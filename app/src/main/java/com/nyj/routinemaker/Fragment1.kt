@@ -24,7 +24,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setOnClickListener()
+        setOnClickListener()//협업테스트
     }
 
     fun setOnClickListener() {
