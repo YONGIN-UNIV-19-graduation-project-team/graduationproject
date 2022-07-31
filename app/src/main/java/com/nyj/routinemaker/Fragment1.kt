@@ -18,7 +18,7 @@ class Fragment1 : Fragment() {
     ): View? {
         //xml과 연결
         val view = inflater.inflate(R.layout.fragment1, container, false)
-        return view
+        return view//123456
 
     }
 
