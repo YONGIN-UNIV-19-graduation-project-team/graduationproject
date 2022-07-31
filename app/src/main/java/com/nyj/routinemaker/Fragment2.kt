@@ -34,7 +34,7 @@ class Fragment2 : Fragment(){
                 intent.putExtra("day", dayofMonth.toString())
 
                 startActivity(intent)
-                //123
+
 
             }
         }
