@@ -26,7 +26,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //val textView = findViewById<TextView>(R.id.timetext)
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
 
-        //textView.text = "현재 설정된 시간 : $hour : $minute"
+        //textView.text = "현재 설정된 시간 : $hour : $minute"//
         timePicker.setOnTimeChangedListener(this)
 
 
