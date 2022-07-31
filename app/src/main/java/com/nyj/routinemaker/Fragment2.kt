@@ -35,7 +35,7 @@ class Fragment2 : Fragment(){
 
                 startActivity(intent)
 
-
+                ////afdf
             }
         }
 
