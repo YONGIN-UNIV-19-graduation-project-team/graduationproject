@@ -9,7 +9,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_addplan.*
 import java.text.SimpleDateFormat
 import java.util.*
-
+//
 class AddPlan_Activity : AppCompatActivity() {
     val formatDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
     val formatTime = SimpleDateFormat("HH:MM", Locale.KOREA)
