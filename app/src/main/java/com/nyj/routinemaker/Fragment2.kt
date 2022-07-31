@@ -35,6 +35,7 @@ class Fragment2 : Fragment(){
 
                 startActivity(intent)
                 //123
+                //456
             }
         }
 
