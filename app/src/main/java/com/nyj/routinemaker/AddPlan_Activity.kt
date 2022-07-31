@@ -63,7 +63,7 @@ class AddPlan_Activity : AppCompatActivity() {
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
                 val selectDate = Calendar.getInstance()
                 selectDate.set(Calendar.HOUR,i)
-                selectDate.set(Calendar.MINUTE,i2)
+                selectDate.set(Calendar.MINUTE,i2)//
                 val date = formatTime.format(selectDate.time)
                 Toast.makeText(this, "Time : "+date, Toast.LENGTH_SHORT ).show()
                 textview_get_time.text = date
