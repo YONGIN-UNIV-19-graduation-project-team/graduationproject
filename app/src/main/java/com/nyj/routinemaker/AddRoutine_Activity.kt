@@ -16,7 +16,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     var changed_hour=0
     var changed_minute=0
     var routine_name=""
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {//
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
 
