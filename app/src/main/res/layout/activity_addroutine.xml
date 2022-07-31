@@ -76,7 +76,8 @@
         android:textSize="24dp"
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:ignore="UnknownIdInLayout" />
 
     <CheckBox
         android:id="@+id/checkBox8"
