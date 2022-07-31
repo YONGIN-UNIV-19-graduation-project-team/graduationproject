@@ -43,7 +43,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             outputfile.write(changed_hour.toString().toByteArray()+changed_minute.toString().toByteArray()+routine_name.toString().toByteArray())
             outputfile.write("\n".toString().toByteArray())
             outputfile.close()
-            //
+            ////
             startActivity(intent)
 
         }
