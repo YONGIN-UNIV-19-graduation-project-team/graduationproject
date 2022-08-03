@@ -26,24 +26,28 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //val textView = findViewById<TextView>(R.id.timetext)
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
 
-        //textView.text = "현재 설정된 시간 : $hour : $minute"//
+        //textView.text = "현재 설정된 시간 : $hour : $minute"//화면 딱 띄웠을때 현재시간 나타나게 하는 코드
         timePicker.setOnTimeChangedListener(this)
 
+        //체크박스 리스너 구현
 
-        add_button.setOnClickListener{//추가 버튼 클릭시 이벤트
 
+        //추가 버튼 클릭시 이벤트
+        add_button.setOnClickListener{
+
+            //intent가 굳이 필요한지 모르겠음. 그냥 file에 넣으면 되는것 아닌지?
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("hour",changed_hour.toString())
             intent.putExtra("minute",changed_minute.toString())
             routine_name = routine_Name.text.toString()
             intent.putExtra("name",routine_name)
-            //파일 접근, 저장 테스트
+            //
 
-            var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_APPEND)
+            //파일 접근, 저장
+            var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_PRIVATE)//MODE_APPEND로 변경해야함
             outputfile.write(changed_hour.toString().toByteArray()+changed_minute.toString().toByteArray()+routine_name.toString().toByteArray())
             outputfile.write("\n".toString().toByteArray())
             outputfile.close()
-            ////
             startActivity(intent)
 
         }
@@ -53,7 +57,6 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
         val textView = findViewById<TextView>(R.id.timetext)
         textView.text = "현재 설정된 시간 : $hourOfDay : $minute"
-        //timePicker.setOnTimeChangedListener(this)
         changed_hour=hourOfDay
         changed_minute=minute
     }

@@ -26,7 +26,7 @@ class AddPlan_Activity : AppCompatActivity() {
         var month = intent.getStringExtra("month").toString()
         var day = intent.getStringExtra("day").toString()
         //toast로 데이터 넘기기 테스트
-        Toast.makeText(this, "year : "+year, Toast.LENGTH_SHORT ).show()
+        //Toast.makeText(this, "year : "+year, Toast.LENGTH_SHORT ).show()
 
         if(year != null && year.length > 0 && !year.contains("null") &&
             month != null && month.length > 0 && !month.contains("null") &&
@@ -37,7 +37,7 @@ class AddPlan_Activity : AppCompatActivity() {
             textview_get_date.setText("error")
         }
 
-        //null22
+
 
         btn_pick_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()

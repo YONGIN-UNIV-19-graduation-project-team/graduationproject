@@ -80,82 +80,78 @@
         tools:ignore="UnknownIdInLayout" />
 
     <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="27dp"
-        android:text="1"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox12"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="27dp"
-        android:text="2"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox13"
-        app:layout_constraintStart_toEndOf="@+id/checkBox8" />
-
-    <CheckBox
-        android:id="@+id/checkBox10"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="260dp"
-        android:text="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox9" />
-
-    <CheckBox
-        android:id="@+id/checkBox11"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="27dp"
-        android:text="4"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox10" />
-
-    <CheckBox
-        android:id="@+id/checkBox12"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="82dp"
+        android:id="@+id/checkBox1"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginBottom="184dp"
-        android:text="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox13"
+        android:layout_marginBottom="20dp"
+        android:text="mon"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox5"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox13"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="184dp"
-        android:text="6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox14"
-        app:layout_constraintStart_toEndOf="@+id/checkBox12" />
+        android:id="@+id/checkBox2"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="tue"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox6"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox3" />
 
     <CheckBox
-        android:id="@+id/checkBox14"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginBottom="184dp"
-        android:text="7"
+        android:id="@+id/checkBox3"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:text="wed"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox7"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox4" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="253dp"
+        android:text="thu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox13" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="185dp"
+        android:text="fri"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox6"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="185dp"
+        android:text="sat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox7" />
+
+    <CheckBox
+        android:id="@+id/checkBox7"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="185dp"
+        android:text="sun"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TimePicker
         android:id="@+id/timePicker"
