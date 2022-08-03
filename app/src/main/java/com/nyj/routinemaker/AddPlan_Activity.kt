@@ -20,6 +20,7 @@ class AddPlan_Activity : AppCompatActivity() {
     var plan_Hour = ""
     var plan_Min=""
     var plan_Name=""
+    var test_001=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
