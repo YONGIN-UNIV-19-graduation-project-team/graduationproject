@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_addroutine.*
 import java.io.DataOutputStream
 import java.io.File
@@ -16,6 +17,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     var changed_hour=0
     var changed_minute=0
     var routine_name=""
+    val weekArray = Array<ByteArray>(7){ byteArrayOf()}
     override fun onCreate(savedInstanceState: Bundle?) {//
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
@@ -29,13 +31,27 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //textView.text = "현재 설정된 시간 : $hour : $minute"//화면 딱 띄웠을때 현재시간 나타나게 하는 코드
         timePicker.setOnTimeChangedListener(this)
 
-        //체크박스 리스너 구현
+
+
 
 
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
 
-            //intent가 굳이 필요한지 모르겠음. 그냥 file에 넣으면 되는것 아닌지?
+            //체크박스 요일 리스트에 저장 아직 구현 못함
+            if(checkBox1.isChecked){weekArray[0] = "mon".toByteArray()}
+            if(checkBox1.isChecked){weekArray[1] = "tue".toByteArray()}
+            if(checkBox1.isChecked){weekArray[2] = "wed".toByteArray()}
+            if(checkBox1.isChecked){weekArray[3] = "thu".toByteArray()}
+            if(checkBox1.isChecked){weekArray[4] = "fri".toByteArray()}
+            if(checkBox1.isChecked){weekArray[5] = "sat".toByteArray()}
+            if(checkBox1.isChecked){weekArray[6] = "sun".toByteArray()}
+
+            //Toast.makeText(this, "데이터전송테스트\narray: "+weekArray[0],Toast.LENGTH_SHORT ).show()
+
+            //변수저장
+            // MainActivity로 이동하기 위한 intent. 데이터 전송은 덤(Toast)
+            //
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("hour",changed_hour.toString())
             intent.putExtra("minute",changed_minute.toString())
@@ -45,7 +61,11 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
             //파일 접근, 저장
             var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_PRIVATE)//MODE_APPEND로 변경해야함
-            outputfile.write(changed_hour.toString().toByteArray()+changed_minute.toString().toByteArray()+routine_name.toString().toByteArray())
+            outputfile.write(
+                changed_hour.toString().toByteArray()+
+                    changed_minute.toString().toByteArray()+
+                    routine_name.toString().toByteArray()
+                        )
             outputfile.write("\n".toString().toByteArray())
             outputfile.close()
             startActivity(intent)
