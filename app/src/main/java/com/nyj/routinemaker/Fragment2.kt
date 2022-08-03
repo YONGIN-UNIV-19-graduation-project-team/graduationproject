@@ -31,7 +31,7 @@ class Fragment2 : Fragment(){
             intent.apply {
                 intent.putExtra("year", year.toString())//toString으로 형변환 해야 null값이 아닌채로 데이터 전송.0730
                 intent.putExtra("month", month.toString())
-                intent.putExtra("day", dayofMonth.toString())//브랜치 삭제 깃 커밋+푸시 테스트
+                intent.putExtra("day", dayofMonth.toString())//dev브랜치테스트
 
                 startActivity(intent)
             }
