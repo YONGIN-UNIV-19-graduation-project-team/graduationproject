@@ -24,7 +24,7 @@ class AddPlan_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
         //화면 나타났을때 year,month,day값 받아와야함
-        //아직미구현
+        //아직미구현//
 
 
         var intent = getIntent()
