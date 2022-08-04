@@ -27,7 +27,7 @@ class AddPlan_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
 
-
+//시현
 
         var intent = getIntent()
 
