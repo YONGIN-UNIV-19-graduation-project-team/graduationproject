@@ -17,7 +17,6 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     var changed_hour=0
     var changed_minute=0
     var routine_name=""
-    val weekArray = Array<ByteArray>(7){ byteArrayOf()}
     override fun onCreate(savedInstanceState: Bundle?) {//
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
@@ -38,15 +37,6 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
 
-            //체크박스 요일 리스트에 저장 아직 구현 못함
-            if(checkBox1.isChecked){weekArray[0] = "mon".toByteArray()}
-            if(checkBox1.isChecked){weekArray[1] = "tue".toByteArray()}
-            if(checkBox1.isChecked){weekArray[2] = "wed".toByteArray()}
-            if(checkBox1.isChecked){weekArray[3] = "thu".toByteArray()}
-            if(checkBox1.isChecked){weekArray[4] = "fri".toByteArray()}
-            if(checkBox1.isChecked){weekArray[5] = "sat".toByteArray()}
-            if(checkBox1.isChecked){weekArray[6] = "sun".toByteArray()}
-
             //Toast.makeText(this, "데이터전송테스트\narray: "+weekArray[0],Toast.LENGTH_SHORT ).show()
 
             //변수저장
@@ -61,13 +51,41 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
             //파일 접근, 저장.
             //바이트 기반 스트림
-            var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_PRIVATE)//MODE_APPEND로 변경해야함
+            var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_PRIVATE)//MODE_APPEND로 변경해야함(누적)
             outputfile.write(
                 changed_hour.toString().toByteArray()+
                     changed_minute.toString().toByteArray()+
-                    routine_name.toString().toByteArray()
+                    routine_name.toByteArray()
                         )
-            outputfile.write("\n".toString().toByteArray())
+            outputfile.write(" ".toByteArray())
+            if(checkBox1.isChecked){
+                outputfile.write("mon".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox2.isChecked){
+                outputfile.write("tue".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox3.isChecked){
+                outputfile.write("wed".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox4.isChecked){
+                outputfile.write("thu".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox5.isChecked){
+                outputfile.write("fri".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox6.isChecked){
+                outputfile.write("sat".toByteArray())
+                outputfile.write(" ".toByteArray())
+            }
+            if(checkBox7.isChecked){
+                outputfile.write("sun".toByteArray())
+            }
+            outputfile.write("\n".toByteArray())
             outputfile.close()
             startActivity(intent)
 
