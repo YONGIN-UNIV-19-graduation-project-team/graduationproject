@@ -59,7 +59,8 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             intent.putExtra("name",routine_name)
             //
 
-            //파일 접근, 저장
+            //파일 접근, 저장.
+            //바이트 기반 스트림
             var outputfile : FileOutputStream = openFileOutput("routinefile", MODE_PRIVATE)//MODE_APPEND로 변경해야함
             outputfile.write(
                 changed_hour.toString().toByteArray()+
