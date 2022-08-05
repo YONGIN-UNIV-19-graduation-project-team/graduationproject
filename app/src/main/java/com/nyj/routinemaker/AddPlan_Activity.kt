@@ -17,7 +17,7 @@ import java.util.*
 //
 class AddPlan_Activity : AppCompatActivity() {
     val formatDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
-    val formatTime = SimpleDateFormat("HH:MM", Locale.KOREA)
+
     var plan_Year=""
     var plan_Month=""
     var plan_Day=""
@@ -39,13 +39,10 @@ class AddPlan_Activity : AppCompatActivity() {
         var intent = getIntent()
 
         var year = intent.getStringExtra("year").toString()
-        //var month = intent.getStringExtra("month").toString()
-        var day = intent.getStringExtra("day").toString()
         var month = ((intent.getStringExtra("month"))!!.toInt()+1).toString()//자꾸 1달 낮게 데이터가 넘겨짐.
-        // ex)8월 달력 클릭시 7월로 데이터가 이전되어서 형변환후 1추가시킨후 다시형변환했음
+        var day = intent.getStringExtra("day").toString()
 
-        //toast로 데이터 넘기기 테스트
-        //Toast.makeText(this, "year : "+year, Toast.LENGTH_SHORT ).show()
+        // ex)8월 달력 클릭시 7월로 데이터가 이전되어서 형변환후 1추가시킨후 다시형변환했음
 
         plan_Year=year
         plan_Month=month
