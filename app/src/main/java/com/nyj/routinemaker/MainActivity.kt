@@ -13,13 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //루틴추가 시 받아온 데이터 hour, minute, name
-        var intent = getIntent()
-        var hour = intent.getStringExtra("hour").toString()
-        var minute = intent.getStringExtra("minute").toString()
-        var name = intent.getStringExtra("name").toString()
-        Toast.makeText(this, "데이터전송테스트\nhour: "+hour+ "\nminute: "+minute+ "\nname: "+name, Toast.LENGTH_SHORT ).show()
-        //
+
 
         setFrag(0)
 
