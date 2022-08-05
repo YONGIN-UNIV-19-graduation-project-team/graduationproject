@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
 import java.io.FileWriter
 import java.io.IOException
@@ -27,6 +28,11 @@ class AddPlan_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
+
+        //db연결
+        val db = Room.databaseBuilder(
+            applicationContext,AppDatabase::class.java,"database"
+        ).allowMainThreadQueries().build()
 
 
 
@@ -79,7 +85,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
         })
 
-        //시간 선택 란 //미해결
+        //시간 선택 란 //정상
         btn_pick_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
@@ -96,39 +102,17 @@ class AddPlan_Activity : AppCompatActivity() {
         })
 
 
-        //저장 버튼 구현. 바이트형변환 테스트 때문에 AddRoutine액티비티와 다른 api를 사용해봤음. 이 방식은 바이트형변환을 하지 않음.
+        //저장 버튼 구현.
         button3.setOnClickListener{
-            //여기에 파일 입력
+
             plan_Name=planName.text.toString()//제목가져오기
-            Toast.makeText(this
-                , plan_Year+"년"+plan_Month+"월"+plan_Day+"일 "+plan_Hour+"시"+plan_Min+"분"
-                , Toast.LENGTH_SHORT ).show()
-           // val path = "/data/data/com.nyj.routinemaker/files/planfile"
-            //문자 기반 스트림
-           // val writer = FileWriter(path)//매개변수 추가로 true를 해주면 덮어쓰기.
-            //val writer = FileWriter(path,true)
-//            try{
-//                writer.write(plan_Name)
-//                writer.write(" ")
-//                writer.write(plan_Year)
-//                writer.write("년")//데이터 받을땐 이 텍스트들 주석처리 해야함
-//                writer.write(plan_Month)
-//                writer.write("월")//
-//                writer.write(plan_Day)
-//                writer.write("일 ")//
-//                writer.write(plan_Hour)
-//                writer.write("시")//
-//                writer.write(plan_Min)
-//                writer.write("분")//
-//                writer.write("\n")//이건주석처리 x
-//            }catch (e: IOException){
-//            }finally {
-//                writer.close()
-//            }//아직미구현
 
+            //데이터 입력
+            val plan = Plan(plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            db?.plan_DAO()?.insertAll(plan)
 
-            //val intent = Intent(this,MainActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }
