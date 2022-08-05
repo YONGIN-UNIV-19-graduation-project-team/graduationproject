@@ -3,6 +3,7 @@ package com.nyj.routinemaker
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.os.Build.VERSION_CODES.M
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -27,7 +28,7 @@ class AddPlan_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
 
-//시현
+
 
         var intent = getIntent()
 
@@ -84,18 +85,16 @@ class AddPlan_Activity : AppCompatActivity() {
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
                 val selectDate = Calendar.getInstance()
                 selectDate.set(Calendar.HOUR,i)
-                selectDate.set(Calendar.MINUTE,i2)//
-                val date = formatTime.format(selectDate.time)
-                Toast.makeText(this, "Time : "+date, Toast.LENGTH_SHORT ).show()
-                textview_get_time.text = date
+                selectDate.set(Calendar.MINUTE,i2)
+                Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
+                textview_get_time.text = "$i:$i2"
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
 
             },getDate.get(Calendar.HOUR),getDate.get(Calendar.MINUTE),true)
             datePicker.show()
-//            AddPlan_Activity에서 시간 선택 란에서 오류가 나타남. 시간,분 선택 시 시간은 오류가 없으나 분에서 자꾸 8분으로 고정되서 나타나는 버그.
-//            그 외에는 작동 잘되고 데이터 전송은 오류없음.(선택된 시간,분 데이터가 전달이 됨)
         })
+
 
         //저장 버튼 구현. 바이트형변환 테스트 때문에 AddRoutine액티비티와 다른 api를 사용해봤음. 이 방식은 바이트형변환을 하지 않음.
         button3.setOnClickListener{
@@ -104,28 +103,28 @@ class AddPlan_Activity : AppCompatActivity() {
             Toast.makeText(this
                 , plan_Year+"년"+plan_Month+"월"+plan_Day+"일 "+plan_Hour+"시"+plan_Min+"분"
                 , Toast.LENGTH_SHORT ).show()
-            val path = "/data/data/com.nyj.routinemaker/files/planfile"
+           // val path = "/data/data/com.nyj.routinemaker/files/planfile"
             //문자 기반 스트림
-            val writer = FileWriter(path)//매개변수 추가로 true를 해주면 덮어쓰기.
+           // val writer = FileWriter(path)//매개변수 추가로 true를 해주면 덮어쓰기.
             //val writer = FileWriter(path,true)
-            try{
-                writer.write(plan_Name)
-                writer.write(" ")
-                writer.write(plan_Year)
-                writer.write("년")//데이터 받을땐 이 텍스트들 주석처리 해야함
-                writer.write(plan_Month)
-                writer.write("월")//
-                writer.write(plan_Day)
-                writer.write("일 ")//
-                writer.write(plan_Hour)
-                writer.write("시")//
-                writer.write(plan_Min)
-                writer.write("분")//
-                writer.write("\n")//이건주석처리 x
-            }catch (e: IOException){
-            }finally {
-                writer.close()
-            }//아직미구현
+//            try{
+//                writer.write(plan_Name)
+//                writer.write(" ")
+//                writer.write(plan_Year)
+//                writer.write("년")//데이터 받을땐 이 텍스트들 주석처리 해야함
+//                writer.write(plan_Month)
+//                writer.write("월")//
+//                writer.write(plan_Day)
+//                writer.write("일 ")//
+//                writer.write(plan_Hour)
+//                writer.write("시")//
+//                writer.write(plan_Min)
+//                writer.write("분")//
+//                writer.write("\n")//이건주석처리 x
+//            }catch (e: IOException){
+//            }finally {
+//                writer.close()
+//            }//아직미구현
 
 
             //val intent = Intent(this,MainActivity::class.java)
