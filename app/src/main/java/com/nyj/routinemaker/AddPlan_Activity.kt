@@ -105,7 +105,7 @@ class AddPlan_Activity : AppCompatActivity() {
             plan_Name=planName.text.toString()//제목가져오기
 
             //데이터 입력
-            val plan = Plan(plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
             db?.plan_DAO()?.insertAll(plan)
 
             val intent = Intent(this,MainActivity::class.java)
