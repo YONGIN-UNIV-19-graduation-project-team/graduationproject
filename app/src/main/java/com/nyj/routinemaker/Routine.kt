@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "tb_routines")
 data class Routine(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val name:String,
 
 
