@@ -1,9 +1,6 @@
 package com.nyj.routinemaker
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface Routine_DAO {
@@ -13,6 +10,8 @@ interface Routine_DAO {
     @Insert
     fun insertAll(vararg routine: Routine)
 
+    @Update
+    fun update(vararg routine: Routine)
     @Delete
     fun delete(routine: Routine)
 }

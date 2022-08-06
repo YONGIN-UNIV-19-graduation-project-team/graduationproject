@@ -64,7 +64,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             if(checkBox6.isChecked)sat=true
             if(checkBox7.isChecked)sun=true
 
-            val routine = Routine( name, hour, min, mon, tue, wed, thu, fri, sat, sun)
+            val routine = Routine( 0L,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
             db?.routine_DAO()?.insertAll(routine)
 
 
