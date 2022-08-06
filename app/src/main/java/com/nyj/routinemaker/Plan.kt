@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "tb_plans")
 data class Plan(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val name: String,
 
     var year:String,
