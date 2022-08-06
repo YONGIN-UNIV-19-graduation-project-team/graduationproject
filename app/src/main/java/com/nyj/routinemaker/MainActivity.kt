@@ -1,6 +1,7 @@
 package com.nyj.routinemaker
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -33,9 +34,15 @@ class MainActivity : AppCompatActivity() {
         when (fragNum){
             0 -> {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
+                frg1_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
+                frg2_button.setTextColor(Color.GRAY)
+
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
+                frg1_button.setTextColor(Color.GRAY)
+                frg2_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
+
             }
         }
     }
