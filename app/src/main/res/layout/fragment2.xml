@@ -32,7 +32,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="498dp"></LinearLayout>
+        tools:layout_editor_absoluteY="498dp">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>
 
