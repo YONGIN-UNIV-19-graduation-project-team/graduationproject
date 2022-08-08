@@ -25,8 +25,13 @@
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" /><![CDATA[
         />
+
+
+
+        ]]>
+
         <Button
             android:id="@+id/frg2_button"
             style="?android:attr/borderlessButtonStyle"
@@ -35,14 +40,34 @@
             android:layout_marginBottom="1dp"
             android:background="@drawable/buttonshape"
             android:text="할 일"
+            android:textScaleX="1.1"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textScaleX="1.1"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/cal_button"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="챌린지"
+            android:textColor="@color/blue"
+            android:textScaleX="1.1"
+            android:textSize="28sp"
+            android:textStyle="bold" /><![CDATA[
+
+
+
+
+
         />
 
 
+
+
+    ]]>
     </LinearLayout>
 
 
@@ -51,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp">
+
     </FrameLayout>
 
 
