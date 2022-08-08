@@ -93,6 +93,13 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
         }
 
+        del_button.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun)
+            db.routine_DAO().delete(routine)
+            startActivity(intent)
+        }
+
     }
 
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {
