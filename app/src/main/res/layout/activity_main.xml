@@ -17,28 +17,27 @@
             android:id="@+id/frg1_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:background="@drawable/buttonshape"
             android:text="루틴"
-            android:textColor="@color/buttonselector"
+            android:textScaleX="1.1"
             android:textSize="28sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         />
-
         <Button
             android:id="@+id/frg2_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
             android:background="@drawable/buttonshape"
             android:text="할 일"
-            android:textColor="@color/buttonselector"
             android:textSize="28sp"
+            android:textStyle="bold"
+            android:textScaleX="1.1"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         />

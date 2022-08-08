@@ -11,18 +11,14 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.constraintlayout.helper.widget.Carousel
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment1.*
 
 class Fragment1 : Fragment() {
 
-    var RoutineList = arrayListOf<RoutineList>(
-        RoutineList(name = "루틴명1", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명2", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명3", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명4", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명2", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명3", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명4", hour = "14", min = "30", dow = "화")
+    var RoutineList = arrayListOf<Routine>(
+        Routine(0L,"55","55","55",
+            true,true,true,true,true,true,true)
     )
 
 
@@ -33,6 +29,10 @@ class Fragment1 : Fragment() {
     ): View? {
         ////xml과 연결
         val view = inflater.inflate(R.layout.fragment1, container, false)
+        val db = Room.databaseBuilder(
+            requireActivity().applicationContext,AppDatabase::class.java,"database"
+        ).allowMainThreadQueries().build()
+        RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         return view
     }
 

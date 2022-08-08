@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/drawable/button_pattern.xml" value="0.253" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/drawable/buttonshape.xml" value="0.141" />
         <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/layout/activity_addplan.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/layout/activity_loading.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/layout/fragment1.xml" value="0.264" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/layout/fragment2.xml" value="0.18070652173913043" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/mipmap-anydpi-v26/icon.xml" value="0.1" />
+        <entry key="..\:/Users/82107/Desktop/graduationproject/app/src/main/res/mipmap-anydpi-v26/icon_round.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_addplan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_addroutine.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_challenge.xml" value="0.23802083333333332" />

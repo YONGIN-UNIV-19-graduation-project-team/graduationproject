@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 
 
-class RoutineAdapter(val context : Context, val RouineList : ArrayList<RoutineList>) : BaseAdapter()
+class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
 {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_routine, null)
@@ -22,7 +22,15 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<RoutineLi
         name.text = routineList.name
         hour.text = routineList.hour
         min.text = routineList.min
-        dow.text = routineList.dow
+        dow.text = ""
+        if(routineList.mon){dow.append(" 월")}
+        if(routineList.tue){dow.append(" 화")}
+        if(routineList.wed){dow.append(" 수")}
+        if(routineList.thu){dow.append(" 목")}
+        if(routineList.fri){dow.append(" 금")}
+        if(routineList.sat){dow.append(" 토")}
+        if(routineList.sun){dow.append(" 일")}
+        //dow.text = routineList.dow
 
         return view
     }
