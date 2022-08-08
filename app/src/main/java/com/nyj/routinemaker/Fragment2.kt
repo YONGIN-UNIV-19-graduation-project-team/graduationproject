@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.room.Room
@@ -35,6 +36,25 @@ class Fragment2 : Fragment(){
         //val pass : Button by lazy { calendarView.setOnClickListener}
         val Adapter = PlanAdapter(requireContext(), PlanList)
         listView.adapter = Adapter
+
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectItem = parent.getItemAtPosition(position) as Plan
+
+                val intent = Intent(activity, ModPlan_Activity::class.java)
+                intent.apply {
+                    intent.putExtra(
+                        "planid",
+                        selectItem.id
+                    )
+
+
+                    startActivity(intent)
+
+                }
+                setOnClickListener()
+            }
+
         setOnClickListener()
     }
 
