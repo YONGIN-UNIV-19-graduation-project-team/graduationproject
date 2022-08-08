@@ -8,21 +8,21 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 
 
-class RoutineAdapter(val context : Context, val RouineList : ArrayList<RoutineList>) : BaseAdapter()
+class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
 {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_routine, null)
         val name = view.findViewById<TextView>(R.id.rt_name)
         val hour = view.findViewById<TextView>(R.id.rt_hour)
         val min = view.findViewById<TextView>(R.id.rt_min)
-        val dow = view.findViewById<TextView>(R.id.rt_dow)
+        //val dow = view.findViewById<TextView>(R.id.rt_dow)
 
         val routineList = RouineList[position]
 
         name.text = routineList.name
         hour.text = routineList.hour
         min.text = routineList.min
-        dow.text = routineList.dow
+        //dow.text = routineList.dow
 
         return view
     }

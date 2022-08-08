@@ -15,14 +15,9 @@ import kotlinx.android.synthetic.main.fragment1.*
 
 class Fragment1 : Fragment() {
 
-    var RoutineList = arrayListOf<RoutineList>(
-        RoutineList(name = "루틴명1", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명2", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명3", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명4", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명2", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명3", hour = "14", min = "30", dow = "화"),
-        RoutineList(name = "루틴명4", hour = "14", min = "30", dow = "화")
+    var RoutineList = arrayListOf<Routine>(
+        Routine(0L,"55","55","55",
+            true,true,true,true,true,true,true)
     )
 
 
