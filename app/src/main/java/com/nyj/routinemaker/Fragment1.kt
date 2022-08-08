@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.constraintlayout.helper.widget.Carousel
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment1.*
 
 class Fragment1 : Fragment() {
@@ -28,6 +29,10 @@ class Fragment1 : Fragment() {
     ): View? {
         ////xml과 연결
         val view = inflater.inflate(R.layout.fragment1, container, false)
+        val db = Room.databaseBuilder(
+            requireActivity().applicationContext,AppDatabase::class.java,"database"
+        ).allowMainThreadQueries().build()
+        RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         return view
     }
 
