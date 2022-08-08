@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.ArrayAdapter
-import android.widget.Button
+import android.widget.*
 import androidx.constraintlayout.helper.widget.Carousel
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment1.*
+import kotlinx.coroutines.selects.select
 
 class Fragment1 : Fragment() {
 
@@ -42,7 +41,23 @@ class Fragment1 : Fragment() {
         ////루틴리스트
         val Adapter = RoutineAdapter(requireContext(), RoutineList)
         listView.adapter = Adapter
-        setOnClickListener()
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectItem = parent.getItemAtPosition(position) as Routine
+                //Toast.makeText(requireContext(),selectItem.name,Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, ModRoutine_Activity::class.java)
+                intent.apply {
+                    intent.putExtra(
+                        "routineid",
+                                selectItem.id
+                    )
+
+
+                    startActivity(intent)
+
+                }
+                setOnClickListener()
+            }
     }
 
     fun setOnClickListener() {

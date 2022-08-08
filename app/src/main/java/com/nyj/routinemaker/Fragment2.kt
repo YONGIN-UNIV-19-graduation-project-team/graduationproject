@@ -23,7 +23,7 @@ class Fragment2 : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //xml과 연결
         val view = inflater.inflate(R.layout.fragment2, container, false)
-
+        //db연결
         val db = Room.databaseBuilder(
             requireActivity().applicationContext,AppDatabase::class.java,"database"
         ).allowMainThreadQueries().build()
