@@ -37,7 +37,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setOnClickListener()
         ////루틴리스트
         val Adapter = RoutineAdapter(requireContext(), RoutineList)
         listView.adapter = Adapter
@@ -62,6 +62,7 @@ class Fragment1 : Fragment() {
 
     fun setOnClickListener() {
         add_button.setOnClickListener(View.OnClickListener {
+
             val intent = Intent(activity, AddRoutine_Activity::class.java)
             startActivity(intent)
         })
