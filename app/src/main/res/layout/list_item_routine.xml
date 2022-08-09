@@ -9,34 +9,43 @@
         android:id="@+id/rt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="name"
+        android:textColor="#898989"
         android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186" />
 
     <TextView
         android:id="@+id/rt_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
         android:text="hour"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="#AEBAD2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rt_name" />
+        app:layout_constraintTop_toBottomOf="@+id/rt_name"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/rt_hm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:text=":"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="#AEBAD2"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/rt_hour"
         app:layout_constraintTop_toBottomOf="@+id/rt_name" />
 
@@ -44,10 +53,12 @@
         android:id="@+id/rt_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="min"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="#AEBAD2"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/rt_hm"
         app:layout_constraintTop_toBottomOf="@+id/rt_name" />
 
@@ -55,10 +66,12 @@
         android:id="@+id/rt_dow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="dayofweek"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="#AEBAD2"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/rt_min"
         app:layout_constraintTop_toBottomOf="@+id/rt_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
