@@ -25,13 +25,7 @@
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /><![CDATA[
-        />
-
-
-
-        ]]>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <Button
             android:id="@+id/frg2_button"
             style="?android:attr/borderlessButtonStyle"
@@ -56,18 +50,8 @@
             android:textColor="@color/blue"
             android:textScaleX="1.1"
             android:textSize="28sp"
-            android:textStyle="bold" /><![CDATA[
+            android:textStyle="bold" />
 
-
-
-
-
-        />
-
-
-
-
-    ]]>
     </LinearLayout>
 
 
