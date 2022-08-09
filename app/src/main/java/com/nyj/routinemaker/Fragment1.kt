@@ -61,10 +61,6 @@ class Fragment1 : Fragment() {
     }
 
     fun setOnClickListener() {
-        cal_button.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity, Challenge_Activity::class.java)
-            startActivity(intent)
-        })
         add_button.setOnClickListener(View.OnClickListener {
             val intent = Intent(activity, AddRoutine_Activity::class.java)
             startActivity(intent)

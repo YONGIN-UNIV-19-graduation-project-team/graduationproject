@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment1.*
@@ -47,7 +48,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    fun setOnClickListener() {
+        cal_button.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, Challenge_Activity::class.java)
+            startActivity(intent)
+        })
+    }
 
 
 }
