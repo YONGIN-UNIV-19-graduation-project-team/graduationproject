@@ -14,7 +14,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-//
+//..
 class AddPlan_Activity : AppCompatActivity() {
     val formatDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
 
