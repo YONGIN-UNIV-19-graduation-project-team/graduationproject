@@ -16,8 +16,7 @@ import java.io.FileOutputStream
 import java.util.*
 
 class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListener{
-    //val timePicker = findViewById<TimePicker>(R.id.timePicker)
-    var routine_name=""
+
     var changed_hour=0
     var changed_minute=0
     var mon = false
@@ -30,7 +29,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {//
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
 
@@ -73,7 +72,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             startActivity(intent)
 
         }
-
+        db.close()
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {

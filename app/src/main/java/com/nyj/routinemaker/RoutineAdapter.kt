@@ -30,7 +30,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         if(routineList.fri){dow.append(" 금")}
         if(routineList.sat){dow.append(" 토")}
         if(routineList.sun){dow.append(" 일")}
-        //dow.text = routineList.dow
+
 
         return view
     }

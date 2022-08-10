@@ -8,9 +8,6 @@ import java.util.*
 class Challenge_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge)//1051dev
-
-
-
+        setContentView(R.layout.activity_challenge)
     }
 }
