@@ -35,11 +35,13 @@ class WidgetProvider :AppWidgetProvider(){
         val db = Room.databaseBuilder(
             context!!.applicationContext,AppDatabase::class.java,"database"
         ).allowMainThreadQueries().build()
+
         year=LocalDate.now().year.toString()
         month=LocalDate.now().month.toString()
         day=LocalDate.now().dayOfMonth.toString()
+
         Planlist = db.plan_DAO().searchday(day).toTypedArray().toCollection(arrayListOf<Plan>())
-        db.close()
+
         Planlist.forEach{Plan-> viewname.append(Plan.name).append(" ")}
         println(viewname)
         views.setTextViewText(R.id.todays_plan,viewname.toString())
