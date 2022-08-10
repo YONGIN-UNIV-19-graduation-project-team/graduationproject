@@ -35,9 +35,10 @@ class ModPlan_Activity : AppCompatActivity() {
 
         var intent = getIntent()
         var planid = intent.getLongExtra("planid",0)
-        Toast.makeText(this, planid.toString(), Toast.LENGTH_SHORT).show()
-        var get_plan = db.plan_DAO().getPlanbyId(planid)//여기에서 해당id의 plan 가져옴
 
+        //id Toast로 띄우는 주석.
+        //Toast.makeText(this, planid.toString(), Toast.LENGTH_SHORT).show()
+        var get_plan = db.plan_DAO().getPlanbyId(planid)//여기에서 해당id의 plan 가져옴
         textview_get_date.text = get_plan.year+"년 "+get_plan.month+"월 "+get_plan.day+"일"
 
         plan_Name = get_plan.name
@@ -90,7 +91,7 @@ class ModPlan_Activity : AppCompatActivity() {
             plan_Name = planName.text.toString()
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
             db.plan_DAO().update(plan)
-
+            db.close()
             startActivity(intent)
         }
 
@@ -99,6 +100,7 @@ class ModPlan_Activity : AppCompatActivity() {
             val intent = Intent(this,MainActivity::class.java)
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
             db.plan_DAO().delete(plan)
+            db.close()
             startActivity(intent)
         }
 

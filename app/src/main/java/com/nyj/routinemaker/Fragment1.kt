@@ -16,7 +16,7 @@ import kotlinx.coroutines.selects.select
 class Fragment1 : Fragment() {
 
     var RoutineList = arrayListOf<Routine>(
-        Routine(0L,"55","55","55",
+        Routine(0L,"더미","55","55",
             true,true,true,true,true,true,true)
     )
 
@@ -26,12 +26,13 @@ class Fragment1 : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        ////xml과 연결
+        ////xml과 연결->view
         val view = inflater.inflate(R.layout.fragment1, container, false)
         val db = Room.databaseBuilder(
             requireActivity().applicationContext,AppDatabase::class.java,"database"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
+        db.close()
         return view
     }
 
@@ -44,7 +45,6 @@ class Fragment1 : Fragment() {
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectItem = parent.getItemAtPosition(position) as Routine
-                //Toast.makeText(requireContext(),selectItem.name,Toast.LENGTH_SHORT).show()
                 val intent = Intent(activity, ModRoutine_Activity::class.java)
                 intent.apply {
                     intent.putExtra(

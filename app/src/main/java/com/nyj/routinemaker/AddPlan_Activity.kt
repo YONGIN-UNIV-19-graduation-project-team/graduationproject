@@ -107,7 +107,7 @@ class AddPlan_Activity : AppCompatActivity() {
             //데이터 입력
             val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
             db?.plan_DAO()?.insertAll(plan)
-
+            db.close()
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
