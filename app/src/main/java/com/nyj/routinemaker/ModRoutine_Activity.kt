@@ -43,7 +43,9 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
         var intent = getIntent()
         var routineid = intent.getLongExtra("routineid",0)
-        Toast.makeText(this, routineid.toString(), Toast.LENGTH_SHORT).show()
+
+        //id확인 Toast
+        //Toast.makeText(this, routineid.toString(), Toast.LENGTH_SHORT).show()
         var get_routine = db.routine_DAO().getRoutinebyId(routineid)
         routine_name = get_routine.name
         routine_Name.setText(routine_name)
@@ -87,7 +89,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
             val routine = Routine( routineid,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
             db.routine_DAO().update(routine)
-
+            db.close()
             startActivity(intent)
 
 
@@ -97,6 +99,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             val intent = Intent(this,MainActivity::class.java)
             val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun)
             db.routine_DAO().delete(routine)
+            db.close()
             startActivity(intent)
         }
 

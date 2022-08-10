@@ -3,19 +3,20 @@ package com.nyj.routinemaker
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addroutine.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.DataOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
 class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListener{
-    //val timePicker = findViewById<TimePicker>(R.id.timePicker)
-    var routine_name=""
+
     var changed_hour=0
     var changed_minute=0
     var mon = false
@@ -28,7 +29,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {//
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
 
@@ -71,12 +72,12 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             startActivity(intent)
 
         }
-
+        db.close()
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
         val textView = findViewById<TextView>(R.id.timetext)
-        textView.text = "현재 설정된 시간 : $hourOfDay : $minute"
+        textView.text = "$hourOfDay : $minute"
         changed_hour=hourOfDay
         changed_minute=minute
     }

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
-
+        setOnClickListener()
     }
 
     private fun setFrag(fragNum : Int) {

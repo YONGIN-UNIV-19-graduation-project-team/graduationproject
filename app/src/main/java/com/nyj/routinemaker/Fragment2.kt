@@ -29,11 +29,11 @@ class Fragment2 : Fragment(){
             requireActivity().applicationContext,AppDatabase::class.java,"database"
         ).allowMainThreadQueries().build()
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
+        db.close()
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val pass : Button by lazy { calendarView.setOnClickListener}
         val Adapter = PlanAdapter(requireContext(), PlanList)
         listView.adapter = Adapter
 
@@ -59,7 +59,7 @@ class Fragment2 : Fragment(){
     }
 
     fun setOnClickListener(){//값 옮기기 Fragment2->AddPlan_Activity로 year,month,day값 보내줘야함.
-        //commit test 0730...
+
         calendarView.setOnDateChangeListener{view, year, month, dayofMonth ->
 
             val intent = Intent(activity, AddPlan_Activity::class.java)
