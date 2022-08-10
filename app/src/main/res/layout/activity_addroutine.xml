@@ -76,29 +76,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="133dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="133dp"
-        android:layout_marginBottom="200dp"
         android:text="루틴 반복 요일"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetext" />
 
     <CheckBox
         android:id="@+id/checkBox1"
         android:layout_width="32dp"
         android:layout_height="50dp"
         android:layout_marginStart="42dp"
+        android:layout_marginTop="55dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
         android:button="@android:color/transparent"
         android:text="월"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox2"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
@@ -106,6 +111,7 @@
         android:layout_width="32dp"
         android:layout_height="50dp"
         android:layout_marginStart="17dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -113,15 +119,18 @@
         android:text="화"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox3"
         app:layout_constraintStart_toEndOf="@+id/checkBox1"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox3"
         android:layout_width="32dp"
         android:layout_height="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -129,14 +138,17 @@
         android:text="수"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox4"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="32dp"
         android:layout_height="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -144,14 +156,17 @@
         android:text="목"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox5"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox5"
         android:layout_width="32dp"
         android:layout_height="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -159,14 +174,17 @@
         android:text="금"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox6"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox6"
         android:layout_width="32dp"
         android:layout_height="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -174,14 +192,17 @@
         android:text="토"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/checkBox7"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <CheckBox
         android:id="@+id/checkBox7"
         android:layout_width="32dp"
         android:layout_height="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="42dp"
         android:layout_marginBottom="130dp"
         android:background="@drawable/checkbox"
@@ -189,8 +210,10 @@
         android:text="일"
         android:textAlignment="center"
         android:textColor="@color/gray_300"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timetext"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -198,22 +221,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="11dp"
         android:text="루틴시간 : "
+        android:textColor="@color/blue"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/timetext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="327dp"
-        android:layout_height="230dp"
+        android:layout_width="321dp"
+        android:layout_height="196dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:numbersTextColor="@color/blue"
+        android:theme="@style/CustomTimePicker"
         android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -222,10 +248,10 @@
 
     <TextView
         android:id="@+id/timetext"
-        android:layout_width="243dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="242dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:text="시간을 선택해주세요"
         android:textColor="@color/black"
@@ -242,11 +268,69 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="1dp"
         android:text="루틴명 : "
-        android:textSize="24dp"
+        android:textSize="26dp"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/routine_Name"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         tools:ignore="UnknownIdInLayout" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="1. 루틴 이름을 포스트잇에 쓰세요!"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="사용법"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="30dp"
+        android:text="4. 루틴을 시작하세요!"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="3. 울리는 알람을 탭하고 써둔 포스트잇을 스캔하세요!"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="2. 루틴을 실행할 장소에 포스트잇을 붙여주세요!"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
