@@ -27,8 +27,8 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     var sat = false
     var sun = false
 
-
-
+    var timeisselected=false
+    var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
@@ -46,17 +46,13 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
 
-
-
-
-            // MainActivity로 이동하기 위한 intent.
-
             val intent = Intent(this,MainActivity::class.java)
 
             val name = routine_Name.text.toString()
             val hour = changed_hour.toString()
             val min = changed_minute.toString()
 
+            if(name!="")nameisnotnull=true
             if(checkBox1.isChecked)mon=true
             if(checkBox2.isChecked)tue=true
             if(checkBox3.isChecked)wed=true
@@ -66,16 +62,27 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             if(checkBox7.isChecked)sun=true
 
             val routine = Routine( 0L,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
-            db?.routine_DAO()?.insertAll(routine)
 
+            if(!routine.mon&&!routine.tue&&!routine.wed&&!routine.thu&&!routine.fri&&!routine.sat&&!routine.sun){
+                Toast.makeText(this, "요일을 한개라도 선택하세요.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(timeisselected&&nameisnotnull){
+                    db.routine_DAO().insertAll(routine)
+                    db.close()
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this, "루틴 이름이나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                }
 
-            startActivity(intent)
-
+            }
         }
         db.close()
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        timeisselected=true
         val textView = findViewById<TextView>(R.id.timetext)
         textView.text = "$hourOfDay : $minute"
         changed_hour=hourOfDay
