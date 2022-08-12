@@ -73,7 +73,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                     startActivity(intent)
                 }
                 else{
-                    Toast.makeText(this, "루틴 이름이나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "루틴 이름이 공백이거나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
                 }
 
             }
