@@ -25,6 +25,8 @@ class AddPlan_Activity : AppCompatActivity() {
     var plan_Min=""
     var plan_Name=""
 
+    var timeisselected=false
+    var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
@@ -90,6 +92,7 @@ class AddPlan_Activity : AppCompatActivity() {
                 selectDate.set(Calendar.HOUR,i)
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
+                timeisselected=true
                 textview_get_time.text = "$i:$i2"
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
@@ -103,13 +106,17 @@ class AddPlan_Activity : AppCompatActivity() {
         button3.setOnClickListener{
 
             plan_Name=planName.text.toString()//제목가져오기
-
+            nameisnotnull=false
+            if(plan_Name!=""){nameisnotnull=true}
             //데이터 입력
             val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
-            db?.plan_DAO()?.insertAll(plan)
-            db.close()
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            if(timeisselected&&nameisnotnull) {
+                db?.plan_DAO()?.insertAll(plan)
+                db.close()
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+            }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
+
         }
     }
 }
