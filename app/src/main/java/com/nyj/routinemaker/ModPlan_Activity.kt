@@ -24,6 +24,9 @@ class ModPlan_Activity : AppCompatActivity() {
     var plan_Min=""
     var plan_Name=""
 
+
+    var timeisselected=false
+    var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modplan)
@@ -43,7 +46,9 @@ class ModPlan_Activity : AppCompatActivity() {
 
         plan_Name = get_plan.name
         planName.setText(plan_Name)
-
+        plan_Year = get_plan.year
+        plan_Month=get_plan.month
+        plan_Day = get_plan.day
 
 
 
@@ -52,17 +57,17 @@ class ModPlan_Activity : AppCompatActivity() {
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
 
-                val selectDate = Calendar.getInstance()
-                selectDate.set(Calendar.YEAR,i)
-                selectDate.set(Calendar.MONTH,i2)
-                selectDate.set(Calendar.DAY_OF_MONTH,i3)
-                val date = formatDate.format(selectDate.time)
-                Toast.makeText(this, "Date : "+date, Toast.LENGTH_SHORT ).show()
-                textview_get_date.text = date
+                    val selectDate = Calendar.getInstance()
+                    selectDate.set(Calendar.YEAR,i)
+                    selectDate.set(Calendar.MONTH,i2)
+                    selectDate.set(Calendar.DAY_OF_MONTH,i3)
+                    val date = formatDate.format(selectDate.time)
+                    Toast.makeText(this, "Date : "+date, Toast.LENGTH_SHORT ).show()
+                    textview_get_date.text = date
 
-                plan_Year=selectDate.get(Calendar.YEAR).toString()
-                plan_Month=(selectDate.get(Calendar.MONTH).toInt()+1).toString()//1달 낮게 값 저장되는 현상..
-                plan_Day=selectDate.get(Calendar.DAY_OF_MONTH).toString()
+                    plan_Year=selectDate.get(Calendar.YEAR).toString()
+                    plan_Month=(selectDate.get(Calendar.MONTH).toInt()+1).toString()//1달 낮게 값 저장되는 현상..
+                    plan_Day=selectDate.get(Calendar.DAY_OF_MONTH).toString()
 
             },getDate.get(Calendar.YEAR),getDate.get(Calendar.MONTH),getDate.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
@@ -78,6 +83,7 @@ class ModPlan_Activity : AppCompatActivity() {
                 selectDate.set(Calendar.HOUR,i)
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
+                timeisselected=true
                 textview_get_time.text = "$i:$i2"
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
@@ -85,14 +91,22 @@ class ModPlan_Activity : AppCompatActivity() {
             },getDate.get(Calendar.HOUR),getDate.get(Calendar.MINUTE),true)
             datePicker.show()
         })
+
+
         //수정버튼
         mod_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
+            nameisnotnull=false
             plan_Name = planName.text.toString()
+            if(plan_Name!="")nameisnotnull=true
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
-            db.plan_DAO().update(plan)
-            db.close()
-            startActivity(intent)
+            if(timeisselected) {
+                if(nameisnotnull) {
+                    db.plan_DAO().update(plan)
+                    db.close()
+                    startActivity(intent)
+                }else Toast.makeText(this, "이름을 공백으로 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }else Toast.makeText(this, "시간이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
         }
 
         //삭제버튼
