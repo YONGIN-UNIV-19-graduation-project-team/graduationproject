@@ -32,6 +32,8 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
     var sat = false
     var sun = false
 
+    var timeisselected=false
+    var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modroutine)
@@ -79,6 +81,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             val hour = changed_hour.toString()
             val min = changed_minute.toString()
 
+            if(name!="")nameisnotnull=true else nameisnotnull=false
             if(checkBox1.isChecked)mon=true
             if(checkBox2.isChecked)tue=true
             if(checkBox3.isChecked)wed=true
@@ -88,11 +91,20 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             if(checkBox7.isChecked)sun=true
 
             val routine = Routine( routineid,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
-            db.routine_DAO().update(routine)
-            db.close()
-            startActivity(intent)
 
-
+            if(!routine.mon&&!routine.tue&&!routine.wed&&!routine.thu&&!routine.fri&&!routine.sat&&!routine.sun){
+                Toast.makeText(this, "요일을 한개라도 선택하세요.", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(timeisselected&&nameisnotnull){
+                    db.routine_DAO().update(routine)
+                    db.close()
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this, "루틴 이름이나 시간을 재설정하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         del_button.setOnClickListener{
@@ -103,9 +115,11 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             startActivity(intent)
         }
 
+
     }
 
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+        timeisselected=true
         val textView = findViewById<TextView>(R.id.timetext)
         textView.text = "현재 설정된 시간 : $hourOfDay : $minute"
         changed_hour=hourOfDay
