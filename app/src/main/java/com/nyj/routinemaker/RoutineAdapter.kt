@@ -9,6 +9,7 @@ import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ import java.util.Currency.getInstance
 
 class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
 {
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -66,22 +68,23 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         val intent = Intent(context,AlarmReceiver::class.java)
 
         intent.putExtra("title",(name.text.toString()))
-
+        intent.putExtra("time",(time.toString()))
         val pendingIntent = PendingIntent.getBroadcast(context,System.currentTimeMillis().toInt(),intent,PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val repeatInterval = AlarmManager.INTERVAL_DAY
-        //val triggerTime = (conv_result)//알람을 울릴 시간 설정
-        //alarmManager.setRepeating( AlarmManager.RTC_WAKEUP, triggerTime,repeatInterval, pendingIntent )
+        val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
+
         chkbox.setOnCheckedChangeListener{_,check->
             val toastMessage = if(check){
                 val triggerTime = (conv_result)//알람을 울릴 시간 설정
                 alarmManager.setRepeating( AlarmManager.RTC_WAKEUP, triggerTime,repeatInterval, pendingIntent )
                 "$time 알람이 설정되었습니다"
+
             }else{alarmManager.cancel(pendingIntent)
                 "알람 설정 취소함"
             }
             Toast.makeText(context,toastMessage,Toast.LENGTH_SHORT).show()
         }
+
 
 
 
