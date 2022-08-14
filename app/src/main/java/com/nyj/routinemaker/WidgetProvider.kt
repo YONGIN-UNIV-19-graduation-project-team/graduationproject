@@ -43,7 +43,7 @@ class WidgetProvider :AppWidgetProvider(){
         Planlist = db.plan_DAO().searchday(day).toTypedArray().toCollection(arrayListOf<Plan>())
 
         Planlist.forEach{Plan-> viewname.append(Plan.name).append(" ")}
-        println(viewname)
+        //println(viewname)
         views.setTextViewText(R.id.todays_plan,viewname.toString())
 
         return views

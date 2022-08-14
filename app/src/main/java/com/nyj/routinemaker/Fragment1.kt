@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.helper.widget.Carousel
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment1.*
-import kotlinx.coroutines.selects.select
 
 class Fragment1 : Fragment() {
 
@@ -58,6 +56,8 @@ class Fragment1 : Fragment() {
                 }
                 setOnClickListener()
             }
+
+
     }
 
     fun setOnClickListener() {
