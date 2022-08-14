@@ -108,7 +108,9 @@ class MainActivity : AppCompatActivity() {
         db.close()
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
+            ////요일 로직 구현하기////
 
+            /////////////////////
             val requestCode = Routine.id
 
             val triggerTime :Calendar= Calendar.getInstance()
@@ -122,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(context,AlarmReceiver::class.java)
 
             intent.putExtra("title",(Routine.name))
-            intent.putExtra("time",(triggerTime.toString()))
+            intent.putExtra("time",(convertTime.toString()))
             intent.putExtra("requestCode",requestCode.toString())
 
 
