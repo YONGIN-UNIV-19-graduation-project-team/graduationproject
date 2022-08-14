@@ -26,7 +26,7 @@ class Fragment2 : Fragment(){
         val view = inflater.inflate(R.layout.fragment2, container, false)
         //db연결
         val db = Room.databaseBuilder(
-            requireActivity().applicationContext,AppDatabase::class.java,"database"
+            requireActivity().applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
         db.close()
