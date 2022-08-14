@@ -8,10 +8,11 @@ import androidx.room.Room
 class ResetCheckboxReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        //여기에 체크박스 해제 코드 작성해야함
+        //Room DB연동
         val db = Room.databaseBuilder(
             context.applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
+        //체크박스를 모두 해제하는 쿼리문 호출
         db.routine_DAO().resetcheckbox()
         db.close()
     }

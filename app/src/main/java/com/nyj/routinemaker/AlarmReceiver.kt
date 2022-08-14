@@ -1,5 +1,6 @@
 package com.nyj.routinemaker
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -9,6 +10,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -17,6 +20,7 @@ class AlarmReceiver : BroadcastReceiver() {
     var getTitle=""
     var getTime=""
     var getRequestCode=""
+    var setResetTime = ""
     lateinit var notificationManager: NotificationManager
     override fun onReceive(context: Context, intent: Intent) {
 
@@ -25,6 +29,8 @@ class AlarmReceiver : BroadcastReceiver() {
         getTitle = intent.getStringExtra("title").toString()
         getTime = intent.getStringExtra("time").toString()
         getRequestCode = intent.getStringExtra("requestCode").toString()
+
+
         createNotificationChannel()
         deliverNotification(context)
 
@@ -51,7 +57,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("제목 :"+getTitle)//제목
-            .setContentText("시간 입니다."+getTime)//내용
+            .setContentText("RequestCode : "+getRequestCode)//내용
             .setContentIntent(contentPendingIntent)//푸쉬알람 클릭시 인텐트작업
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)//푸쉬알람 클릭 시 사라짐
