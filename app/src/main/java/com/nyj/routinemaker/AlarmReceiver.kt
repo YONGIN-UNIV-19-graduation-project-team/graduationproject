@@ -12,6 +12,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -29,11 +30,21 @@ class AlarmReceiver : BroadcastReceiver() {
         getTitle = intent.getStringExtra("title").toString()
         getTime = intent.getStringExtra("time").toString()
         getRequestCode = intent.getStringExtra("requestCode").toString()
-
-
-        createNotificationChannel()
-        deliverNotification(context)
-
+        //////////요일 로직 구현부///////////
+        var weekList = intent.getSerializableExtra("weekList") as ArrayList<Boolean>
+        println(weekList)
+        if((doDayOfWeek()=="월"&&weekList[0])
+            ||(doDayOfWeek()=="화"&&weekList[1])
+            ||(doDayOfWeek()=="수"&&weekList[2])
+            ||(doDayOfWeek()=="목"&&weekList[3])
+            ||(doDayOfWeek()=="금"&&weekList[4])
+            ||(doDayOfWeek()=="토"&&weekList[5])
+            ||(doDayOfWeek()=="일"&&weekList[6]))
+        {
+            createNotificationChannel()
+            deliverNotification(context)
+        }else println("요일이 일치하지 않아 알림이 뜨지 않았다.")
+        ///////////////////////////////////////////////
     }
     fun createNotificationChannel(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
@@ -67,4 +78,26 @@ class AlarmReceiver : BroadcastReceiver() {
         //notificationManager?.cancel(getRequestCode.toInt())
     }
 
+    private fun doDayOfWeek(): String? {//오늘의 요일 구하기
+        val cal: Calendar = Calendar.getInstance()
+        var strWeek: String? = null
+        val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
+
+        if (nWeek == 1) {
+            strWeek = "일"
+        } else if (nWeek == 2) {
+            strWeek = "월"
+        } else if (nWeek == 3) {
+            strWeek = "화"
+        } else if (nWeek == 4) {
+            strWeek = "수"
+        } else if (nWeek == 5) {
+            strWeek = "목"
+        } else if (nWeek == 6) {
+            strWeek = "금"
+        } else if (nWeek == 7) {
+            strWeek = "토"
+        }
+        return strWeek
+    }
 }

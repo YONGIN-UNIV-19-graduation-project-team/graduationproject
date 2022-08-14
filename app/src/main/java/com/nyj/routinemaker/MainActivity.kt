@@ -99,8 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun setAlarm(context: Context){
-
-
+        var do_Alarm=false
         val db = Room.databaseBuilder(
             applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
@@ -108,7 +107,16 @@ class MainActivity : AppCompatActivity() {
         db.close()
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
+            var weekList = arrayListOf<Boolean>(Routine.mon,Routine.tue,Routine.wed,Routine.thu,Routine.fri,Routine.sat,Routine.sun)
             ////요일 로직 구현하기////
+            //val getDayOfWeek = doDayOfWeek()//오늘의 요일
+//            if(getDayOfWeek=="월"&&Routine.mon)do_Alarm=true
+//            if(getDayOfWeek=="화"&&Routine.tue)do_Alarm=true
+//            if(getDayOfWeek=="수"&&Routine.wed)do_Alarm=true
+//            if(getDayOfWeek=="목"&&Routine.thu)do_Alarm=true
+//            if(getDayOfWeek=="금"&&Routine.fri)do_Alarm=true
+//            if(getDayOfWeek=="토"&&Routine.sat)do_Alarm=true
+//            if(getDayOfWeek=="일"&&Routine.sun)do_Alarm=true
 
             /////////////////////
             val requestCode = Routine.id
@@ -126,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("title",(Routine.name))
             intent.putExtra("time",(convertTime.toString()))
             intent.putExtra("requestCode",requestCode.toString())
-
+            intent.putExtra("weekList",weekList)
 
             val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
 
