@@ -40,7 +40,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"database"
+            applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
 
         var intent = getIntent()
@@ -90,7 +90,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             if(checkBox6.isChecked)sat=true
             if(checkBox7.isChecked)sun=true
 
-            val routine = Routine( routineid,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
+            val routine = Routine( routineid,name, hour, min, mon, tue, wed, thu, fri, sat, sun,false)
 
             if(!routine.mon&&!routine.tue&&!routine.wed&&!routine.thu&&!routine.fri&&!routine.sat&&!routine.sun){
                 Toast.makeText(this, "요일을 한개라도 선택하세요.", Toast.LENGTH_SHORT).show()
@@ -109,7 +109,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
         del_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
-            val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun)
+            val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun,false)
             db.routine_DAO().delete(routine)
             db.close()
             startActivity(intent)

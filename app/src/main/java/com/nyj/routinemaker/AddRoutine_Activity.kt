@@ -36,7 +36,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"database"
+            applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
 
 
@@ -61,7 +61,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             if(checkBox6.isChecked)sat=true
             if(checkBox7.isChecked)sun=true
 
-            val routine = Routine( 0L,name, hour, min, mon, tue, wed, thu, fri, sat, sun)
+            val routine = Routine( 0L,name, hour, min, mon, tue, wed, thu, fri, sat, sun,false)
 
             if(!routine.mon&&!routine.tue&&!routine.wed&&!routine.thu&&!routine.fri&&!routine.sat&&!routine.sun){
                 Toast.makeText(this, "요일을 한개라도 선택하세요.", Toast.LENGTH_SHORT).show()

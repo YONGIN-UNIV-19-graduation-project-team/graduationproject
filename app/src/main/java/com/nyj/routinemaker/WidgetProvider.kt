@@ -33,7 +33,7 @@ class WidgetProvider :AppWidgetProvider(){
 
         //db연동, 안될수도있음
         val db = Room.databaseBuilder(
-            context!!.applicationContext,AppDatabase::class.java,"database"
+            context!!.applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
 
         year=LocalDate.now().year.toString()
@@ -43,7 +43,7 @@ class WidgetProvider :AppWidgetProvider(){
         Planlist = db.plan_DAO().searchday(day).toTypedArray().toCollection(arrayListOf<Plan>())
 
         Planlist.forEach{Plan-> viewname.append(Plan.name).append(" ")}
-        println(viewname)
+        //println(viewname)
         views.setTextViewText(R.id.todays_plan,viewname.toString())
 
         return views
