@@ -15,7 +15,7 @@ class Fragment1 : Fragment() {
 
     var RoutineList = arrayListOf<Routine>(
         Routine(0L,"더미","55","55",
-            true,true,true,true,true,true,true)
+            true,true,true,true,true,true,true,false)
     )
 
 
@@ -27,7 +27,7 @@ class Fragment1 : Fragment() {
         ////xml과 연결->view
         val view = inflater.inflate(R.layout.fragment1, container, false)
         val db = Room.databaseBuilder(
-            requireActivity().applicationContext,AppDatabase::class.java,"database"
+            requireActivity().applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()

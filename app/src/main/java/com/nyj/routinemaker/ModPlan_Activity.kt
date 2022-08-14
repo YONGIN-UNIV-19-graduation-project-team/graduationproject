@@ -33,7 +33,7 @@ class ModPlan_Activity : AppCompatActivity() {
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"database"
+            applicationContext,AppDatabase::class.java,"databases"
         ).allowMainThreadQueries().build()
 
         var intent = getIntent()

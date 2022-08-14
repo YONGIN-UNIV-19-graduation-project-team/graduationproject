@@ -19,4 +19,9 @@ interface Routine_DAO {
     @Delete
     fun delete(routine: Routine)
 
+    @Query("UPDATE tb_routines SET routineischecked=0 WHERE routineischecked=1")
+    fun resetcheckbox()
+
+    @Query("SELECT COUNT(*) FROM tb_routines")
+    fun getCount():Int
 }

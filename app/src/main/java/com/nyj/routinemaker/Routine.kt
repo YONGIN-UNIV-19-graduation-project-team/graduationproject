@@ -18,6 +18,7 @@ data class Routine(
     var thu:Boolean,
     var fri:Boolean,
     var sat:Boolean,
-    var sun:Boolean
+    var sun:Boolean,
+    var routineischecked :Boolean = false
 
 )
