@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/buttonshape"
-            android:text=" 챌린지"
+            android:text="챌린지"
             android:textColor="#898989"
             android:textScaleX="1.1"
             android:textSize="28sp"

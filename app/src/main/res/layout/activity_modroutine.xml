@@ -329,7 +329,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginBottom="30dp"
-        android:text="4.루틴을 시작하세요!"
+        android:text="4. 루틴을 시작하세요!"
         android:textColor="@color/gray"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
