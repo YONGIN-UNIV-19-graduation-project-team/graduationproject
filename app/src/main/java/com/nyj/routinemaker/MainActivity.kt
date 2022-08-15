@@ -108,17 +108,7 @@ class MainActivity : AppCompatActivity() {
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
             var weekList = arrayListOf<Boolean>(Routine.mon,Routine.tue,Routine.wed,Routine.thu,Routine.fri,Routine.sat,Routine.sun)
-            ////요일 로직 구현하기////
-            //val getDayOfWeek = doDayOfWeek()//오늘의 요일
-//            if(getDayOfWeek=="월"&&Routine.mon)do_Alarm=true
-//            if(getDayOfWeek=="화"&&Routine.tue)do_Alarm=true
-//            if(getDayOfWeek=="수"&&Routine.wed)do_Alarm=true
-//            if(getDayOfWeek=="목"&&Routine.thu)do_Alarm=true
-//            if(getDayOfWeek=="금"&&Routine.fri)do_Alarm=true
-//            if(getDayOfWeek=="토"&&Routine.sat)do_Alarm=true
-//            if(getDayOfWeek=="일"&&Routine.sun)do_Alarm=true
 
-            /////////////////////
             val requestCode = Routine.id
 
             val triggerTime :Calendar= Calendar.getInstance()

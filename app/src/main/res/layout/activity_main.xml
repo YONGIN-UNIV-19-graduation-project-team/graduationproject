@@ -40,20 +40,7 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/cal_button"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:text="챌린지"
-            android:textColor="#898989"
-            android:textScaleX="1.1"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
-
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -61,7 +48,15 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp">
 
-    </FrameLayout>
 
+        <ImageButton
+            android:id="@+id/cal_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="320dp"
+            app:srcCompat="@drawable/calender"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:layout_gravity="bottom"/>
+    </FrameLayout>
 
 </LinearLayout>
