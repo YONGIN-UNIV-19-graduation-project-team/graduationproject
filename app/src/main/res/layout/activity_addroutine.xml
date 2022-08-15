@@ -278,17 +278,6 @@
         tools:ignore="UnknownIdInLayout" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:text="1. 루틴 이름을 포스트잇에 쓰세요!"
-        android:textColor="@color/gray"
-        android:textSize="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -300,15 +289,25 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:layout_marginBottom="30dp"
-        android:text="4. 루틴을 시작하세요!"
+        android:text="1. 루틴 이름을 포스트잇에 쓰세요!"
         android:textColor="@color/gray"
         android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:text="2. 루틴을 실행할 장소에 포스트잇을 붙여주세요!"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -323,14 +322,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
-        android:text="2. 루틴을 실행할 장소에 포스트잇을 붙여주세요!"
+        android:layout_marginBottom="30dp"
+        android:text="4. 루틴을 시작하세요!"
         android:textColor="@color/gray"
         android:textSize="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
