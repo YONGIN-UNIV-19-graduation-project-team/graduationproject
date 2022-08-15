@@ -121,7 +121,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {
         timeisselected=true
         val textView = findViewById<TextView>(R.id.timetext)
-        textView.text = "$hourOfDay : $minute"
+        textView.text = " $hourOfDay : $minute"
         changed_hour=hourOfDay
         changed_minute=minute
     }
