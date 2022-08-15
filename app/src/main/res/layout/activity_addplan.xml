@@ -4,110 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPlan_Activity">
+    tools:context=".AddPlan_Activity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="8dp">
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="136dp"
+        android:layout_height="39dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:layout_weight="1"
+        android:lineSpacingMultiplier="1.5"
+        android:text="할일 추가"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textview_get_date"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="57dp"
         android:text="Get Date"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textview_get_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textview_get_time"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="80dp"
-        android:hint="버튼을 눌러 시간 설정"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="11dp"
-        android:text="할일 제목:"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/planName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="312dp"
-        android:text="시간:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/planName" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="80dp"
         android:text="날짜:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/blue"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btn_pick_date"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="54dp"
         android:text="D"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pick_time"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_get_date"
+        app:layout_constraintTop_toBottomOf="@+id/planName" />
+
+    <TextView
+        android:id="@+id/textview_get_time"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="62dp"
+        android:hint="버튼을 눌러 시간 설정"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textview_get_date" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="87dp"
+        android:text="시간:"
+        android:textColor="@color/blue"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/btn_pick_time"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="284dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="54dp"
         android:text="T"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_get_time"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pick_date" />
+
+    <EditText
+        android:id="@+id/planName"
+        android:layout_width="309dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="할 일을 입력하세요"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="160dp"
+        android:text="할 일 제목:"
+        android:textColor="@color/blue"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="285dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="137dp"
-        android:text="저장"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="311dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginBottom="177dp"
+        android:text="추가"
+        android:textColor="@color/blue"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/planName"
-        android:layout_width="243dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="제목을 입력하세요.."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
