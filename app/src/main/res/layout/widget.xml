@@ -7,7 +7,7 @@
 
     <TextView
 
-        android:id="@+id/textView01"
+        android:id="@+id/day_of_week"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_weight="0.3"
@@ -16,7 +16,7 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/day_of_month"
         android:layout_width="match_parent"
         android:layout_height="22dp"
         android:layout_weight="0.3"

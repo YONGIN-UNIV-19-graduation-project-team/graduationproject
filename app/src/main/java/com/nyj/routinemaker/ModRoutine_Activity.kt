@@ -32,7 +32,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
     var sat = false
     var sun = false
 
-    var timeisselected=false
+    //var timeisselected=false
     var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,28 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
         //Toast.makeText(this, routineid.toString(), Toast.LENGTH_SHORT).show()
         var get_routine = db.routine_DAO().getRoutinebyId(routineid)
         routine_name = get_routine.name
+        changed_hour = get_routine.hour.toInt()
+        changed_minute = get_routine.min.toInt()
         routine_Name.setText(routine_name)
+
+        val textView = findViewById<TextView>(R.id.timetext)
+
+        if(changed_hour<10&&changed_minute<10) {
+            textView.text = "0$changed_hour : 0$changed_minute"
+        }
+        else {
+            if (changed_minute<10) {
+                textView.text = "$changed_hour : 0$changed_minute"
+            }
+            else
+                if(changed_hour<10) {
+                    textView.text = "0$changed_hour : $changed_minute"
+                }
+                else textView.text = "$changed_hour : $changed_minute"
+        }
+
+
+
 
         val checkBox01 = findViewById<CheckBox>(R.id.checkBox1)
         val checkBox02 = findViewById<CheckBox>(R.id.checkBox2)
@@ -96,17 +117,17 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
                 Toast.makeText(this, "요일을 한개라도 선택하세요.", Toast.LENGTH_SHORT).show()
             }
             else{
-                if(timeisselected&&nameisnotnull){
+                if(nameisnotnull){
                     db.routine_DAO().update(routine)
                     db.close()
                     startActivity(intent)
                 }
                 else{
-                    Toast.makeText(this, "루틴 이름이 공백이거나 시간을 재설정하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "루틴 이름이 공백입니다!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
+        //삭제버튼 구현
         del_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
             val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun,false)
@@ -119,9 +140,21 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
     }
 
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {
-        timeisselected=true
+        //timeisselected=true
         val textView = findViewById<TextView>(R.id.timetext)
-        textView.text = "$hourOfDay : $minute"
+        if(hourOfDay<10&&minute<10) {
+            textView.text = "0$hourOfDay : 0$minute"
+        }
+        else {
+            if (minute<10) {
+                textView.text = "$hourOfDay : 0$minute"
+            }
+            else
+                if(hourOfDay<10) {
+                    textView.text = "0$hourOfDay : $minute"
+                }
+                else textView.text = "$hourOfDay : $minute"
+        }
         changed_hour=hourOfDay
         changed_minute=minute
     }

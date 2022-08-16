@@ -42,7 +42,9 @@ class ModPlan_Activity : AppCompatActivity() {
         //id Toast로 띄우는 주석.
         //Toast.makeText(this, planid.toString(), Toast.LENGTH_SHORT).show()
         var get_plan = db.plan_DAO().getPlanbyId(planid)//여기에서 해당id의 plan 가져옴
+
         textview_get_date.text = get_plan.year+"년 "+get_plan.month+"월 "+get_plan.day+"일"
+        textview_get_time.text = "${get_plan.hour.toInt()}:${get_plan.min.toInt()}"
 
         plan_Name = get_plan.name
         planName.setText(plan_Name)
@@ -51,7 +53,7 @@ class ModPlan_Activity : AppCompatActivity() {
         plan_Day = get_plan.day
 
 
-
+        //날짜 선택 란//
         btn_pick_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -84,7 +86,21 @@ class ModPlan_Activity : AppCompatActivity() {
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
                 timeisselected=true
-                textview_get_time.text = "$i:$i2"
+
+                if(i<10&&i2<10) {
+                    textview_get_time.text = "0$i : 0$i2"
+                }
+                else {
+                    if (i2<10) {
+                        textview_get_time.text = "$i : 0$i2"
+                    }
+                    else
+                        if(i<10) {
+                            textview_get_time.text = "0$i : $i2"
+                        }
+                        else textview_get_time.text = "$i : $i2"
+                }
+
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
 
@@ -104,6 +120,7 @@ class ModPlan_Activity : AppCompatActivity() {
                 if(nameisnotnull) {
                     db.plan_DAO().update(plan)
                     db.close()
+                    intent.putExtra("access_plan",true)
                     startActivity(intent)
                 }else Toast.makeText(this, "이름을 공백으로 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }else Toast.makeText(this, "시간이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
@@ -115,6 +132,7 @@ class ModPlan_Activity : AppCompatActivity() {
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
             db.plan_DAO().delete(plan)
             db.close()
+            intent.putExtra("access_plan",true)
             startActivity(intent)
         }
 

@@ -34,8 +34,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        setFrag(0)
+        var accessByPlan = intent.getBooleanExtra("access_plan",false)
+        if(!accessByPlan) setFrag(0)
+        else setFrag(1)
 
         frg1_button.setOnClickListener{
             setFrag(0)
