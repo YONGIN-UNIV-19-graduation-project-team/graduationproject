@@ -22,7 +22,7 @@ class WidgetProvider :AppWidgetProvider(){
 
     var Planlist = arrayListOf<Plan>(
         Plan(0L,"더미","2022","11",
-            "12","0","0")
+            "12","0","0","0")
     )
 
 
@@ -34,7 +34,7 @@ class WidgetProvider :AppWidgetProvider(){
 
         //db연동, 안될수도있음
         val db = Room.databaseBuilder(
-            context!!.applicationContext,AppDatabase::class.java,"databases"
+            context!!.applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
 
         year=LocalDate.now().year.toString()

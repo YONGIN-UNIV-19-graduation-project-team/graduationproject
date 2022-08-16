@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     fun setAlarm(context: Context){
         var do_Alarm=false
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
+            applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()

@@ -14,7 +14,7 @@ data class Plan(
 
     var hour: String,
     var min:String,
-
+    val date:String
 
 
 )

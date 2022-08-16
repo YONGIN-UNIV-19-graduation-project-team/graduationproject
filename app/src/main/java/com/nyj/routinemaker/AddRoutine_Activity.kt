@@ -39,7 +39,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
             val db = Room.databaseBuilder(
-                applicationContext,AppDatabase::class.java,"databases"
+                applicationContext,AppDatabase::class.java,"routine_database"
             ).allowMainThreadQueries().build()
 
             val intent = Intent(this,MainActivity::class.java)

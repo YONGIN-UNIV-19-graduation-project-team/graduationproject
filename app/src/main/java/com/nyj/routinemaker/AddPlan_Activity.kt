@@ -33,7 +33,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
+            applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
 
 
@@ -123,7 +123,8 @@ class AddPlan_Activity : AppCompatActivity() {
             nameisnotnull=false
             if(plan_Name!=""){nameisnotnull=true}
             //데이터 입력
-            val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            val add_date = plan_Year+plan_Month+plan_Day
+            val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
             if(timeisselected&&nameisnotnull) {
                 db?.plan_DAO()?.insertAll(plan)
                 db.close()
