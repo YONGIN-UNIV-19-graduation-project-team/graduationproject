@@ -33,7 +33,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
+            applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
 
 
@@ -93,7 +93,21 @@ class AddPlan_Activity : AppCompatActivity() {
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
                 timeisselected=true
-                textview_get_time.text = "$i:$i2"
+
+                if(i<10&&i2<10) {
+                    textview_get_time.text = "0$i : 0$i2"
+                }
+                else {
+                    if (i2<10) {
+                        textview_get_time.text = "$i : 0$i2"
+                    }
+                    else
+                        if(i<10) {
+                            textview_get_time.text = "0$i : $i2"
+                        }
+                        else textview_get_time.text = "$i : $i2"
+                }
+
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
 
@@ -109,11 +123,13 @@ class AddPlan_Activity : AppCompatActivity() {
             nameisnotnull=false
             if(plan_Name!=""){nameisnotnull=true}
             //데이터 입력
-            val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            val add_date = plan_Year+plan_Month+plan_Day
+            val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
             if(timeisselected&&nameisnotnull) {
                 db?.plan_DAO()?.insertAll(plan)
                 db.close()
                 val intent = Intent(this,MainActivity::class.java)
+                intent.putExtra("access_plan",true)
                 startActivity(intent)
             }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
 

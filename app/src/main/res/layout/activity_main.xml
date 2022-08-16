@@ -8,9 +8,14 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_width="379dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <Button
@@ -26,11 +31,12 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/frg2_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:background="@drawable/buttonshape"
             android:text="할 일"
@@ -40,28 +46,29 @@
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/cal_button"
-            android:layout_width="53dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:text="챌린지"
-            android:textColor="#898989"
-            android:textScaleX="1.1"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
-
 
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
 
+
+        <ImageButton
+            android:id="@+id/cal_button"
+            android:layout_width="80dp"
+            android:layout_height="81dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="300dp"
+            android:background="#00FF0000"
+            app:srcCompat="@drawable/calender"
+            tools:ignore="SpeakableTextPresentCheck" />
     </FrameLayout>
-
 
 </LinearLayout>

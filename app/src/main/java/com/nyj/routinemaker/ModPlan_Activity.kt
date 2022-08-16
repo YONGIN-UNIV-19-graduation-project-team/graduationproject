@@ -25,7 +25,7 @@ class ModPlan_Activity : AppCompatActivity() {
     var plan_Name=""
 
 
-    var timeisselected=false
+    var timeisselected=true
     var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class ModPlan_Activity : AppCompatActivity() {
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
+            applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
 
         var intent = getIntent()
@@ -42,16 +42,36 @@ class ModPlan_Activity : AppCompatActivity() {
         //id Toast로 띄우는 주석.
         //Toast.makeText(this, planid.toString(), Toast.LENGTH_SHORT).show()
         var get_plan = db.plan_DAO().getPlanbyId(planid)//여기에서 해당id의 plan 가져옴
+
         textview_get_date.text = get_plan.year+"년 "+get_plan.month+"월 "+get_plan.day+"일"
+
+        val gethour = get_plan.hour.toInt()
+        val getmin = get_plan.min.toInt()
+        if(get_plan.hour.toInt()<10&&get_plan.min.toInt()<10) {
+            textview_get_time.text = "0$gethour : 0$getmin"
+        }
+        else {
+            if (get_plan.min.toInt()<10) {
+                textview_get_time.text = "$gethour : 0$getmin"
+            }
+            else
+                if(get_plan.hour.toInt()<10) {
+                    textview_get_time.text = "0$gethour : $getmin"
+                }
+                else textview_get_time.text = "$gethour : $getmin"
+        }
+
+
 
         plan_Name = get_plan.name
         planName.setText(plan_Name)
         plan_Year = get_plan.year
         plan_Month=get_plan.month
         plan_Day = get_plan.day
+        plan_Hour = get_plan.hour
+        plan_Min = get_plan.min
 
-
-
+        //날짜 선택 란//
         btn_pick_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
@@ -84,7 +104,21 @@ class ModPlan_Activity : AppCompatActivity() {
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
                 timeisselected=true
-                textview_get_time.text = "$i:$i2"
+
+                if(i<10&&i2<10) {
+                    textview_get_time.text = "0$i : 0$i2"
+                }
+                else {
+                    if (i2<10) {
+                        textview_get_time.text = "$i : 0$i2"
+                    }
+                    else
+                        if(i<10) {
+                            textview_get_time.text = "0$i : $i2"
+                        }
+                        else textview_get_time.text = "$i : $i2"
+                }
+
                 plan_Hour=selectDate.get(Calendar.HOUR).toString()
                 plan_Min=selectDate.get(Calendar.MINUTE).toString()
 
@@ -99,11 +133,13 @@ class ModPlan_Activity : AppCompatActivity() {
             nameisnotnull=false
             plan_Name = planName.text.toString()
             if(plan_Name!="")nameisnotnull=true
-            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            val add_date = plan_Year+plan_Month+plan_Day
+            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
             if(timeisselected) {
                 if(nameisnotnull) {
                     db.plan_DAO().update(plan)
                     db.close()
+                    intent.putExtra("access_plan",true)
                     startActivity(intent)
                 }else Toast.makeText(this, "이름을 공백으로 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }else Toast.makeText(this, "시간이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
@@ -112,9 +148,10 @@ class ModPlan_Activity : AppCompatActivity() {
         //삭제버튼
         del_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
-            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min)
+            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
             db.plan_DAO().delete(plan)
             db.close()
+            intent.putExtra("access_plan",true)
             startActivity(intent)
         }
 

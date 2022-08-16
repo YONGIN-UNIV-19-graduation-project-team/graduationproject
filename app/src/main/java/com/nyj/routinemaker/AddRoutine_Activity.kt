@@ -33,18 +33,14 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
 
-
-        //db연결
-        val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
-        ).allowMainThreadQueries().build()
-
-
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
         timePicker.setOnTimeChangedListener(this)
 
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
+            val db = Room.databaseBuilder(
+                applicationContext,AppDatabase::class.java,"routine_database"
+            ).allowMainThreadQueries().build()
 
             val intent = Intent(this,MainActivity::class.java)
 
@@ -74,17 +70,28 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                 }
                 else{
                     Toast.makeText(this, "루틴 이름이 공백이거나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                    db.close()
                 }
-
             }
         }
-        db.close()
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
         timeisselected=true
         val textView = findViewById<TextView>(R.id.timetext)
-        textView.text = "$hourOfDay : $minute"
+        if(hourOfDay<10&&minute<10) {
+            textView.text = "0$hourOfDay : 0$minute"
+        }
+        else {
+            if (minute<10) {
+                textView.text = "$hourOfDay : 0$minute"
+            }
+            else
+                if(hourOfDay<10) {
+                    textView.text = "0$hourOfDay : $minute"
+                }
+                else textView.text = "$hourOfDay : $minute"
+        }
         changed_hour=hourOfDay
         changed_minute=minute
     }

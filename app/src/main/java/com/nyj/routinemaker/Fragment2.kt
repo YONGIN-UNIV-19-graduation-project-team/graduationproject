@@ -18,7 +18,7 @@ class Fragment2 : Fragment(){
 
     var PlanList = arrayListOf<Plan>(
         Plan(0L,"더미","2022","11",
-            "12","0","0")
+            "12","0","0","")
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,7 +26,7 @@ class Fragment2 : Fragment(){
         val view = inflater.inflate(R.layout.fragment2, container, false)
         //db연결
         val db = Room.databaseBuilder(
-            requireActivity().applicationContext,AppDatabase::class.java,"databases"
+            requireActivity().applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
         db.close()

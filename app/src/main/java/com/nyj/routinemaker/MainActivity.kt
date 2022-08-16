@@ -34,8 +34,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        setFrag(0)
+        var accessByPlan = intent.getBooleanExtra("access_plan",false)
+        if(!accessByPlan) setFrag(0)
+        else setFrag(1)
 
         frg1_button.setOnClickListener{
             setFrag(0)
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
         val resetAlarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         val resetIntent = Intent(context,ResetCheckboxReceiver::class.java)
-        val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,0)
+        val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,PendingIntent.FLAG_IMMUTABLE)
 
         val resetCal = Calendar.getInstance()
         resetCal.setTimeInMillis(System.currentTimeMillis())
@@ -101,24 +102,14 @@ class MainActivity : AppCompatActivity() {
     fun setAlarm(context: Context){
         var do_Alarm=false
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"databases"
+            applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
             var weekList = arrayListOf<Boolean>(Routine.mon,Routine.tue,Routine.wed,Routine.thu,Routine.fri,Routine.sat,Routine.sun)
-            ////요일 로직 구현하기////
-            //val getDayOfWeek = doDayOfWeek()//오늘의 요일
-//            if(getDayOfWeek=="월"&&Routine.mon)do_Alarm=true
-//            if(getDayOfWeek=="화"&&Routine.tue)do_Alarm=true
-//            if(getDayOfWeek=="수"&&Routine.wed)do_Alarm=true
-//            if(getDayOfWeek=="목"&&Routine.thu)do_Alarm=true
-//            if(getDayOfWeek=="금"&&Routine.fri)do_Alarm=true
-//            if(getDayOfWeek=="토"&&Routine.sat)do_Alarm=true
-//            if(getDayOfWeek=="일"&&Routine.sun)do_Alarm=true
 
-            /////////////////////
             val requestCode = Routine.id
 
             val triggerTime :Calendar= Calendar.getInstance()
