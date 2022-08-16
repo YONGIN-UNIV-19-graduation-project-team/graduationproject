@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="삭제"
-            android:textColor="@color/blue"
+            android:textColor="@color/red"
             android:textSize="25sp"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"  />
