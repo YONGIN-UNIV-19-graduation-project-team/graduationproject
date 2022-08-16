@@ -10,7 +10,12 @@
     <LinearLayout
         android:layout_width="379dp"
         android:layout_height="62dp"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <Button
@@ -47,17 +52,23 @@
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
 
 
         <ImageButton
             android:id="@+id/cal_button"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="320dp"
+            android:layout_width="80dp"
+            android:layout_height="81dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="300dp"
+            android:background="#00FF0000"
             app:srcCompat="@drawable/calender"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:layout_gravity="bottom"/>
+            tools:ignore="SpeakableTextPresentCheck" />
     </FrameLayout>
 
 </LinearLayout>

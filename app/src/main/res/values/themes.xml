@@ -17,4 +17,7 @@
     <style name="CustomTimePicker">
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blue</item>
+    </style>
 </resources>
