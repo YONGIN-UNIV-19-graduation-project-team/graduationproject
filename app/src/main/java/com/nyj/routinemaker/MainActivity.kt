@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
         val resetAlarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         val resetIntent = Intent(context,ResetCheckboxReceiver::class.java)
-        val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,0)
+        val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,PendingIntent.FLAG_IMMUTABLE)
 
         val resetCal = Calendar.getInstance()
         resetCal.setTimeInMillis(System.currentTimeMillis())
