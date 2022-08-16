@@ -19,7 +19,7 @@ class WidgetProvider :AppWidgetProvider(){
     var day=""
     var hour = ""
     var min = ""
-
+    var date=""
     var Planlist = arrayListOf<Plan>(
         Plan(0L,"더미","2022","11",
             "12","0","0","0")
@@ -38,8 +38,9 @@ class WidgetProvider :AppWidgetProvider(){
         ).allowMainThreadQueries().build()
 
         year=LocalDate.now().year.toString()
-        month=LocalDate.now().month.toString()
+        month=LocalDate.now().monthValue.toString()
         day=LocalDate.now().dayOfMonth.toString()
+        date=year+month+day
         Planlist = db.plan_DAO().searchday(day).toTypedArray().toCollection(arrayListOf<Plan>())
 
         Planlist.forEach{Plan->

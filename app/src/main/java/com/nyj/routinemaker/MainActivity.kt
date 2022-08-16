@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,13 +57,13 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
                 frg1_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-
+                cal_button.setVisibility(View.VISIBLE)
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
-
+                cal_button.setVisibility(View.GONE)
             }
         }
     }
