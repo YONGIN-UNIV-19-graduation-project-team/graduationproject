@@ -38,9 +38,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
-            val db = Room.databaseBuilder(
-                applicationContext,AppDatabase::class.java,"routine_database"
-            ).allowMainThreadQueries().build()
+
 
             val intent = Intent(this,MainActivity::class.java)
 
@@ -64,13 +62,16 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             }
             else{
                 if(timeisselected&&nameisnotnull){
+                    val db = Room.databaseBuilder(
+                        this.applicationContext,AppDatabase::class.java,"routine_database"
+                    ).allowMainThreadQueries().build()
                     db.routine_DAO().insertAll(routine)
                     db.close()
                     startActivity(intent)
                 }
                 else{
                     Toast.makeText(this, "루틴 이름이 공백이거나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
-                    db.close()
+
                 }
             }
         }
