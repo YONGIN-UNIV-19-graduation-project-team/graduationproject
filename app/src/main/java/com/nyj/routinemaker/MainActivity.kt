@@ -6,20 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment1.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
 import java.util.*
 
 
@@ -28,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,13 +51,13 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
                 frg1_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-
+                cal_button.setVisibility(View.VISIBLE)
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
-
+                cal_button.setVisibility(View.GONE)
             }
         }
     }
@@ -80,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         val resetAlarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
         val resetIntent = Intent(context,ResetCheckboxReceiver::class.java)
         val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,PendingIntent.FLAG_IMMUTABLE)
-
         val resetCal = Calendar.getInstance()
         resetCal.setTimeInMillis(System.currentTimeMillis())
         //자정 시간
@@ -100,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun setAlarm(context: Context){
-        var do_Alarm=false
         val db = Room.databaseBuilder(
             applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
@@ -137,9 +128,11 @@ class MainActivity : AppCompatActivity() {
                 this,
                 requestCode.toInt(),
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,convertTime,repeatInterval,pendingIntent)
+            println("pendingintent 전송 완료")
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,convertTime,pendingIntent)
+            //alarmManager.setRepeating(AlarmManager.RTC,convertTime,repeatInterval,pendingIntent)
         }
     }
 

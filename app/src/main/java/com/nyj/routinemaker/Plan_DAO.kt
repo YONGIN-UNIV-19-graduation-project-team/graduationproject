@@ -8,6 +8,8 @@ interface Plan_DAO{
     fun getAll():List<Plan>
     @Query("SELECT *FROM tb_plans WHERE id LIKE :searchQuery")
     fun getPlanbyId(searchQuery: Long) : Plan
+    @Query("SELECT *FROM tb_plans WHERE date LIKE :date")
+    fun getPlanbyDate(date:String):List<Plan>
     @Insert
     fun insertAll(vararg plan: Plan)
     @Update

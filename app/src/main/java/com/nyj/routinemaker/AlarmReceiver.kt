@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +24,7 @@ class AlarmReceiver : BroadcastReceiver() {
     var getRequestCode=""
     var setResetTime = ""
     lateinit var notificationManager: NotificationManager
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onReceive(context: Context, intent: Intent) {
 
         notificationManager = context.getSystemService(
@@ -58,13 +60,14 @@ class AlarmReceiver : BroadcastReceiver() {
             notificationManager?.createNotificationChannel(notificationChannel)
         }
     }
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun deliverNotification(context: Context){
         val contextIntent = Intent(context,MainActivity::class.java) //알림 클릭 시 이동하는 인텐트.
         val contentPendingIntent = PendingIntent.getActivity(context, getRequestCode.toInt(),//request Code
             contextIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT//현재 인텐트를 유지하고, 대신 인텐트의 extra data는 새로 전달된 Intent로 교체.
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT//현재 인텐트를 유지하고, 대신 인텐트의 extra data는 새로 전달된 Intent로 교체.
         )
-
+        println("pendingintent 수신 완료")
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("제목 :"+getTitle)//제목

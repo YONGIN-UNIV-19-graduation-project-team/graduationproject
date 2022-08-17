@@ -41,7 +41,7 @@ class AddPlan_Activity : AppCompatActivity() {
         var intent = getIntent()
 
         var year = intent.getStringExtra("year").toString()
-        var month = ((intent.getStringExtra("month"))!!.toInt()+1).toString()//자꾸 1달 낮게 데이터가 넘겨짐.
+        var month = (intent.getStringExtra("month")).toString()
         var day = intent.getStringExtra("day").toString()
 
         // ex)8월 달력 클릭시 7월로 데이터가 이전되어서 형변환후 1추가시킨후 다시형변환했음
