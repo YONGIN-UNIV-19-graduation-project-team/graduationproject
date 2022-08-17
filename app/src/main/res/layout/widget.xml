@@ -3,13 +3,15 @@
     android:layout_width="200dp"
     android:layout_height="200dp"
     android:orientation="vertical"
+    android:background="@drawable/stroke"
+    android:padding="10dip"
     >
 
     <TextView
 
         android:id="@+id/day_of_week"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="13dp"
         android:layout_weight="0.3"
         android:text="화요일"
         android:textColor="@color/black"
@@ -18,7 +20,7 @@
     <TextView
         android:id="@+id/day_of_month"
         android:layout_width="match_parent"
-        android:layout_height="22dp"
+        android:layout_height="30dp"
         android:layout_weight="0.3"
         android:text="16"
         android:textColor="@color/black"
