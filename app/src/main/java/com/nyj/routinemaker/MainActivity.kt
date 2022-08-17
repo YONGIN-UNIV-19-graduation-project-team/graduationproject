@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -29,25 +30,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setPermission()
 
 
-        //권한설정
-        TedPermission.with(this)
-            .setPermissionListener(object : PermissionListener {
-                override fun onPermissionGranted() {
-                    startActivity(Intent(this@MainActivity, MainActivity::class.java))
-                    finish()
-                }
-
-                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                    for(i in deniedPermissions!!)
-                        i.showErrLog()
-                }
-
-            })
-            .setDeniedMessage("앱을 실행하려면 권한을 허가하셔야합니다.")
-            .setPermissions(Manifest.permission.CAMERA)
-            .check()
+//        //권한설정
+//        TedPermission.with(this)
+//            .setPermissionListener(object : PermissionListener {
+//                override fun onPermissionGranted() {
+//                    //startActivity(Intent(this@MainActivity, MainActivity::class.java))
+//                    finish()
+//                }
+//
+//                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+//                    for(i in deniedPermissions!!)
+//                        i.showErrLog()
+//                }
+//
+//            })
+//            .setDeniedMessage("앱을 실행하려면 권한을 허가하셔야합니다.")
+//            .setPermissions(Manifest.permission.CAMERA)
+//            .check()
 
 
 
@@ -66,6 +68,28 @@ class MainActivity : AppCompatActivity() {
         resetChkbox(this)
         setAlarm(this)
     }
+
+    private fun setPermission() {
+        val permission = object : PermissionListener{
+            override fun onPermissionGranted() {
+                Toast.makeText(this@MainActivity, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                Toast.makeText(this@MainActivity, "권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        TedPermission.with(this)
+            .setPermissionListener(permission)
+            .setRationaleMessage("카메라 앱을 사용하시려면 권한을 혀용해주세요.")
+            .setDeniedMessage("권한을 거부하셨습니다.")
+            .setPermissions(android.Manifest.permission.CAMERA)
+            .check()
+    }
+
+
 
     private fun setFrag(fragNum : Int) {
         //fragnum이 0일때 fragment1로 , 1때 fragment2로
