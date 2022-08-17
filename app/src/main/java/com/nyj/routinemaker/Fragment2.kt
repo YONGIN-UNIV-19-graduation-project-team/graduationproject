@@ -37,10 +37,10 @@ class Fragment2 : Fragment() {
     ): View? {
         //xml과 연결
         val view = inflater.inflate(R.layout.fragment2, container, false)
-        val nowyear= LocalDate.now().year.toString()
-        val nowmonth= LocalDate.now().monthValue.toString()
-        val nowday= LocalDate.now().dayOfMonth.toString()
-        date_ = nowyear+nowmonth+nowday
+        clicked_year= LocalDate.now().year.toString()
+        clicked_month= LocalDate.now().monthValue.toString()
+        clicked_dayofMonth= LocalDate.now().dayOfMonth.toString()
+        date_ = clicked_year+clicked_month+clicked_dayofMonth
         println(date_)
         //db연결
         val db = Room.databaseBuilder(
