@@ -1,5 +1,6 @@
 package com.nyj.routinemaker
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -9,9 +10,12 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
         if(!accessByPlan) setFrag(0)
@@ -42,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         resetChkbox(this)
         setAlarm(this)
     }
+
+
 
     private fun setFrag(fragNum : Int) {
         //fragnum이 0일때 fragment1로 , 1때 fragment2로
