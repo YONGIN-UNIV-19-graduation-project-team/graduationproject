@@ -61,4 +61,16 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    //androidx
+    implementation 'androidx.exifinterface:exifinterface:1.2.0-beta01'
+
+    //Permission Manager
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+
+    //Splitties
+    implementation 'com.louiscad.splitties:splitties-toast:2.1.1'
+
+    //tesseract
+    implementation 'com.rmtheis:tess-two:9.1.0'
 }

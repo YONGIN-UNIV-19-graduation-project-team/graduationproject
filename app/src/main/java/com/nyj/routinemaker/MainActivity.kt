@@ -1,5 +1,6 @@
 package com.nyj.routinemaker
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -12,6 +13,8 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +29,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        //권한설정
+        TedPermission.with(this)
+            .setPermissionListener(object : PermissionListener {
+                override fun onPermissionGranted() {
+                    startActivity(Intent(this@MainActivity, MainActivity::class.java))
+                    finish()
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    for(i in deniedPermissions!!)
+                        i.showErrLog()
+                }
+
+            })
+            .setDeniedMessage("앱을 실행하려면 권한을 허가하셔야합니다.")
+            .setPermissions(Manifest.permission.CAMERA)
+            .check()
+
+
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
         if(!accessByPlan) setFrag(0)
