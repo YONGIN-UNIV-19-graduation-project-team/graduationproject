@@ -30,7 +30,7 @@
             android:layout_gravity="bottom"
             android:background="@android:drawable/ic_popup_sync"
             android:scaleType="center"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </LinearLayout>
 
     <TextView
