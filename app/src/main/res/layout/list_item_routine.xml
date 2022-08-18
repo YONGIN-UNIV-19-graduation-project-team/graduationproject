@@ -54,26 +54,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="30dp"
         android:text="min"
         android:textColor="#AEBAD2"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/rt_hm"
-        app:layout_constraintTop_toBottomOf="@+id/rt_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_hm" />
 
     <TextView
         android:id="@+id/rt_dow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="월 화 수 목 금"
-        android:textColor="#AEBAD2"
-        android:textSize="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="월"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/rt_min"
-        app:layout_constraintTop_toBottomOf="@+id/rt_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_min" />
+
+    <TextView
+        android:id="@+id/rt_dow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="일"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow5" />
+
+    <TextView
+        android:id="@+id/rt_dow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="금"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow3" />
+
+    <TextView
+        android:id="@+id/rt_dow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="화"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow" />
+
+    <TextView
+        android:id="@+id/rt_dow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="수"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow1" />
+
+    <TextView
+        android:id="@+id/rt_dow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="목"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow2" />
+
+    <TextView
+        android:id="@+id/rt_dow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="토"
+        android:textColor="@color/softgray"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_dow4" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -88,4 +160,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
