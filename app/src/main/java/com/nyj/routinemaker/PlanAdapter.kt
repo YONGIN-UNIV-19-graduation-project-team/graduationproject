@@ -10,7 +10,7 @@ import android.widget.TextView
 class PlanAdapter (val context : Context, val PlanList : ArrayList<Plan>) : BaseAdapter()
 {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        println("planAdapter 실행")
+        //println("planAdapter 실행")
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_plan, null)
         val name = view.findViewById<TextView>(R.id.plan_name)
         val data = view.findViewById<TextView>(R.id.plan_data)

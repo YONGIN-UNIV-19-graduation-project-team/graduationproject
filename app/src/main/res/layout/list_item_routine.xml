@@ -63,7 +63,7 @@
         app:layout_constraintStart_toEndOf="@+id/rt_hm" />
 
     <TextView
-        android:id="@+id/rt_dow"
+        android:id="@+id/rt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toEndOf="@+id/rt_min" />
 
     <TextView
-        android:id="@+id/rt_dow6"
+        android:id="@+id/rt_7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -85,10 +85,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow5" />
+        app:layout_constraintStart_toEndOf="@+id/rt_6" />
 
     <TextView
-        android:id="@+id/rt_dow4"
+        android:id="@+id/rt_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -97,10 +97,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow3" />
+        app:layout_constraintStart_toEndOf="@+id/rt_4" />
 
     <TextView
-        android:id="@+id/rt_dow1"
+        android:id="@+id/rt_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -109,10 +109,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow" />
+        app:layout_constraintStart_toEndOf="@+id/rt_1" />
 
     <TextView
-        android:id="@+id/rt_dow2"
+        android:id="@+id/rt_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -121,10 +121,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow1" />
+        app:layout_constraintStart_toEndOf="@+id/rt_2" />
 
     <TextView
-        android:id="@+id/rt_dow3"
+        android:id="@+id/rt_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -133,10 +133,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow2" />
+        app:layout_constraintStart_toEndOf="@+id/rt_3" />
 
     <TextView
-        android:id="@+id/rt_dow5"
+        android:id="@+id/rt_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -145,7 +145,7 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_dow4" />
+        app:layout_constraintStart_toEndOf="@+id/rt_5" />
 
     <CheckBox
         android:id="@+id/checkBox"

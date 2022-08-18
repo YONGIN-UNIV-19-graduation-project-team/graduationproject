@@ -18,17 +18,28 @@ class ResetCheckboxReceiver : BroadcastReceiver() {
     )
     override fun onReceive(context: Context, intent: Intent) {
         //Room DB연동
+
+        println("정각이 됐다!!!!!!!!!!!!!!!!!!!!1")
         val db = Room.databaseBuilder(
-            context.applicationContext,AppDatabase::class.java,"databases"
+            context.applicationContext,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
         //체크박스를 모두 해제하는 쿼리문 호출
-        db.routine_DAO().resetcheckbox()
+        println("db접근완료")
+        db.routine_DAO().resetCheckBox()
+        println("체크박스 리셋 시도 완료")
+
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()
-        ////////////////////////////////////////
+        println(RoutineList)
+        println("루틴리스트에 db저장.데이터베이스 종료 완료")
+
+        ////////////////////////////////////////알림반복구현.
 
         val alarmManager = context.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
+        println("알람매니저 접근완료")
+        //람다식에 접근을 못함.(routineList가 비어있는 버그)
         RoutineList.forEach { Routine ->
+            println("루틴리스트 람다식 접근완료. 현재 루틴의 개수만큼 이 출력문이 출력되어야 함")
             var weekList = arrayListOf<Boolean>(Routine.mon,Routine.tue,Routine.wed,Routine.thu,Routine.fri,Routine.sat,Routine.sun)
 
             val requestCode = Routine.id
@@ -47,10 +58,10 @@ class ResetCheckboxReceiver : BroadcastReceiver() {
             intent.putExtra("time",(convertTime.toString()))
             intent.putExtra("requestCode",requestCode.toString())
             intent.putExtra("weekList",weekList)
-
+            println("intent에 값 지정 완료.")
             //val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
 
-            println("캘린더ㅡ를 이용한 밀리초"+convertTime)
+            //println("캘린더ㅡ를 이용한 밀리초"+convertTime)
             if(System.currentTimeMillis()>convertTime){
                 convertTime+=interval
             }
@@ -60,7 +71,7 @@ class ResetCheckboxReceiver : BroadcastReceiver() {
                 intent,
                 PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
-            println("pendingintent 전송 완료")
+            println("정각이 되어 pendingintent 반복 전송 완료")
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,convertTime,pendingIntent)
 
 
