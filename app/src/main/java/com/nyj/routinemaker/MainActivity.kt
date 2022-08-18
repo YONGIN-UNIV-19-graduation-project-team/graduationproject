@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        println("메인액티비티가 실행되었다.")
+
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
         if(!accessByPlan) setFrag(0)
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         resetChkbox(this)
         setAlarm(this)
     }
+
+
 
     private fun setFrag(fragNum : Int) {
         //fragnum이 0일때 fragment1로 , 1때 fragment2로
@@ -70,16 +74,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
-        val resetAlarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
-        val resetIntent = Intent(context,ResetCheckboxReceiver::class.java)
-        val resetSender = PendingIntent.getBroadcast(context,0,resetIntent,PendingIntent.FLAG_IMMUTABLE)
+        val resetAlarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+        val resetIntent = Intent(this,ResetCheckboxReceiver::class.java)
+        val resetSender = PendingIntent.getBroadcast(this,0,resetIntent,PendingIntent.FLAG_IMMUTABLE)
         val resetCal = Calendar.getInstance()
         resetCal.setTimeInMillis(System.currentTimeMillis())
         //자정 시간
         resetCal.set(Calendar.HOUR_OF_DAY,0)
         resetCal.set(Calendar.MINUTE,0)
         resetCal.set(Calendar.SECOND,0)
-        resetAlarmManager.setInexactRepeating(
+        resetAlarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             resetCal.getTimeInMillis()+AlarmManager.INTERVAL_DAY,
             AlarmManager.INTERVAL_DAY,
@@ -87,13 +91,13 @@ class MainActivity : AppCompatActivity() {
         )
         val format = SimpleDateFormat("MM/dd kk:mm:ss")
         val setResetTime = format.format(Date(resetCal.getTimeInMillis()+AlarmManager.INTERVAL_DAY))
-        Log.d("resetAlarm","ResetHour: "+setResetTime)
+        Log.d("resetAlarm","ResetHour: "+setResetTime+"이 정각알람 울리는 시간")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun setAlarm(context: Context){
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"routine_database"
+            this,AppDatabase::class.java,"routine_database"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()
@@ -106,21 +110,21 @@ class MainActivity : AppCompatActivity() {
             val triggerTime :Calendar= Calendar.getInstance()
             triggerTime.timeInMillis = System.currentTimeMillis()
             triggerTime.set(Calendar.HOUR_OF_DAY,Routine.hour.toInt())
-            println("시"+Routine.hour.toInt()+" 분"+Routine.min+" 이름"+Routine.name)
+            println("이름이"+Routine.name+"인 pendingIntent 준비 완료")
             triggerTime.set(Calendar.MINUTE,Routine.min.toInt())
             triggerTime.set(Calendar.SECOND,0)
             var convertTime = triggerTime.timeInMillis
             var interval:Long = 1000*60*60*24
-            val intent = Intent(context,AlarmReceiver::class.java)
+            val intent = Intent(this,AlarmReceiver::class.java)
 
             intent.putExtra("title",(Routine.name))
             intent.putExtra("time",(convertTime.toString()))
             intent.putExtra("requestCode",requestCode.toString())
             intent.putExtra("weekList",weekList)
 
-            val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
+            //val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
 
-            println("캘린더ㅡ를 이용한 밀리초"+convertTime)
+            //println("캘린더ㅡ를 이용한 밀리초"+convertTime)
             if(System.currentTimeMillis()>convertTime){
                 convertTime+=interval
             }

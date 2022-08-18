@@ -92,4 +92,5 @@ class WidgetProvider :AppWidgetProvider(){
         }
         return strWeek
     }
+
 }

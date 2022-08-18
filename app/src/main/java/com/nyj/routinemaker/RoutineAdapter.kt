@@ -2,6 +2,7 @@ package com.nyj.routinemaker
 
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,23 @@ import kotlin.collections.ArrayList
 class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
 {
 
+    @SuppressLint("ResourceAsColor")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        println("RoutineAdapter 실행")
+        //println("RoutineAdapter 실행")
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_routine, null)
         val name = view.findViewById<TextView>(R.id.rt_name)
         val hour = view.findViewById<TextView>(R.id.rt_hour)
         val min = view.findViewById<TextView>(R.id.rt_min)
-        val dow = view.findViewById<TextView>(R.id.rt_dow)
+
         val chkbox = view.findViewById<CheckBox>(R.id.checkBox)
+
+        val dow1 = view.findViewById<TextView>(R.id.rt_1)
+        val dow2 = view.findViewById<TextView>(R.id.rt_2)
+        val dow3 = view.findViewById<TextView>(R.id.rt_3)
+        val dow4 = view.findViewById<TextView>(R.id.rt_4)
+        val dow5 = view.findViewById<TextView>(R.id.rt_5)
+        val dow6 = view.findViewById<TextView>(R.id.rt_6)
+        val dow7 = view.findViewById<TextView>(R.id.rt_7)
 
 
         val routineList = RouineList[position]
@@ -38,20 +48,21 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         }else min.text = routineList.min
 
 
-        min.text = routineList.min
-        dow.text = ""
+
 
         if(routineList.routineischecked){chkbox.isChecked=true}//체크박스 상태 띄으기
-        else{chkbox.isChecked==false}//될지 모름
+        if(!routineList.routineischecked){chkbox.isChecked=false}
 
 
-        if(routineList.mon){dow.append(" 월")}
-        if(routineList.tue){dow.append(" 화")}
-        if(routineList.wed){dow.append(" 수")}
-        if(routineList.thu){dow.append(" 목")}
-        if(routineList.fri){dow.append(" 금")}
-        if(routineList.sat){dow.append(" 토")}
-        if(routineList.sun){dow.append(" 일")}
+        if(routineList.mon){dow1.setTextColor(R.color.real_red)}
+        if(routineList.tue){dow2.setTextColor(R.color.real_red)}
+        if(routineList.wed){dow3.setTextColor(R.color.real_red)}
+        if(routineList.thu){dow4.setTextColor(R.color.real_red)}
+        if(routineList.fri){dow5.setTextColor(R.color.real_red)}
+        if(routineList.sat){dow6.setTextColor(R.color.real_red)}
+        if(routineList.sun){dow7.setTextColor(R.color.real_red)}
+
+
 
         return view
     }

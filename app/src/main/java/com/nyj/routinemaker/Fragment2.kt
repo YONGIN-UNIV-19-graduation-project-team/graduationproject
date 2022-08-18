@@ -29,6 +29,8 @@ class Fragment2 : Fragment() {
     var clicked_year = "2022"
     var clicked_month = "8"
     var clicked_dayofMonth = "20"
+    var count = 0
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,12 +49,14 @@ class Fragment2 : Fragment() {
             requireActivity().applicationContext, AppDatabase::class.java, "routine_database"
         ).allowMainThreadQueries().build()
         PlanList = db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
+        count = db.plan_DAO().countPlan(date_)
         db.close()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        listcount.text = count.toString()+"개"
 
         val Adapter = PlanAdapter(requireContext(), PlanList)
         listView.adapter = Adapter
@@ -90,6 +94,8 @@ class Fragment2 : Fragment() {
             PlanList =
                 db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
             println(PlanList)
+            count = db.plan_DAO().countPlan(date_)
+            listcount.text = count.toString()+"개"
 
             val Adapter = PlanAdapter(requireContext(), PlanList)
             listView.adapter = Adapter

@@ -20,8 +20,11 @@ interface Routine_DAO {
     fun delete(routine: Routine)
 
     @Query("UPDATE tb_routines SET routineischecked=0 WHERE routineischecked=1")
-    fun resetcheckbox()
+    fun resetCheckBox()
 
     @Query("SELECT COUNT(*) FROM tb_routines")
     fun getCount():Int
+
+    @Query("SELECT COUNT(*) FROM tb_routines where id LIKE :ID")
+    fun getIdExist(ID:Long):Int
 }
