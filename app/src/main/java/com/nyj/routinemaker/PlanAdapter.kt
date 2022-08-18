@@ -18,7 +18,7 @@ class PlanAdapter (val context : Context, val PlanList : ArrayList<Plan>) : Base
         val planList = PlanList[position]
 
         name.text = planList.name
-        data.text = planList.year+"년 "+planList.month+"월 "+planList.day+"일 "+planList.hour+"시 "+planList.min+"분"
+        data.text = planList.hour+"시 "+planList.min+"분"
 
 
 

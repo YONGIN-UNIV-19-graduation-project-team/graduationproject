@@ -13,4 +13,5 @@
     <color name="blue">#A3BDED</color>
     <color name="white2">#FAFAFA</color>
     <color name="red">#FFAAAA</color>
+    <color name="zero">#00FF0000</color>
 </resources>
