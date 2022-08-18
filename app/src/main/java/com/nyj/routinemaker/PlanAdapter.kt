@@ -14,11 +14,21 @@ class PlanAdapter (val context : Context, val PlanList : ArrayList<Plan>) : Base
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_plan, null)
         val name = view.findViewById<TextView>(R.id.plan_name)
         val data = view.findViewById<TextView>(R.id.plan_data)
-
+        var hour = ""
+        var min = ""
         val planList = PlanList[position]
 
+        if(planList.hour.toInt()<10) {
+            hour = "0"+planList.hour
+        }else hour = planList.hour
+
+        if(planList.min.toInt()<10){
+            min = "0"+planList.min
+        }else min = planList.min
+
+
         name.text = planList.name
-        data.text = planList.hour+"시 "+planList.min+"분"
+        data.text = hour+"시 " +min+"분"
 
 
 
