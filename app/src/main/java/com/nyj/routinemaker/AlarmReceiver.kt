@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.room.Room
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,6 +33,11 @@ class AlarmReceiver : BroadcastReceiver() {
         getTitle = intent.getStringExtra("title").toString()
         getTime = intent.getStringExtra("time").toString()
         getRequestCode = intent.getStringExtra("requestCode").toString()
+
+        val db = Room.databaseBuilder(
+            context.applicationContext,AppDatabase::class.java,"routine_database"
+        ).allowMainThreadQueries().build()
+
         //////////요일 로직 구현부///////////
         var weekList = intent.getSerializableExtra("weekList") as ArrayList<Boolean>
         println(weekList)
@@ -43,9 +49,13 @@ class AlarmReceiver : BroadcastReceiver() {
             ||(doDayOfWeek()=="토"&&weekList[5])
             ||(doDayOfWeek()=="일"&&weekList[6]))
         {
-            createNotificationChannel()
-            deliverNotification(context)
+            if(db.routine_DAO().getIdExist(getRequestCode.toLong())==1) {
+                createNotificationChannel()
+                deliverNotification(context)
+            }else println("삭제된 루틴이라 알림이 뜨지 않았다.")
         }else println("요일이 일치하지 않아 알림이 뜨지 않았다.")
+        println("     ")
+        db.close()
         ///////////////////////////////////////////////
     }
     fun createNotificationChannel(){
@@ -63,10 +73,12 @@ class AlarmReceiver : BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.S)
     private fun deliverNotification(context: Context){
         val contextIntent = Intent(context,Camera::class.java) //알림 클릭 시 이동하는 인텐트.
+        contextIntent.putExtra("id",getRequestCode)
         val contentPendingIntent = PendingIntent.getActivity(context, getRequestCode.toInt(),//request Code
             contextIntent,
             PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT//현재 인텐트를 유지하고, 대신 인텐트의 extra data는 새로 전달된 Intent로 교체.
         )
+
         println("pendingintent 수신 완료")
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_background)
