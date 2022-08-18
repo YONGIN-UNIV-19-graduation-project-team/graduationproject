@@ -38,7 +38,6 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         }else min.text = routineList.min
 
 
-        min.text = routineList.min
         dow.text = ""
 
         if(routineList.routineischecked){chkbox.isChecked=true}//체크박스 상태 띄으기
