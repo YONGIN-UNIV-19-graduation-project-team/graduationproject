@@ -2,6 +2,7 @@ package com.nyj.routinemaker
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
 import android.hardware.Sensor
@@ -23,6 +24,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.exifinterface.media.ExifInterface
+import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_camera.*
 import splitties.toast.toast
 
@@ -77,6 +79,18 @@ class Camera : AppCompatActivity() {
         )
 
         setContentView(R.layout.activity_camera)
+        button_check.setOnClickListener(){
+            val getID = intent.getStringExtra("id")!!.toLong()
+            val db = Room.databaseBuilder(
+                this,AppDatabase::class.java,"routine_database"
+            ).allowMainThreadQueries().build()
+            val Routine = db.routine_DAO().getRoutinebyId(getID)
+            Routine.routineischecked=true
+            db.routine_DAO().update(Routine)
+            db.close()
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
         initSensor()
         initView()
     }

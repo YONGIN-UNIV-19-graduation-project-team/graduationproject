@@ -27,13 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("메인액티비티가 실행되었다.")
-        /////////////////////////삭제
-        val db = Room.databaseBuilder(
-            this,AppDatabase::class.java,"routine_database"
-        ).allowMainThreadQueries().build()
-        val count = db.routine_DAO().getCount()
-        println("쓰잘데 없는 카운트"+count.toString())
-        /////////////////////////
 
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
