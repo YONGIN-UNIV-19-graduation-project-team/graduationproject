@@ -66,8 +66,8 @@ dependencies {
     implementation 'androidx.exifinterface:exifinterface:1.2.0-beta01'
 
     //Permission Manager
-    // 'gun0912.ted:tedpermission:2.2.3'
-    implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+    //implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
 
     //Splitties
     implementation 'com.louiscad.splitties:splitties-toast:2.1.1'
