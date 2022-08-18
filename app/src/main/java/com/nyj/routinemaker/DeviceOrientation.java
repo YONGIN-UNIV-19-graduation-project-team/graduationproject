@@ -4,8 +4,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.ExifInterface;
 
-import androidx.exifinterface.media.ExifInterface;
+//import androidx.exifinterface.media.ExifInterface;
 
 // 예제 그대로 가져옴
 public class DeviceOrientation {
