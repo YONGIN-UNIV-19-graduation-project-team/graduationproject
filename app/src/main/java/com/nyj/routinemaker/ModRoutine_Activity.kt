@@ -92,6 +92,8 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
 
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
+        timePicker.hour = changed_hour
+        timePicker.minute = changed_minute
         timePicker.setOnTimeChangedListener(this)
 
         //수정버튼 구현
@@ -140,7 +142,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
     }
 
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {
-        //timeisselected=true
+
         val textView = findViewById<TextView>(R.id.timetext)
         if(hourOfDay<10&&minute<10) {
             textView.text = "0$hourOfDay : 0$minute"

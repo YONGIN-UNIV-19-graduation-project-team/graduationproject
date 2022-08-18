@@ -95,11 +95,15 @@ class ModPlan_Activity : AppCompatActivity() {
 
         })
 
+
         //시간 선택 란 //정상
         btn_pick_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
+            getDate.set(Calendar.HOUR,gethour)
+            getDate.set(Calendar.MINUTE,getmin)
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
                 val selectDate = Calendar.getInstance()
+
                 selectDate.set(Calendar.HOUR,i)
                 selectDate.set(Calendar.MINUTE,i2)
                 Toast.makeText(this, "Time : $i : $i2", Toast.LENGTH_SHORT ).show()
