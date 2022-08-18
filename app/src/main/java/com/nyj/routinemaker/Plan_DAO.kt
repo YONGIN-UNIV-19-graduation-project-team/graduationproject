@@ -18,4 +18,6 @@ interface Plan_DAO{
     fun delete(plan: Plan)
     @Query("SELECT *FROM tb_plans WHERE day LIKE :searchQuery2")
     fun searchday(searchQuery2: String) : List<Plan>
+    @Query("SELECT COUNT(*) FROM tb_plans where date LIKE :date")
+    fun countPlan(date: String):Int
 }
