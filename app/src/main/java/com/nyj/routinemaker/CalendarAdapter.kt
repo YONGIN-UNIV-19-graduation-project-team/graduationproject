@@ -32,13 +32,14 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
             parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
         challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(ArrayList<Challenge>())
+        db.close()
         return ItemViewHolder(view)
     }
 
     //데이터 설정
    @RequiresApi(Build.VERSION_CODES.O)
    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        println("뷰바인더실행")
+
 
 
         //날짜 변수에 담기
@@ -70,7 +71,7 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
                 }
                 //현재 날짜 색상 칠하기
                 if ((day_position == CalendarUtil.selectDate) && (now_month == day_position?.monthValue.toString())) {
-                    println("월검색조건문")
+
                     holder.dayText.setTextColor(Color.BLACK)
                 }
             }
