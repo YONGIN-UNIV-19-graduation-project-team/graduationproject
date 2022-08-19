@@ -8,6 +8,5 @@ class CalendarUtil {
     companion object{
         @RequiresApi(Build.VERSION_CODES.O)
         var selectDate: LocalDate = LocalDate.now()
-
     }
 }

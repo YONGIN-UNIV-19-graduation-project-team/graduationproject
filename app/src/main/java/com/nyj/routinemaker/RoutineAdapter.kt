@@ -4,6 +4,7 @@ package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,13 +55,13 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         if(!routineList.routineischecked){chkbox.isChecked=false}
 
 
-        if(routineList.mon){dow1.setTextColor(R.color.real_red)}
-        if(routineList.tue){dow2.setTextColor(R.color.real_red)}
-        if(routineList.wed){dow3.setTextColor(R.color.real_red)}
-        if(routineList.thu){dow4.setTextColor(R.color.real_red)}
-        if(routineList.fri){dow5.setTextColor(R.color.real_red)}
-        if(routineList.sat){dow6.setTextColor(R.color.real_red)}
-        if(routineList.sun){dow7.setTextColor(R.color.real_red)}
+        if(routineList.mon){dow1.setTextColor(Color.BLACK)}
+        if(routineList.tue){dow2.setTextColor(Color.BLACK)}
+        if(routineList.wed){dow3.setTextColor(Color.BLACK)}
+        if(routineList.thu){dow4.setTextColor(Color.BLACK)}
+        if(routineList.fri){dow5.setTextColor(Color.BLACK)}
+        if(routineList.sat){dow6.setTextColor(Color.BLACK)}
+        if(routineList.sun){dow7.setTextColor(Color.BLACK)}
 
 
 
