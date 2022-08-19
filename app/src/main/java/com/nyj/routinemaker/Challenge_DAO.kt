@@ -17,7 +17,7 @@ interface Challenge_DAO {
     fun delete(challenge: Challenge)
 
     @Query("SELECT percent FROM tb_challenge where year = :parameter1 AND month = :parameter2 AND day = :parameter3")
-    fun getPercent(parameter1:String,parameter2:String,parameter3:String):Float
+    fun getPercent(parameter1:String,parameter2:String,parameter3:String):Double
 
     @Query("SELECT count(*) FROM tb_challenge where year = :parameter4 AND month = :parameter5 AND day = :parameter6")
     fun isExist(parameter4:String,parameter5:String,parameter6:String):Int

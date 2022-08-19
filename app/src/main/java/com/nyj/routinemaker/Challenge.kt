@@ -10,8 +10,8 @@ data class Challenge(
     var month:String,
     var day:String,
 
-    var percent: Float,
+    var percent: Double,
 
 
 
-)
+    )
