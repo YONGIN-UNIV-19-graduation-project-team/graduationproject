@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.nyj.routinemaker.databinding.ActivityChallengeBinding
 import kotlinx.android.synthetic.main.activity_challenge.*
 import java.time.LocalDate
@@ -19,13 +20,66 @@ import kotlin.collections.ArrayList
 
 class Challenge_Activity : AppCompatActivity() {
 
+    var RoutineList = arrayListOf<Routine>(
+        Routine(0L,"더미","55","55",
+            true,true,true,true,true,true,true,false)
+    )
+    var count_checked=0
+    var count_all=0
+    var isExist=0
     private lateinit var binding: ActivityChallengeBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge)
+        ///////////////////////////////////////////
+        val year=LocalDate.now().year.toString()
+        val month=LocalDate.now().monthValue.toString()
+        val day=LocalDate.now().dayOfMonth.toString()
 
+        val db = Room.databaseBuilder(
+            applicationContext,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
+
+        RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
+        RoutineList.forEach{routine ->
+            var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
+            if((doDayOfWeek()=="월"&&weekList[0])
+                ||(doDayOfWeek()=="화"&&weekList[1])
+                ||(doDayOfWeek()=="수"&&weekList[2])
+                ||(doDayOfWeek()=="목"&&weekList[3])
+                ||(doDayOfWeek()=="금"&&weekList[4])
+                ||(doDayOfWeek()=="토"&&weekList[5])
+                ||(doDayOfWeek()=="일"&&weekList[6]))
+            {
+                count_all++
+            }
+
+
+
+        }
+        count_checked = db.routine_DAO().howManyChecked()
+        val percent = (count_checked.toFloat())/(count_all.toFloat())
+        println("@@@@@@@@@@@@@@@@@"+percent)
+        isExist = db.challenge_DAO().isExist(year,month,day)
+        val challenge = Challenge(0L,year,month,day,percent)
+        val id = db.challenge_DAO().getId(year,month,day)
+        if(isExist!=0){
+            val challenge = Challenge(id,year,month,day,percent)
+            db.challenge_DAO().update(challenge)
+        }else db.challenge_DAO().insertAll(challenge)
+
+
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////
         //binding 초기화
         binding = DataBindingUtil.setContentView(this,R.layout.activity_challenge)
 
@@ -116,5 +170,28 @@ class Challenge_Activity : AppCompatActivity() {
             }
         }
         return dayList
+    }
+
+    private fun doDayOfWeek(): String? {//오늘의 요일 구하기
+        val cal: Calendar = Calendar.getInstance()
+        var strWeek: String? = null
+        val nWeek: Int = cal.get(Calendar.DAY_OF_WEEK)
+
+        if (nWeek == 1) {
+            strWeek = "일"
+        } else if (nWeek == 2) {
+            strWeek = "월"
+        } else if (nWeek == 3) {
+            strWeek = "화"
+        } else if (nWeek == 4) {
+            strWeek = "수"
+        } else if (nWeek == 5) {
+            strWeek = "목"
+        } else if (nWeek == 6) {
+            strWeek = "금"
+        } else if (nWeek == 7) {
+            strWeek = "토"
+        }
+        return strWeek
     }
 }

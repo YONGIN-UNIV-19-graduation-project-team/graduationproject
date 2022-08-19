@@ -82,7 +82,7 @@ class Camera : AppCompatActivity() {
         button_check.setOnClickListener(){
             val getID = intent.getStringExtra("id")!!.toLong()
             val db = Room.databaseBuilder(
-                this,AppDatabase::class.java,"routine_database"
+                this,AppDatabase::class.java,"routine_databases"
             ).allowMainThreadQueries().build()
             val Routine = db.routine_DAO().getRoutinebyId(getID)
             Routine.routineischecked=true

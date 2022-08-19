@@ -34,7 +34,7 @@ class WidgetProvider :AppWidgetProvider(){
 
         //db연동, 안될수도있음
         val db = Room.databaseBuilder(
-            context!!.applicationContext,AppDatabase::class.java,"routine_database"
+            context!!.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
         year=LocalDate.now().year.toString()

@@ -63,7 +63,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             else{
                 if(timeisselected&&nameisnotnull){
                     val db = Room.databaseBuilder(
-                        this.applicationContext,AppDatabase::class.java,"routine_database"
+                        this.applicationContext,AppDatabase::class.java,"routine_databases"
                     ).allowMainThreadQueries().build()
                     db.routine_DAO().insertAll(routine)
                     db.close()

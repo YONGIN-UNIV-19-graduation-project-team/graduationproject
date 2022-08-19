@@ -40,7 +40,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
         //db연결
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"routine_database"
+            applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
         var intent = getIntent()

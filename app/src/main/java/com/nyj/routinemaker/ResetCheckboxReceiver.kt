@@ -21,7 +21,7 @@ class ResetCheckboxReceiver : BroadcastReceiver() {
 
         println("정각이 됐다!!!!!!!!!!!!!!!!!!!!1")
         val db = Room.databaseBuilder(
-            context.applicationContext,AppDatabase::class.java,"routine_database"
+            context.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
         //체크박스를 모두 해제하는 쿼리문 호출
         println("db접근완료")
