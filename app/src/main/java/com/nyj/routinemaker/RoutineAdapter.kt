@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import kotlin.collections.ArrayList
 
 
@@ -55,7 +56,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         if(!routineList.routineischecked){chkbox.isChecked=false}
 
 
-        if(routineList.mon){dow1.setTextColor(Color.BLACK)}
+        if(routineList.mon){dow1.setTextColor(ContextCompat.getColor(context, R.color.blue))}
         if(routineList.tue){dow2.setTextColor(Color.BLACK)}
         if(routineList.wed){dow3.setTextColor(Color.BLACK)}
         if(routineList.thu){dow4.setTextColor(Color.BLACK)}
