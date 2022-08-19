@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/progress_percent"
                 android:layout_width="26dp"
                 android:layout_height="24dp"
                 android:text="XX"
@@ -71,7 +71,8 @@
                 android:layout_weight="1"
                 android:background="@color/zero"
                 android:scaleType="fitEnd"
-                android:src="@drawable/ic_pre_btn" />
+                android:src="@drawable/ic_pre_btn"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/monthYearText"
@@ -90,7 +91,8 @@
                 android:layout_weight="1"
                 android:background="@color/zero"
                 android:scaleType="fitStart"
-                android:src="@drawable/ic_next_btn" />
+                android:src="@drawable/ic_next_btn"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout

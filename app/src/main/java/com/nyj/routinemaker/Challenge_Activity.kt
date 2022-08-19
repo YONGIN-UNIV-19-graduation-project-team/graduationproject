@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.nyj.routinemaker.databinding.ActivityChallengeBinding
+import kotlinx.android.synthetic.main.activity_challenge.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -21,9 +22,14 @@ class Challenge_Activity : AppCompatActivity() {
         Routine(0L,"더미","55","55",
             true,true,true,true,true,true,true,false)
     )
+    var challengeList = arrayListOf<Challenge>(
+        Challenge(0L,"2022","5","5",
+            0.0)
+    )
     var count_checked=0
     var count_all=0
     var isExist=0
+    var progressPercent=0.00
     private lateinit var binding: ActivityChallengeBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -53,12 +59,10 @@ class Challenge_Activity : AppCompatActivity() {
                 count_all++
             }
 
-
-
         }
         count_checked = db.routine_DAO().howManyChecked()
         val percent = (count_checked.toDouble())/(count_all.toDouble())
-        println("@@@@@@@@@@@@@@@@@"+percent)
+
         isExist = db.challenge_DAO().isExist(year,month,day)
         val challenge = Challenge(0L,year,month,day,percent)
         val id = db.challenge_DAO().getId(year,month,day)
@@ -67,19 +71,19 @@ class Challenge_Activity : AppCompatActivity() {
             db.challenge_DAO().update(challenge)
         }else db.challenge_DAO().insertAll(challenge)
 
+        challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(arrayListOf<Challenge>())
+        println(challengeList)
+        challengeList.forEach { challenge ->
+            progressPercent+=(challenge.percent*3.4)
+        }
 
-
-
-
-
-
-
-
-
-        ///////////////////////////////////////////
         //binding 초기화
         binding = DataBindingUtil.setContentView(this,R.layout.activity_challenge)
-
+        progress_percent.text = progressPercent.toInt().toString()
+        println(progress_percent.text)
+        binding.progressBar.progress = progressPercent.toInt()
+        println(progressPercent.toInt())
+        db.close()
         //현재 날짜
         CalendarUtil.selectDate = LocalDate.now()
 
