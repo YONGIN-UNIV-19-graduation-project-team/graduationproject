@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun setAlarm(context: Context){
         val db = Room.databaseBuilder(
-            this,AppDatabase::class.java,"routine_database"
+            this,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()

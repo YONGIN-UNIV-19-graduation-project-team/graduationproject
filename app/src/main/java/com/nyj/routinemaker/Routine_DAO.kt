@@ -27,4 +27,7 @@ interface Routine_DAO {
 
     @Query("SELECT COUNT(*) FROM tb_routines where id LIKE :ID")
     fun getIdExist(ID:Long):Int
+
+    @Query("SELECT COUNT(*) FROM tb_routines where routineischecked=1")
+    fun howManyChecked():Int
 }
