@@ -3,15 +3,12 @@ package com.nyj.routinemaker
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.LocaleList
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.nyj.routinemaker.databinding.ActivityChallengeBinding
-import kotlinx.android.synthetic.main.activity_challenge.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -60,7 +57,7 @@ class Challenge_Activity : AppCompatActivity() {
 
         }
         count_checked = db.routine_DAO().howManyChecked()
-        val percent = (count_checked.toFloat())/(count_all.toFloat())
+        val percent = (count_checked.toDouble())/(count_all.toDouble())
         println("@@@@@@@@@@@@@@@@@"+percent)
         isExist = db.challenge_DAO().isExist(year,month,day)
         val challenge = Challenge(0L,year,month,day,percent)
