@@ -83,7 +83,7 @@ class Challenge_Activity : AppCompatActivity() {
         println(progress_percent.text)
         binding.progressBar.progress = progressPercent.toInt()
         println(progressPercent.toInt())
-        db.close()
+        //db.close()
         //현재 날짜
         CalendarUtil.selectDate = LocalDate.now()
 
