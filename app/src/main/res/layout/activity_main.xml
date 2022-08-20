@@ -48,12 +48,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="696dp">
+        android:layout_height="756dp">
 
         <FrameLayout
             android:id="@+id/main_frame"
-            android:layout_width="367dp"
-            android:layout_height="625dp"
+            android:layout_width="372dp"
+            android:layout_height="678dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,10 +71,12 @@
             android:layout_gravity="bottom"
             android:layout_marginStart="312dp"
             android:layout_marginEnd="11dp"
+            android:layout_marginBottom="8dp"
             android:background="#00FF0000"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/challenge_button"
             tools:ignore="SpeakableTextPresentCheck" />
