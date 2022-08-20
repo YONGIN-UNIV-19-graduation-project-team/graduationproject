@@ -3,12 +3,12 @@
     <item android:state_pressed="true" >  <!--버튼이 눌렸을때-->
         <shape>
             <gradient
-                android:startColor="#83A9D9"
-                android:endColor="#83A9D9"
+                android:startColor="@color/softgray"
+                android:endColor="@color/softgray"
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="#83A9D9" />
+                android:color="@color/softgray" />
             <corners
                 android:radius="20dp" />
             <padding
@@ -25,12 +25,12 @@
     <item android:state_focused="true">
         <shape>
             <gradient
-                android:startColor="#A3BDED"
-                android:endColor="#A3BDED"
+                android:startColor="@color/softgray"
+                android:endColor="@color/softgray"
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="#A3BDED" />
+                android:color="@color/softgray" />
             <corners
                 android:radius="2dp" />
             <padding
@@ -46,12 +46,12 @@
     <item>
         <shape>
             <gradient
-                android:startColor="#A3BDED"
-                android:endColor="#A3BDED"
+                android:startColor="@color/softgray"
+                android:endColor="@color/softgray"
                 android:angle="90" />
             <stroke
                 android:width="2dp"
-                android:color="#A3BDED" />
+                android:color="@color/softgray" />
             <corners
                 android:radius="20dp" />
             <padding
