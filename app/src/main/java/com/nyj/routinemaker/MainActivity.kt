@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
+import splitties.resources.drawable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,12 +23,12 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("메인액티비티가 실행되었다.")
-
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
         if(!accessByPlan) setFrag(0)
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
-        setOnClickListener()
+
         resetChkbox(this)
         setAlarm(this)
     }
@@ -55,22 +56,34 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
                 frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-                cal_button.setVisibility(View.VISIBLE)
+                //cal_button.setVisibility(View.VISIBLE)
+                cal_button.setImageResource(R.drawable.challenge_button)
+
+                cal_setOnClickListener()
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
-                cal_button.setVisibility(View.GONE)
+                //cal_button.setVisibility(View.GONE)
+                cal_button.setImageResource(R.drawable.plus_button)
+
+                plus_setOnClickListener()
             }
         }
     }
 
-    fun setOnClickListener() {
+    fun cal_setOnClickListener() {
         cal_button.setOnClickListener(View.OnClickListener {
-            val intent = Intent(this, Challenge_Activity::class.java)
-            startActivity(intent)
+            var intent_button = Intent(this, Challenge_Activity::class.java)
+            startActivity(intent_button)
         })
+    }
+    fun plus_setOnClickListener(){
+        cal_button.setOnClickListener {
+            var intent_button = Intent(this, AddPlan_Activity::class.java)
+            startActivity(intent_button)
+        }
     }
 
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
