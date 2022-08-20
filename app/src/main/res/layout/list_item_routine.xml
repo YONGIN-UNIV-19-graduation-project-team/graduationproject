@@ -151,11 +151,11 @@
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="31dp"
         android:background="@drawable/checkbox"
         android:button="@drawable/checkbox"
         android:clickable="false"
