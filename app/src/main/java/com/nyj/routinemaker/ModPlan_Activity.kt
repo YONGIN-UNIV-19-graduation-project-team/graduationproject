@@ -123,8 +123,8 @@ class ModPlan_Activity : AppCompatActivity() {
                         else textview_get_time.text = "$i : $i2"
                 }
 
-                plan_Hour=selectDate.get(Calendar.HOUR).toString()
-                plan_Min=selectDate.get(Calendar.MINUTE).toString()
+                plan_Hour=i.toString()
+                plan_Min=i2.toString()
 
             },getDate.get(Calendar.HOUR),getDate.get(Calendar.MINUTE),true)
             datePicker.show()

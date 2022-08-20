@@ -108,8 +108,8 @@ class AddPlan_Activity : AppCompatActivity() {
                         else textview_get_time.text = "$i : $i2"
                 }
 
-                plan_Hour=selectDate.get(Calendar.HOUR).toString()
-                plan_Min=selectDate.get(Calendar.MINUTE).toString()
+                plan_Hour=i.toString()
+                plan_Min=i2.toString()
 
             },getDate.get(Calendar.HOUR),getDate.get(Calendar.MINUTE),true)
             datePicker.show()
@@ -126,7 +126,7 @@ class AddPlan_Activity : AppCompatActivity() {
             val add_date = plan_Year+plan_Month+plan_Day
             val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
             if(timeisselected&&nameisnotnull) {
-                db?.plan_DAO()?.insertAll(plan)
+                db.plan_DAO().insertAll(plan)
                 db.close()
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("access_plan",true)
