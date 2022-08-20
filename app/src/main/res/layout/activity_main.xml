@@ -53,7 +53,7 @@
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="372dp"
-            android:layout_height="678dp"
+            android:layout_height="744dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,14 +67,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="280dp"
+                android:layout_marginLeft="310dp"
                 android:clickable="true"
                 android:scaleType="fitCenter"
                 app:backgroundTint="@color/zero"
+                app:fabSize="normal"
                 app:rippleColor="@color/zero"
                 app:srcCompat="@drawable/challenge_button"
-                tools:ignore="SpeakableTextPresentCheck"
-                app:fabSize="normal"/>
+                tools:ignore="SpeakableTextPresentCheck" />
         </FrameLayout>
 
 
