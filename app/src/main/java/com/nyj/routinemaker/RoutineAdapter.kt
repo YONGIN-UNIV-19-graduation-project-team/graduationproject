@@ -56,13 +56,13 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         if(!routineList.routineischecked){chkbox.isChecked=false}
 
 
-        if(routineList.mon){dow1.setTextColor(ContextCompat.getColor(context, R.color.blue))}
-        if(routineList.tue){dow2.setTextColor(Color.BLACK)}
-        if(routineList.wed){dow3.setTextColor(Color.BLACK)}
-        if(routineList.thu){dow4.setTextColor(Color.BLACK)}
-        if(routineList.fri){dow5.setTextColor(Color.BLACK)}
-        if(routineList.sat){dow6.setTextColor(Color.BLACK)}
-        if(routineList.sun){dow7.setTextColor(Color.BLACK)}
+        if(routineList.mon){dow1.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.tue){dow2.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.wed){dow3.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.thu){dow4.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.fri){dow5.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.sat){dow6.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.sun){dow7.setTextColor(ContextCompat.getColor(context, R.color.red))}
 
 
 

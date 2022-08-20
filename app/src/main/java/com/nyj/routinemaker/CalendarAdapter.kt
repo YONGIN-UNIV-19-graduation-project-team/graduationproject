@@ -1,5 +1,6 @@
 package com.nyj.routinemaker
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
@@ -37,6 +38,7 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
     }
 
     //데이터 설정
+   @SuppressLint("ResourceAsColor")
    @RequiresApi(Build.VERSION_CODES.O)
    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
@@ -57,13 +59,13 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
                 holder.dayText.text = day_position.dayOfMonth.toString()
                 if(challenge.year==year.toString()&&challenge.month==month.toString()&&challenge.day==day.toString()) {
                     if(challenge.percent==1.0){
-                        holder.itemView.setBackgroundColor(Color.BLUE)
+                        holder.itemView.setBackgroundColor(R.color.red)
                     }else if(challenge.percent>=0.75) {//0.75~0.999
-                        holder.itemView.setBackgroundColor(Color.YELLOW)
+                        holder.itemView.setBackgroundColor(R.color.red_100)
                     }else if(challenge.percent>=0.5) {//0.5~0.7499
-                        holder.itemView.setBackgroundColor(Color.GREEN)
+                        holder.itemView.setBackgroundColor(R.color.red_200)
                     }else if(challenge.percent>=0.25) {//0.25~0.4999
-                        holder.itemView.setBackgroundColor(Color.RED)
+                        holder.itemView.setBackgroundColor(R.color.red_300)
                     }
 
 
