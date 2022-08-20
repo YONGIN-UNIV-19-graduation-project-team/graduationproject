@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="44dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <TextView
         android:id="@+id/rt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="3dp"
         android:text="name"
@@ -24,7 +26,7 @@
         android:id="@+id/rt_hour"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="70dp"
         android:layout_marginTop="3dp"
         android:layout_marginBottom="4dp"
         android:text="hour"
@@ -38,7 +40,7 @@
         android:id="@+id/rt_hm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="4dp"
         android:text=":"
         android:textColor="@color/black"
@@ -50,7 +52,7 @@
         android:id="@+id/rt_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="4dp"
         android:text="min"
         android:textColor="@color/black"
@@ -151,17 +153,18 @@
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/checkbox"
-        android:button="@drawable/checkbox"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="31dp"
+        android:background="@drawable/checkbox_rou"
+        android:button="@null"
         android:clickable="false"
         android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

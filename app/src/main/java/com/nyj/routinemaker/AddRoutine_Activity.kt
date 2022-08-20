@@ -35,7 +35,10 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
         timePicker.setOnTimeChangedListener(this)
-
+        can_button.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
         //추가 버튼 클릭시 이벤트
         add_button.setOnClickListener{
 

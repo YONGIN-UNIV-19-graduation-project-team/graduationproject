@@ -3,12 +3,12 @@
     <item android:state_checked="false">
         <shape>
             <gradient
-                android:startColor="@color/softgray"
-                android:endColor="@color/softgray"
+                android:startColor="@color/zero"
+                android:endColor="@color/zero"
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="@color/softgray" />
+                android:color="@color/zero" />
             <corners android:radius="4dp"/>
         </shape>
     </item>
@@ -24,4 +24,5 @@
             <corners android:radius="4dp"/>
         </shape>
     </item>
+
 </selector>
