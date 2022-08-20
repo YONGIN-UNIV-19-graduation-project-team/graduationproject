@@ -35,7 +35,7 @@ class AlarmReceiver : BroadcastReceiver() {
         getRequestCode = intent.getStringExtra("requestCode").toString()
 
         val db = Room.databaseBuilder(
-            context.applicationContext,AppDatabase::class.java,"routine_database"
+            context.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
         //////////요일 로직 구현부///////////

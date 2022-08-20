@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(version = 1,
-    entities = arrayOf(Routine::class,Plan::class),
+    entities = arrayOf(Routine::class,Plan::class,Challenge::class),
     exportSchema = false)//entity가 여러개일 경우 arrayof로 묶는다
 abstract class AppDatabase:RoomDatabase() {
     abstract fun routine_DAO():Routine_DAO
     abstract fun plan_DAO():Plan_DAO
+    abstract fun challenge_DAO():Challenge_DAO
 
 }

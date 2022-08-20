@@ -4,12 +4,14 @@ package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import kotlin.collections.ArrayList
 
 
@@ -54,13 +56,13 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         if(!routineList.routineischecked){chkbox.isChecked=false}
 
 
-        if(routineList.mon){dow1.setTextColor(R.color.real_red)}
-        if(routineList.tue){dow2.setTextColor(R.color.real_red)}
-        if(routineList.wed){dow3.setTextColor(R.color.real_red)}
-        if(routineList.thu){dow4.setTextColor(R.color.real_red)}
-        if(routineList.fri){dow5.setTextColor(R.color.real_red)}
-        if(routineList.sat){dow6.setTextColor(R.color.real_red)}
-        if(routineList.sun){dow7.setTextColor(R.color.real_red)}
+        if(routineList.mon){dow1.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.tue){dow2.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.wed){dow3.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.thu){dow4.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.fri){dow5.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.sat){dow6.setTextColor(ContextCompat.getColor(context, R.color.red))}
+        if(routineList.sun){dow7.setTextColor(ContextCompat.getColor(context, R.color.red))}
 
 
 

@@ -53,14 +53,14 @@ class MainActivity : AppCompatActivity() {
         when (fragNum){
             0 -> {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
-                frg1_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
+                frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
                 cal_button.setVisibility(View.VISIBLE)
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
                 frg1_button.setTextColor(Color.GRAY)
-                frg2_button.setTextColor(getResources().getColor(R.color.blue, getResources().newTheme()))
+                frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 cal_button.setVisibility(View.GONE)
             }
         }
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun setAlarm(context: Context){
         val db = Room.databaseBuilder(
-            this,AppDatabase::class.java,"routine_database"
+            this,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         db.close()

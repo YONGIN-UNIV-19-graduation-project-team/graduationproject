@@ -46,7 +46,7 @@ class Fragment2 : Fragment() {
         println(date_)
         //db연결
         val db = Room.databaseBuilder(
-            requireActivity().applicationContext, AppDatabase::class.java, "routine_database"
+            requireActivity().applicationContext, AppDatabase::class.java, "routine_databases"
         ).allowMainThreadQueries().build()
         PlanList = db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
         count = db.plan_DAO().countPlan(date_)
@@ -86,7 +86,7 @@ class Fragment2 : Fragment() {
             clicked_month = (month + 1).toString()
             clicked_dayofMonth = dayofMonth.toString()
             val db = Room.databaseBuilder(
-                requireActivity().applicationContext, AppDatabase::class.java, "routine_database"
+                requireActivity().applicationContext, AppDatabase::class.java, "routine_databases"
             ).allowMainThreadQueries().build()
 
             //
