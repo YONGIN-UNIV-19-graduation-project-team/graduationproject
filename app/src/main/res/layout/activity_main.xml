@@ -62,24 +62,21 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/cal_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="280dp"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                app:backgroundTint="@color/zero"
+                app:rippleColor="@color/zero"
+                app:srcCompat="@drawable/challenge_button"
+                tools:ignore="SpeakableTextPresentCheck"
+                app:fabSize="normal"/>
         </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/cal_button"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="312dp"
-            android:layout_marginEnd="11dp"
-            android:layout_marginBottom="8dp"
-            android:background="#00FF0000"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/challenge_button"
-            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
