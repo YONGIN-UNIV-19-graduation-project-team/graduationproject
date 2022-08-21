@@ -161,12 +161,13 @@ class ModPlan_Activity : AppCompatActivity() {
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
             db.plan_DAO().delete(plan)
             db.close()
-            intent.putExtra("access_plan",true)
+            intent.putExtra("access_by_fragment",2)
             startActivity(intent)
         }
+        //취소버튼
         cancel_modplan_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
-            intent.putExtra("access_plan",true)
+            intent.putExtra("access_by_fragment",2)
             startActivity(intent)
         }
 

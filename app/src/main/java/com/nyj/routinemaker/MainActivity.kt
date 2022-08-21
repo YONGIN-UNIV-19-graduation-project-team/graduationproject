@@ -29,15 +29,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var accessByPlan = intent.getBooleanExtra("access_plan",false)
-        if(!accessByPlan) setFrag(0)
-        else setFrag(1)
-
-        frg1_button.setOnClickListener{
+        var accessByPlan = intent.getIntExtra("access_by_fragment",0)
+        if(accessByPlan==0) setFrag(0)
+        else if(accessByPlan==1)setFrag(1)
+        else if(accessByPlan==2)setFrag(2)
+        else setFrag(0)
+        frg0_button.setOnClickListener{
             setFrag(0)
         }
-        frg2_button.setOnClickListener{
+        frg1_button.setOnClickListener{
             setFrag(1)
+        }
+        frg2_button.setOnClickListener{
+            setFrag(2)
         }
 
 
@@ -48,25 +52,30 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setFrag(fragNum : Int) {
-        //fragnum이 0일때 fragment1로 , 1때 fragment2로
+
        val ft = supportFragmentManager.beginTransaction()
         when (fragNum){
             0 -> {
+                ft.replace(R.id.main_frame, Fragment0()).commit()
+                frg0_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
+                frg2_button.setTextColor(Color.GRAY)
+                frg1_button.setTextColor(Color.GRAY)
+
+
+            }
+            1 -> {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
+                frg0_button.setTextColor(Color.GRAY)
                 frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
 
 
             }
-            1 -> {
-                ft.replace(R.id.main_frame, Fragment2()).commit()
-                frg1_button.setTextColor(Color.GRAY)
-                frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
-
-
-            }
             2 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
+                frg0_button.setTextColor(Color.GRAY)
+                frg1_button.setTextColor(Color.GRAY)
+                frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
 
             }
         }

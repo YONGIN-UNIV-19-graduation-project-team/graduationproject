@@ -35,8 +35,11 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
         timePicker.setOnTimeChangedListener(this)
+        //이전 버튼 클릭시 이벤트
         can_button.setOnClickListener {
             val intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("access_by_fragment",1)
+
             startActivity(intent)
         }
         //추가 버튼 클릭시 이벤트
@@ -70,6 +73,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                     ).allowMainThreadQueries().build()
                     db.routine_DAO().insertAll(routine)
                     db.close()
+                    intent.putExtra("access_by_fragment",1)
                     startActivity(intent)
                 }
                 else{

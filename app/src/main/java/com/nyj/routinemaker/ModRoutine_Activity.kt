@@ -135,11 +135,13 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             val routine = Routine(routineid,"","","",mon,tue,wed,thu,fri,sat,sun,false)
             db.routine_DAO().delete(routine)
             db.close()
+            intent.putExtra("access_by_fragment",1)
             startActivity(intent)
         }
-
+        //취소버튼 구현
         cancel_modroutine_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("access_by_fragment",1)
             startActivity(intent)
         }
     }
