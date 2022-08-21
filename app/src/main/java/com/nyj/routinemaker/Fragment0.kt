@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment0.*
+import kotlinx.android.synthetic.main.fragment1.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -20,10 +21,8 @@ import kotlin.collections.ArrayList
 
 class Fragment0 : Fragment() {
 
-    var todays_RoutineList = arrayListOf<Routine>(
-        Routine(0L,"더미","55","55",
-            true,true,true,true,true,true,true,false)
-    )
+    var todays_RoutineList = arrayListOf<Routine>()
+    var todays_PlanList = arrayListOf<Routine>()
     var challengeList = arrayListOf<Challenge>(
         Challenge(0L,"2022","5","5",
             0.0)
@@ -42,6 +41,7 @@ class Fragment0 : Fragment() {
     var count_all=0
     var isExist=0
     var progressPercent=0.00
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,8 +68,9 @@ class Fragment0 : Fragment() {
             requireActivity().applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
-        todays_RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
-        todays_RoutineList.forEach{routine ->
+        RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
+        PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
+        RoutineList.forEach{routine ->
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
             if((doDayOfWeek()=="월"&&weekList[0])
                 ||(doDayOfWeek()=="화"&&weekList[1])
@@ -123,9 +124,31 @@ class Fragment0 : Fragment() {
             CalendarUtil.selectDate = CalendarUtil.selectDate.plusMonths(1)
             setMonthview()
         }
+        ////////////////////////루틴리스트에서 오늘 요일이 포함한 것들만 남기고 나머지 삭제
+        RoutineList.forEach { routine ->
+            val exroutine = Routine(routine.id,routine.name,routine.hour,routine.min,routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun,routine.routineischecked)
+            var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
+
+            if((doDayOfWeek()=="월"&&weekList[0])
+                ||(doDayOfWeek()=="화"&&weekList[1])
+                ||(doDayOfWeek()=="수"&&weekList[2])
+                ||(doDayOfWeek()=="목"&&weekList[3])
+                ||(doDayOfWeek()=="금"&&weekList[4])
+                ||(doDayOfWeek()=="토"&&weekList[5])
+                ||(doDayOfWeek()=="일"&&weekList[6])){
+                todays_RoutineList.add(exroutine)
+            }
+        }
+
+        todaysroutinecount.text = todays_RoutineList.size.toString()+"개"
+
+        ////////////////////////플랜리스트에서 오늘 날짜를 포함한 것들만 남기고 나머지 삭제
+
+
         //////////////////////////////////////////////리스트뷰1(오늘의 루틴)
 
-
+        val Adapter_rt = TodaysRoutineAdapter(requireContext(), todays_RoutineList)
+        routineListview.adapter = Adapter_rt
 
 
 
@@ -133,7 +156,8 @@ class Fragment0 : Fragment() {
 
         //////////////////////////////////////////////리스트뷰2(오늘의 할일)
 
-
+        val Adapter_pl = TodaysPlanAdapter(requireContext(), PlanList)
+        planListview.adapter = Adapter_pl
 
 
 

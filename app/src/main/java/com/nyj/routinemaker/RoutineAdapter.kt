@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import kotlin.collections.ArrayList
 
 
-class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
+class RoutineAdapter(val context : Context, val RoutineList : ArrayList<Routine>) : BaseAdapter()
 {
 
     @SuppressLint("ResourceAsColor")
@@ -37,7 +37,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         val dow7 = view.findViewById<TextView>(R.id.rt_7)
 
 
-        val routineList = RouineList[position]
+        val routineList = RoutineList[position]
 
         name.text = routineList.name
 
@@ -71,7 +71,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
 
 
     override fun getItem(position: Int): Any {
-        return RouineList[position]
+        return RoutineList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -79,7 +79,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
     }
 
     override fun getCount(): Int {
-        return RouineList.size
+        return RoutineList.size
     }
 
 
