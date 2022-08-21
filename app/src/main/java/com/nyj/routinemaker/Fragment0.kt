@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import kotlinx.android.synthetic.main.fragment0.*
+import kotlinx.android.synthetic.main.fragment1.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -20,10 +21,7 @@ import kotlin.collections.ArrayList
 
 class Fragment0 : Fragment() {
 
-    var todays_RoutineList = arrayListOf<Routine>(
-        Routine(0L,"더미","55","55",
-            true,true,true,true,true,true,true,false)
-    )
+    var todays_RoutineList = arrayListOf<Routine>()
     var challengeList = arrayListOf<Challenge>(
         Challenge(0L,"2022","5","5",
             0.0)
@@ -42,6 +40,7 @@ class Fragment0 : Fragment() {
     var count_all=0
     var isExist=0
     var progressPercent=0.00
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,8 +67,9 @@ class Fragment0 : Fragment() {
             requireActivity().applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
-        todays_RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
-        todays_RoutineList.forEach{routine ->
+        RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
+        PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
+        RoutineList.forEach{routine ->
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
             if((doDayOfWeek()=="월"&&weekList[0])
                 ||(doDayOfWeek()=="화"&&weekList[1])
@@ -124,8 +124,9 @@ class Fragment0 : Fragment() {
             setMonthview()
         }
         //////////////////////////////////////////////리스트뷰1(오늘의 루틴)
-
-
+        println(RoutineList)
+        val Adapter_rt = TodaysRoutineAdapter(requireContext(), RoutineList)
+        routineListview.adapter = Adapter_rt
 
 
 
@@ -133,7 +134,8 @@ class Fragment0 : Fragment() {
 
         //////////////////////////////////////////////리스트뷰2(오늘의 할일)
 
-
+        val Adapter_pl = TodaysPlanAdapter(requireContext(), PlanList)
+        planListview.adapter = Adapter_pl
 
 
 
