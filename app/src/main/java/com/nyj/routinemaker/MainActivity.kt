@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("메인액티비티가 실행되었다.")
 
         var accessByPlan = intent.getBooleanExtra("access_plan",false)
         if(!accessByPlan) setFrag(0)
@@ -56,35 +55,23 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
                 frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-                //cal_button.setVisibility(View.VISIBLE)
-                cal_button.setImageResource(R.drawable.challenge_button)
 
-                cal_setOnClickListener()
+
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
-                //cal_button.setVisibility(View.GONE)
-                cal_button.setImageResource(R.drawable.plus_button)
 
-                plus_setOnClickListener()
+
+            }
+            2 -> {
+                ft.replace(R.id.main_frame, Fragment2()).commit()
+
             }
         }
     }
 
-    fun cal_setOnClickListener() {
-        cal_button.setOnClickListener(View.OnClickListener {
-            var intent_button = Intent(this, Challenge_Activity::class.java)
-            startActivity(intent_button)
-        })
-    }
-    fun plus_setOnClickListener(){
-        cal_button.setOnClickListener {
-            var intent_button = Intent(this, AddPlan_Activity::class.java)
-            startActivity(intent_button)
-        }
-    }
 
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
         val resetAlarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager

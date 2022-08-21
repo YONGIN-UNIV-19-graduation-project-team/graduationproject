@@ -9,7 +9,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
+import kotlinx.android.synthetic.main.activity_addplan.planName
+import kotlinx.android.synthetic.main.activity_addplan.textview_get_date
+import kotlinx.android.synthetic.main.activity_addplan.textview_get_time
+import kotlinx.android.synthetic.main.activity_modplan.*
 import kotlinx.android.synthetic.main.activity_modroutine.*
+import kotlinx.android.synthetic.main.activity_modroutine.del_button
+import kotlinx.android.synthetic.main.activity_modroutine.mod_button
 import kotlinx.android.synthetic.main.list_item_plan.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,7 +78,7 @@ class ModPlan_Activity : AppCompatActivity() {
         plan_Min = get_plan.min
 
         //날짜 선택 란//
-        btn_pick_date.setOnClickListener(View.OnClickListener {
+        textview_get_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
@@ -97,7 +103,7 @@ class ModPlan_Activity : AppCompatActivity() {
 
 
         //시간 선택 란 //정상
-        btn_pick_time.setOnClickListener(View.OnClickListener {
+        textview_get_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             getDate.set(Calendar.HOUR,gethour)
             getDate.set(Calendar.MINUTE,getmin)
@@ -155,6 +161,11 @@ class ModPlan_Activity : AppCompatActivity() {
             val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
             db.plan_DAO().delete(plan)
             db.close()
+            intent.putExtra("access_plan",true)
+            startActivity(intent)
+        }
+        cancel_modplan_button.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("access_plan",true)
             startActivity(intent)
         }

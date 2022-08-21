@@ -138,7 +138,10 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             startActivity(intent)
         }
 
-
+        cancel_modroutine_button.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onTimeChanged(p0: TimePicker?, hourOfDay: Int, minute: Int) {

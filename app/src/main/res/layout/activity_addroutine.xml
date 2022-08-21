@@ -30,16 +30,11 @@
             android:textColor="@color/red"
             android:textSize="20sp" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="200dp"
-            android:layout_height="26dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:lineSpacingMultiplier="1.5"
@@ -51,27 +46,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/add_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="추가"
-            android:textColor="@color/gray_300"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </LinearLayout>
 
     <EditText
         android:id="@+id/routine_Name"
         android:layout_width="279dp"
         android:layout_height="45dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="108dp"
         android:ems="10"
         android:hint="루틴 이름을 입력해주세요"
         android:inputType="textPersonName"
@@ -85,15 +67,13 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="480dp"
-        android:layout_marginEnd="133dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="232dp"
         android:text="루틴 반복 요일"
         android:textColor="@color/red"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
@@ -214,14 +194,12 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="408dp"
-        android:layout_marginEnd="11dp"
-        android:text="루틴시간 : "
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="404dp"
+        android:text="루틴시간"
         android:textColor="@color/red"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/timetext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -243,23 +221,21 @@
         android:id="@+id/timetext"
         android:layout_width="242dp"
         android:layout_height="29dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="408dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="448dp"
+        android:layout_marginEnd="132dp"
         android:text="시간을 선택해주세요"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="87dp"
         android:layout_height="39dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="120dp"
-        android:text="루틴명 : "
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="84dp"
+        android:text="루틴명"
         android:textColor="@color/red"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -325,6 +301,16 @@
         android:textColor="@color/gray"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addrt_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="루틴 추가"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
