@@ -126,7 +126,7 @@ class AddPlan_Activity : AppCompatActivity() {
                 db.plan_DAO().insertAll(plan)
                 db.close()
                 val intent = Intent(this,MainActivity::class.java)
-                intent.putExtra("access_plan",true)
+                intent.putExtra("access_by_fragment",2)
                 startActivity(intent)
             }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
 
@@ -134,7 +134,7 @@ class AddPlan_Activity : AppCompatActivity() {
         //이전 버튼 구현
         cancel_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
-            intent.putExtra("access_plan",true)
+            intent.putExtra("access_by_fragment",2)
             startActivity(intent)
         }
     }
