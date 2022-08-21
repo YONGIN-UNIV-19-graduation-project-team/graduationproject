@@ -22,7 +22,7 @@ import kotlin.collections.ArrayList
 class Fragment0 : Fragment() {
 
     var todays_RoutineList = arrayListOf<Routine>()
-    var todays_PlanList = arrayListOf<Routine>()
+    var todays_PlanList = arrayListOf<Plan>()
     var challengeList = arrayListOf<Challenge>(
         Challenge(0L,"2022","5","5",
             0.0)
@@ -102,7 +102,7 @@ class Fragment0 : Fragment() {
         }
 
 
-        progress_percent.text = progressPercent.toInt().toString()
+        progress_percent.text = progressPercent.toInt().toString()+"%"
         println(progress_percent.text)
         progressBar.progress = progressPercent.toInt()
         println(progressPercent.toInt())
@@ -124,7 +124,7 @@ class Fragment0 : Fragment() {
             CalendarUtil.selectDate = CalendarUtil.selectDate.plusMonths(1)
             setMonthview()
         }
-        ////////////////////////루틴리스트에서 오늘 요일이 포함한 것들만 남기고 나머지 삭제
+        ////////////////////////루틴리스트에서 오늘 요일이 포함한 것들만 투데이루틴리스트에 저장
         RoutineList.forEach { routine ->
             val exroutine = Routine(routine.id,routine.name,routine.hour,routine.min,routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun,routine.routineischecked)
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
@@ -142,9 +142,11 @@ class Fragment0 : Fragment() {
 
         todaysroutinecount.text = todays_RoutineList.size.toString()+"개"
 
-        ////////////////////////플랜리스트에서 오늘 날짜를 포함한 것들만 남기고 나머지 삭제
-
-
+        ////////////////////////플랜리스트에서 오늘 날짜를 포함한 것들만 투데이플랜리스트에 저장
+        val date = year+month+day
+        todays_PlanList = db.plan_DAO().searchday(date).toTypedArray().toCollection(ArrayList<Plan>())
+        todaysplancount.text = todays_PlanList.size.toString()+"개"
+        db.close()
         //////////////////////////////////////////////리스트뷰1(오늘의 루틴)
 
         val Adapter_rt = TodaysRoutineAdapter(requireContext(), todays_RoutineList)
@@ -156,7 +158,7 @@ class Fragment0 : Fragment() {
 
         //////////////////////////////////////////////리스트뷰2(오늘의 할일)
 
-        val Adapter_pl = TodaysPlanAdapter(requireContext(), PlanList)
+        val Adapter_pl = TodaysPlanAdapter(requireContext(), todays_PlanList)
         planListview.adapter = Adapter_pl
 
 
