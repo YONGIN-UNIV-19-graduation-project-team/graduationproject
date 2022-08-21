@@ -53,22 +53,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cal_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:clickable="true"
-            android:scaleType="fitCenter"
-
-            app:backgroundTint="@color/zero"
-            app:fabSize="normal"
-            app:rippleColor="@color/zero"
-            app:srcCompat="@drawable/challenge_button"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </FrameLayout>
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

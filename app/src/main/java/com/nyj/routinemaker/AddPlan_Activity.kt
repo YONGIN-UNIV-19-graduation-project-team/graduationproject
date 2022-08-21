@@ -3,15 +3,12 @@ package com.nyj.routinemaker
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.os.Build.VERSION_CODES.M
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
-import java.io.FileWriter
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 //..
@@ -62,7 +59,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
 
         //날짜 선택 란 //정상
-        btn_pick_date.setOnClickListener(View.OnClickListener {
+        textview_get_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
 
@@ -85,7 +82,7 @@ class AddPlan_Activity : AppCompatActivity() {
         })
 
         //시간 선택 란 //정상
-        btn_pick_time.setOnClickListener(View.OnClickListener {
+        textview_get_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
                 val selectDate = Calendar.getInstance()
@@ -117,7 +114,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
 
         //저장 버튼 구현.
-        button3.setOnClickListener{
+        addplan_button.setOnClickListener{
 
             plan_Name=planName.text.toString()//제목가져오기
             nameisnotnull=false
@@ -133,6 +130,12 @@ class AddPlan_Activity : AppCompatActivity() {
                 startActivity(intent)
             }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
 
+        }
+        //이전 버튼 구현
+        cancel_button.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("access_plan",true)
+            startActivity(intent)
         }
     }
 }
