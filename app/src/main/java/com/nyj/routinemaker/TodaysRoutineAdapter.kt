@@ -1,6 +1,9 @@
 package com.nyj.routinemaker
 
 import android.content.Context
+import android.graphics.Paint
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +17,20 @@ class TodaysRoutineAdapter (val context: Context,val RoutineList:ArrayList<Routi
         val time = view.findViewById<TextView>(R.id.todays_routine_time)
 
         val routineList = RoutineList[position]
-        name.text = routineList.name
+
+        val nametext = routineList.name
         val timetext = "확인 시간 ${routineList.hour} : ${routineList.min}"
+        name.text = routineList.name
         time.text = timetext
+        //루틴이 수행된거면 중간줄
+        if(routineList.routineischecked) {
+            name.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
+            time.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
+            //색도 변경(gray)
+            ///
+        }
+
+
         return view
     }
 
