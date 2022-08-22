@@ -1,6 +1,7 @@
 package com.nyj.routinemaker
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.text.SpannableString
 import android.text.style.StrikethroughSpan
@@ -43,6 +44,8 @@ class TodaysRoutineAdapter (val context: Context,val RoutineList:ArrayList<Routi
             name.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
             time.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
             //색도 변경(gray)
+            name.setTextColor(Color.GRAY)
+            time.setTextColor(Color.GRAY)
             ///
         }
 
