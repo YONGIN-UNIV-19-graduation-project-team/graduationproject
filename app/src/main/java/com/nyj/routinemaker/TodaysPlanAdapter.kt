@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_addplan.*
 
 class TodaysPlanAdapter (val context: Context,val PlanList:ArrayList<Plan>):BaseAdapter(){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -14,8 +15,23 @@ class TodaysPlanAdapter (val context: Context,val PlanList:ArrayList<Plan>):Base
         val time = view.findViewById<TextView>(R.id.todays_plan_time)
         val planList = PlanList[position]
         name.text = planList.name
-        val timetext = "확인 시간 ${planList.hour} : ${planList.min}"
-        time.text = timetext
+
+        if(planList.hour.toInt()<10&&planList.min.toInt()<10) {
+            time.text = "확인 시간 0${planList.hour} : 0${planList.min}"
+        }
+        else {
+            if (planList.min.toInt()<10) {
+                time.text = "확인 시간 ${planList.hour} : 0${planList.min}"
+            }
+            else
+                if(planList.hour.toInt()<10) {
+                    time.text = "확인 시간 0${planList.hour} : ${planList.min}"
+                }
+                else time.text = "확인 시간 ${planList.hour} : ${planList.min}"
+        }
+
+
+
         return view
     }
 

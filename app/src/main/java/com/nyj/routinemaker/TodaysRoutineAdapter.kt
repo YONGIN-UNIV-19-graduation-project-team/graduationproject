@@ -19,9 +19,25 @@ class TodaysRoutineAdapter (val context: Context,val RoutineList:ArrayList<Routi
         val routineList = RoutineList[position]
 
         val nametext = routineList.name
-        val timetext = "확인 시간 ${routineList.hour} : ${routineList.min}"
+
+        if(routineList.hour.toInt()<10&&routineList.min.toInt()<10) {
+            time.text = "확인 시간 0${routineList.hour} : 0${routineList.min}"
+        }
+        else {
+            if (routineList.min.toInt()<10) {
+                time.text = "확인 시간 ${routineList.hour} : 0${routineList.min}"
+            }
+            else
+                if(routineList.hour.toInt()<10) {
+                    time.text = "확인 시간 0${routineList.hour} : ${routineList.min}"
+                }
+                else time.text = "확인 시간 ${routineList.hour} : ${routineList.min}"
+        }
+
+
+
+
         name.text = routineList.name
-        time.text = timetext
         //루틴이 수행된거면 중간줄
         if(routineList.routineischecked) {
             name.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
