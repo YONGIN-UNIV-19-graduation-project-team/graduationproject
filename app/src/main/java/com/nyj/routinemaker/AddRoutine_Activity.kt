@@ -1,12 +1,13 @@
 package com.nyj.routinemaker
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CompoundButton
-import android.widget.TextView
-import android.widget.TimePicker
-import android.widget.Toast
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addroutine.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -102,6 +103,24 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         }
         changed_hour=hourOfDay
         changed_minute=minute
+    }
+
+    // 화면 클릭하여 키보드 숨기기 및 포커스 제거
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action === MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 
 }
