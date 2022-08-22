@@ -5,15 +5,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
-import splitties.resources.drawable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,26 +56,32 @@ class MainActivity : AppCompatActivity() {
         when (fragNum){
             0 -> {
                 ft.replace(R.id.main_frame, Fragment0()).commit()
+                frg0_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 frg0_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
                 frg1_button.setTextColor(Color.GRAY)
-
+                frg1_button.paintFlags = 0
+                frg2_button.paintFlags = 0
 
             }
             1 -> {
                 ft.replace(R.id.main_frame, Fragment1()).commit()
+                frg1_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 frg0_button.setTextColor(Color.GRAY)
                 frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-
+                frg0_button.paintFlags = 0
+                frg2_button.paintFlags = 0
 
             }
             2 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
+                frg2_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
                 frg0_button.setTextColor(Color.GRAY)
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
-
+                frg0_button.paintFlags = 0
+                frg1_button.paintFlags = 0
             }
         }
     }
