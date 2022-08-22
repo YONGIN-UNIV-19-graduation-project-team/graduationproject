@@ -3,6 +3,7 @@ package com.nyj.routinemaker
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
 import kotlinx.android.synthetic.main.activity_addplan.planName
@@ -154,7 +156,7 @@ class ModPlan_Activity : AppCompatActivity() {
                 if(nameisnotnull) {
                     db.plan_DAO().update(plan)
                     db.close()
-                    intent.putExtra("access_plan",true)
+                    intent.putExtra("access_by_fragment",2)
                     startActivity(intent)
                 }else Toast.makeText(this, "이름을 공백으로 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }else Toast.makeText(this, "시간이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
@@ -162,12 +164,26 @@ class ModPlan_Activity : AppCompatActivity() {
 
         //삭제버튼
         del_button.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
-            db.plan_DAO().delete(plan)
-            db.close()
-            intent.putExtra("access_by_fragment",2)
-            startActivity(intent)
+            AlertDialog.Builder(this)
+                .setMessage("정말로 삭제하시겠습니까?")
+                .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val intent = Intent(applicationContext,MainActivity::class.java)
+                        val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
+                        db.plan_DAO().delete(plan)
+                        db.close()
+                        intent.putExtra("access_by_fragment",2)
+                        startActivity(intent)
+                    }
+                })
+                .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Toast.makeText(applicationContext,"삭제를 취소하였습니다.",Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .create()
+                .show()
+
         }
         //취소버튼
         cancel_modplan_button.setOnClickListener{
