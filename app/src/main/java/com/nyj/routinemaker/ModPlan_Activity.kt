@@ -189,6 +189,7 @@ class ModPlan_Activity : AppCompatActivity() {
         cancel_modplan_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("access_by_fragment",2)
+            db.close()
             startActivity(intent)
         }
 

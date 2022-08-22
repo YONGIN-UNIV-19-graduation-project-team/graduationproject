@@ -46,7 +46,7 @@ class WidgetProvider :AppWidgetProvider(){
 
         println("@@@@@@@@@@@@@@@"+Planlist)
         Planlist.forEach{Plan->
-            viewname.append(Plan.name).append(" ")
+            viewname.append(Plan.name).append("\n")
 
         }
         val plan_Count = Planlist.size.toString()

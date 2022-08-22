@@ -160,6 +160,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
         cancel_modroutine_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("access_by_fragment",1)
+            db.close()
             startActivity(intent)
         }
     }

@@ -40,7 +40,6 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         can_button.setOnClickListener {
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra("access_by_fragment",1)
-
             startActivity(intent)
         }
         //추가 버튼 클릭시 이벤트
