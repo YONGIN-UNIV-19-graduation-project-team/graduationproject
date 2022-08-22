@@ -16,19 +16,10 @@ class TodaysPlanAdapter (val context: Context,val PlanList:ArrayList<Plan>):Base
         val planList = PlanList[position]
         name.text = planList.name
 
-        if(planList.hour.toInt()<10&&planList.min.toInt()<10) {
-            time.text = "확인 시간 0${planList.hour} : 0${planList.min}"
+        if(planList.hour.toInt()<12) {
+            time.text = "오전 ${planList.hour}시 ${planList.min}분"
         }
-        else {
-            if (planList.min.toInt()<10) {
-                time.text = "확인 시간 ${planList.hour} : 0${planList.min}"
-            }
-            else
-                if(planList.hour.toInt()<10) {
-                    time.text = "확인 시간 0${planList.hour} : ${planList.min}"
-                }
-                else time.text = "확인 시간 ${planList.hour} : ${planList.min}"
-        }
+        else time.text = "오후 ${(planList.hour.toInt()-12)}시 ${planList.min}분"
 
 
 

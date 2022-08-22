@@ -2,6 +2,7 @@ package com.nyj.routinemaker
 
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.ImageFormat
@@ -22,6 +23,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.exifinterface.media.ExifInterface
 import androidx.room.Room
@@ -65,6 +67,25 @@ class Camera : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //System.currentTimeMillis()
+        //val nowTime = "${System.currentTimeMillis()}"
+        //val getTime = intent.getStringExtra("time").toString().toInt()
+        //val calculate_time = nowTime.toInt()-getTime
+
+//        if(calculate_time>60000) {
+//            AlertDialog.Builder(this)
+//                .setMessage("시간초과!!!!!!!")
+//                .setPositiveButton("예", object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//                        val intent = Intent(applicationContext, MainActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//
+//                })
+//                .create()
+//                .show()
+//        }
+
 
         // 상태바 숨기기
         window.setFlags(

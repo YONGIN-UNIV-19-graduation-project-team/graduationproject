@@ -19,22 +19,10 @@ class TodaysRoutineAdapter (val context: Context,val RoutineList:ArrayList<Routi
 
         val routineList = RoutineList[position]
 
-        val nametext = routineList.name
-
-        if(routineList.hour.toInt()<10&&routineList.min.toInt()<10) {
-            time.text = "확인 시간 0${routineList.hour} : 0${routineList.min}"
+        if(routineList.hour.toInt()<12) {
+            time.text = "오전 ${routineList.hour}시 ${routineList.min}분"
         }
-        else {
-            if (routineList.min.toInt()<10) {
-                time.text = "확인 시간 ${routineList.hour} : 0${routineList.min}"
-            }
-            else
-                if(routineList.hour.toInt()<10) {
-                    time.text = "확인 시간 0${routineList.hour} : ${routineList.min}"
-                }
-                else time.text = "확인 시간 ${routineList.hour} : ${routineList.min}"
-        }
-
+        else time.text = "오후 ${(routineList.hour.toInt()-12)}시 ${routineList.min}분"
 
 
 
