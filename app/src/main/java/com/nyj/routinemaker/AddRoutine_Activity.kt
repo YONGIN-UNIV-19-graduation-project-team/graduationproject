@@ -1,7 +1,9 @@
 package com.nyj.routinemaker
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,6 +32,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
     var timeisselected=false
     var nameisnotnull=false
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
@@ -82,6 +85,50 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                 }
             }
         }
+        //요일 체크박스 선택및 해제시 텍스트 컬러 변경
+        checkBox1.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox2.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox3.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox4.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+            checkBox1.setTextColor(Color.GRAY)
+        else
+            checkBox1.setTextColor(Color.RED)
+        }
+        checkBox5.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox6.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox7.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
