@@ -123,6 +123,7 @@ class Camera : AppCompatActivity() {
 
         checkFile(File(dataPath+"tessdata/"), "kor")//사용할 언어파일의 이름 지정
         tess = TessBaseAPI() //api준비
+        println("@@@@@@@@@@@@datapath : " + dataPath)
         tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
 
 
@@ -133,7 +134,7 @@ class Camera : AppCompatActivity() {
             if (bitmap != null) {
                 Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
                 imageopencv(bitmap)
-                test.setImageBitmap(bitmap)
+
 
                 } else
                     Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
@@ -446,8 +447,7 @@ class Camera : AppCompatActivity() {
         Imgproc.warpPerspective(mat, dst, perspectiveTransform, Size(dw, dh))
 
     //  Mat 비트맵으로
-        val result = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
-        convertMatToBitMap(dst)
+       val result :Bitmap? = convertMatToBitMap(dst)
 
         //test.setImageBitmap(result)
         if (result != null) {
@@ -484,11 +484,12 @@ class Camera : AppCompatActivity() {
         var bmp: Bitmap? = null
         val rgb = Mat()
         try {
-            bmp = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
+            bmp = Bitmap.createBitmap(rgb.width(), rgb.height(), Bitmap.Config.ARGB_8888)
             Utils.matToBitmap(rgb, bmp)
         } catch (e: CvException) {
             e.printStackTrace()
         }
+        test.setImageBitmap(bmp)
         return bmp
     }
 
@@ -550,11 +551,14 @@ class Camera : AppCompatActivity() {
 
     fun processImage(bitmap: Bitmap){
         //test.setImageBitmap(bitmap)
+        println(bitmap)
         Toast.makeText(applicationContext,"잠시 기다려 주세요",Toast.LENGTH_SHORT).show()
         var ocrResult : String? = null;
         tess.setImage(bitmap)
+
         ocrResult = tess.utF8Text
-        Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
+        textView8.text=ocrResult
+        //Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
 
     }
 
