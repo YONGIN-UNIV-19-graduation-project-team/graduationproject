@@ -150,6 +150,7 @@ class Camera : AppCompatActivity() {
 
 
 
+    //8.23
     //surfaceview capture
     @RequiresApi(Build.VERSION_CODES.N)
     fun capturePicture()  : Bitmap {
