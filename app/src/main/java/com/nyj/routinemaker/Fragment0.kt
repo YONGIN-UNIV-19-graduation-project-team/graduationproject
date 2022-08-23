@@ -1,51 +1,75 @@
 package com.nyj.routinemaker
 
+import android.app.Activity
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.nyj.routinemaker.databinding.ActivityChallengeBinding
-import kotlinx.android.synthetic.main.activity_challenge.*
+import kotlinx.android.synthetic.main.fragment0.*
+import kotlinx.android.synthetic.main.fragment1.*
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Challenge_Activity : AppCompatActivity() {
+class Fragment0 : Fragment() {
 
+    var todays_RoutineList = arrayListOf<Routine>()
+    var todays_PlanList = arrayListOf<Plan>()
+    var challengeList = arrayListOf<Challenge>(
+        Challenge(0L,"2022","5","5",
+            0.0)
+    )
     var RoutineList = arrayListOf<Routine>(
         Routine(0L,"더미","55","55",
             true,true,true,true,true,true,true,false)
     )
-    var challengeList = arrayListOf<Challenge>(
-        Challenge(0L,"2022","5","5",
-            0.0)
+    var PlanList = arrayListOf<Plan>(
+        Plan(
+            0L, "더미", "2022", "11",
+            "12", "0", "0", ""
+        )
     )
     var count_checked=0
     var count_all=0
     var isExist=0
     var progressPercent=0.00
-    private lateinit var binding: ActivityChallengeBinding
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment0,container,false)
+        /////////////db구현 후 리스트에 추가/////////////////
+
+
+
+        ////////////////////////////////////////////////
+        return view
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge)
-        ///////////////////////////////////////////
-        val year=LocalDate.now().year.toString()
-        val month=LocalDate.now().monthValue.toString()
-        val day=LocalDate.now().dayOfMonth.toString()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val year= LocalDate.now().year.toString()
+        val month= LocalDate.now().monthValue.toString()
+        val day= LocalDate.now().dayOfMonth.toString()
 
         val db = Room.databaseBuilder(
-            applicationContext,AppDatabase::class.java,"routine_databases"
+            requireActivity().applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
 
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
+        PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
         RoutineList.forEach{routine ->
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
             if((doDayOfWeek()=="월"&&weekList[0])
@@ -77,13 +101,12 @@ class Challenge_Activity : AppCompatActivity() {
             progressPercent+=(challenge.percent*3.4)
         }
 
-        //binding 초기화
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_challenge)
-        progress_percent.text = progressPercent.toInt().toString()
+
+        progress_percent.text = progressPercent.toInt().toString()+"%"
         println(progress_percent.text)
-        binding.progressBar.progress = progressPercent.toInt()
+        progressBar.progress = progressPercent.toInt()
         println(progressPercent.toInt())
-        //db.close()
+        db.close()
         //현재 날짜
         CalendarUtil.selectDate = LocalDate.now()
 
@@ -91,23 +114,63 @@ class Challenge_Activity : AppCompatActivity() {
         setMonthview()
 
         //이전달 버튼 이벤트
-        binding.preBtn.setOnClickListener {
+        pre_btn.setOnClickListener {
             CalendarUtil.selectDate = CalendarUtil.selectDate.minusMonths(1)
             setMonthview()
         }
 
         //다음달 버튼 이벤트
-        binding.nextBtn.setOnClickListener {
+        next_btn.setOnClickListener {
             CalendarUtil.selectDate = CalendarUtil.selectDate.plusMonths(1)
             setMonthview()
         }
+        ////////////////////////루틴리스트에서 오늘 요일이 포함한 것들만 투데이루틴리스트에 저장
+        RoutineList.forEach { routine ->
+            val exroutine = Routine(routine.id,routine.name,routine.hour,routine.min,routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun,routine.routineischecked)
+            var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
+
+            if((doDayOfWeek()=="월"&&weekList[0])
+                ||(doDayOfWeek()=="화"&&weekList[1])
+                ||(doDayOfWeek()=="수"&&weekList[2])
+                ||(doDayOfWeek()=="목"&&weekList[3])
+                ||(doDayOfWeek()=="금"&&weekList[4])
+                ||(doDayOfWeek()=="토"&&weekList[5])
+                ||(doDayOfWeek()=="일"&&weekList[6])){
+                todays_RoutineList.add(exroutine)
+            }
+        }
+
+        todaysroutinecount.text = todays_RoutineList.size.toString()+"개"
+
+        ////////////////////////플랜리스트에서 오늘 날짜를 포함한 것들만 투데이플랜리스트에 저장
+        val date = year+month+day
+        todays_PlanList = db.plan_DAO().searchday(date).toTypedArray().toCollection(ArrayList<Plan>())
+        todaysplancount.text = todays_PlanList.size.toString()+"개"
+        db.close()
+        //////////////////////////////////////////////리스트뷰1(오늘의 루틴)
+
+        val Adapter_rt = TodaysRoutineAdapter(requireContext(), todays_RoutineList)
+        routineListview.adapter = Adapter_rt
+
+
+
+
+
+        //////////////////////////////////////////////리스트뷰2(오늘의 할일)
+
+        val Adapter_pl = TodaysPlanAdapter(requireContext(), todays_PlanList)
+        planListview.adapter = Adapter_pl
+
+
+
+
+        ////////////////////////////////////////////////////////////////
     }
 
-    //날짜 화면에 보여주기
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setMonthview() {
         //년월 텍스트뷰 셋팅
-        binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectDate)
+        monthYearText.text = monthYearFromDate(CalendarUtil.selectDate)
 
         //날짜 생성해서 리스트에 담기
         val dayList = dayInMonthArray(CalendarUtil.selectDate)
@@ -116,13 +179,14 @@ class Challenge_Activity : AppCompatActivity() {
         val adapter = CalendarAdapter(dayList)
 
         //레이아웃 설정(열 7개)
-        var manager:RecyclerView.LayoutManager = GridLayoutManager(applicationContext, 7)
+        var manager: RecyclerView.LayoutManager = GridLayoutManager(context?.applicationContext, 7)
 
         //레이아웃 적용
-        binding.recyclerview.layoutManager = manager
+        recyclerview.layoutManager = manager
 
         //어댑터 적용
-        binding.recyclerview.adapter = adapter
+        recyclerview.adapter = adapter
+
     }
     //날짜 타입 설정(월,년)
     @RequiresApi(Build.VERSION_CODES.O)
@@ -131,7 +195,7 @@ class Challenge_Activity : AppCompatActivity() {
         var formatter = DateTimeFormatter.ofPattern("yyyy년 MM월")
 
         //받아온 날짜를를 해당 포맷으로 변경
-       return date.format(formatter)
+        return date.format(formatter)
     }
 
     //날짜 타입(년,월)

@@ -1,12 +1,15 @@
 package com.nyj.routinemaker
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CompoundButton
-import android.widget.TextView
-import android.widget.TimePicker
-import android.widget.Toast
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addroutine.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,18 +32,21 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
 
     var timeisselected=false
     var nameisnotnull=false
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addroutine)
 
         val timePicker = findViewById<TimePicker>(R.id.timePicker)
         timePicker.setOnTimeChangedListener(this)
+        //이전 버튼 클릭시 이벤트
         can_button.setOnClickListener {
             val intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("access_by_fragment",1)
             startActivity(intent)
         }
         //추가 버튼 클릭시 이벤트
-        add_button.setOnClickListener{
+        addrt_button.setOnClickListener{
 
 
             val intent = Intent(this,MainActivity::class.java)
@@ -70,6 +76,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                     ).allowMainThreadQueries().build()
                     db.routine_DAO().insertAll(routine)
                     db.close()
+                    intent.putExtra("access_by_fragment",1)
                     startActivity(intent)
                 }
                 else{
@@ -78,6 +85,50 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                 }
             }
         }
+        //요일 체크박스 선택및 해제시 텍스트 컬러 변경
+        checkBox1.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox2.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox3.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox4.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+            checkBox1.setTextColor(Color.GRAY)
+        else
+            checkBox1.setTextColor(Color.RED)
+        }
+        checkBox5.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox6.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox7.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(Color.GRAY)
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+
     }
 
     override fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int) {
@@ -98,6 +149,24 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
         }
         changed_hour=hourOfDay
         changed_minute=minute
+    }
+
+    // 화면 클릭하여 키보드 숨기기 및 포커스 제거
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action === MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 
 }

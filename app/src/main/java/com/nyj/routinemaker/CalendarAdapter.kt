@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import kotlinx.coroutines.NonDisposableHandle.parent
 import java.time.LocalDate
 
 class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
@@ -21,11 +20,6 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
         Challenge(0L,"2022","5","5",
             0.0)
     )
-    //챌린지별 배경색 지정 변수
-    var red = 0
-    var red_100 = 0
-    var red_200 = 0
-    var red_300 = 0
 
     class ItemViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
@@ -35,11 +29,6 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.calendar_item, parent, false)
-        //챌린지별 배경색 변수값 대입
-        red = ContextCompat.getColor(parent.context, R.color.red)
-        red_100 = ContextCompat.getColor(parent.context, R.color.red_100)
-        red_200 = ContextCompat.getColor(parent.context, R.color.red_200)
-        red_300 = ContextCompat.getColor(parent.context, R.color.red_300)
 
         val db = Room.databaseBuilder(
             parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
@@ -53,7 +42,6 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
    @SuppressLint("ResourceAsColor")
    @RequiresApi(Build.VERSION_CODES.O)
    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
 
 
         //날짜 변수에 담기
@@ -71,13 +59,13 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
                 holder.dayText.text = day_position.dayOfMonth.toString()
                 if(challenge.year==year.toString()&&challenge.month==month.toString()&&challenge.day==day.toString()) {
                     if(challenge.percent==1.0){
-                        holder.itemView.setBackgroundColor(red)
+                        holder.itemView.setBackgroundResource(R.drawable.challenge_background1)
                     }else if(challenge.percent>=0.75) {//0.75~0.999
-                        holder.itemView.setBackgroundColor(red_100)
+                        holder.itemView.setBackgroundResource(R.drawable.challenge_background2)
                     }else if(challenge.percent>=0.5) {//0.5~0.7499
-                        holder.itemView.setBackgroundColor(red_200)
+                        holder.itemView.setBackgroundResource(R.drawable.challenge_background3)
                     }else if(challenge.percent>=0.25) {//0.25~0.4999
-                        holder.itemView.setBackgroundColor(red_300)
+                        holder.itemView.setBackgroundResource(R.drawable.challenge_background4)
                     }
 
 

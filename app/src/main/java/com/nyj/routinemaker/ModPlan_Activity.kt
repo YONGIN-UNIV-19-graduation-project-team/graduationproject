@@ -2,14 +2,27 @@ package com.nyj.routinemaker
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
+import kotlinx.android.synthetic.main.activity_addplan.planName
+import kotlinx.android.synthetic.main.activity_addplan.textview_get_date
+import kotlinx.android.synthetic.main.activity_addplan.textview_get_time
+import kotlinx.android.synthetic.main.activity_modplan.*
 import kotlinx.android.synthetic.main.activity_modroutine.*
+import kotlinx.android.synthetic.main.activity_modroutine.del_button
+import kotlinx.android.synthetic.main.activity_modroutine.mod_button
 import kotlinx.android.synthetic.main.list_item_plan.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,7 +85,7 @@ class ModPlan_Activity : AppCompatActivity() {
         plan_Min = get_plan.min
 
         //날짜 선택 란//
-        btn_pick_date.setOnClickListener(View.OnClickListener {
+        textview_get_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
@@ -97,7 +110,7 @@ class ModPlan_Activity : AppCompatActivity() {
 
 
         //시간 선택 란 //정상
-        btn_pick_time.setOnClickListener(View.OnClickListener {
+        textview_get_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             getDate.set(Calendar.HOUR,gethour)
             getDate.set(Calendar.MINUTE,getmin)
@@ -143,7 +156,7 @@ class ModPlan_Activity : AppCompatActivity() {
                 if(nameisnotnull) {
                     db.plan_DAO().update(plan)
                     db.close()
-                    intent.putExtra("access_plan",true)
+                    intent.putExtra("access_by_fragment",2)
                     startActivity(intent)
                 }else Toast.makeText(this, "이름을 공백으로 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }else Toast.makeText(this, "시간이 선택되지 않았습니다.", Toast.LENGTH_SHORT).show()
@@ -151,16 +164,55 @@ class ModPlan_Activity : AppCompatActivity() {
 
         //삭제버튼
         del_button.setOnClickListener{
+            AlertDialog.Builder(this)
+                .setMessage("정말로 삭제하시겠습니까?")
+                .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val intent = Intent(applicationContext,MainActivity::class.java)
+                        val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
+                        db.plan_DAO().delete(plan)
+                        db.close()
+                        intent.putExtra("access_by_fragment",2)
+                        startActivity(intent)
+                    }
+                })
+                .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Toast.makeText(applicationContext,"삭제를 취소하였습니다.",Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .create()
+                .show()
+
+        }
+        //취소버튼
+        cancel_modplan_button.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)
-            val plan = Plan(planid,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,"")
-            db.plan_DAO().delete(plan)
+            intent.putExtra("access_by_fragment",2)
             db.close()
-            intent.putExtra("access_plan",true)
             startActivity(intent)
         }
 
 
 
 
+    }
+
+    // 화면 클릭하여 키보드 숨기기 및 포커스 제거
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action === MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 }

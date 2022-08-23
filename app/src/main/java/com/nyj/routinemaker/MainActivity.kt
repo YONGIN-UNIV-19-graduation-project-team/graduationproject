@@ -5,15 +5,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
-import splitties.resources.drawable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,17 +27,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("메인액티비티가 실행되었다.")
 
-        var accessByPlan = intent.getBooleanExtra("access_plan",false)
-        if(!accessByPlan) setFrag(0)
-        else setFrag(1)
-
-        frg1_button.setOnClickListener{
+        var accessByPlan = intent.getIntExtra("access_by_fragment",0)
+        if(accessByPlan==0) setFrag(0)
+        else if(accessByPlan==1)setFrag(1)
+        else if(accessByPlan==2)setFrag(2)
+        else setFrag(0)
+        frg0_button.setOnClickListener{
             setFrag(0)
         }
-        frg2_button.setOnClickListener{
+        frg1_button.setOnClickListener{
             setFrag(1)
+        }
+        frg2_button.setOnClickListener{
+            setFrag(2)
         }
 
 
@@ -49,42 +51,41 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setFrag(fragNum : Int) {
-        //fragnum이 0일때 fragment1로 , 1때 fragment2로
+
        val ft = supportFragmentManager.beginTransaction()
         when (fragNum){
             0 -> {
-                ft.replace(R.id.main_frame, Fragment1()).commit()
-                frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
+                ft.replace(R.id.main_frame, Fragment0()).commit()
+                frg0_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                frg0_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
                 frg2_button.setTextColor(Color.GRAY)
-                //cal_button.setVisibility(View.VISIBLE)
-                cal_button.setImageResource(R.drawable.challenge_button)
+                frg1_button.setTextColor(Color.GRAY)
+                frg1_button.paintFlags = 0
+                frg2_button.paintFlags = 0
 
-                cal_setOnClickListener()
             }
             1 -> {
+                ft.replace(R.id.main_frame, Fragment1()).commit()
+                frg1_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                frg0_button.setTextColor(Color.GRAY)
+                frg1_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
+                frg2_button.setTextColor(Color.GRAY)
+                frg0_button.paintFlags = 0
+                frg2_button.paintFlags = 0
+
+            }
+            2 -> {
                 ft.replace(R.id.main_frame, Fragment2()).commit()
+                frg2_button.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                frg0_button.setTextColor(Color.GRAY)
                 frg1_button.setTextColor(Color.GRAY)
                 frg2_button.setTextColor(getResources().getColor(R.color.red, getResources().newTheme()))
-                //cal_button.setVisibility(View.GONE)
-                cal_button.setImageResource(R.drawable.plus_button)
-
-                plus_setOnClickListener()
+                frg0_button.paintFlags = 0
+                frg1_button.paintFlags = 0
             }
         }
     }
 
-    fun cal_setOnClickListener() {
-        cal_button.setOnClickListener(View.OnClickListener {
-            var intent_button = Intent(this, Challenge_Activity::class.java)
-            startActivity(intent_button)
-        })
-    }
-    fun plus_setOnClickListener(){
-        cal_button.setOnClickListener {
-            var intent_button = Intent(this, AddPlan_Activity::class.java)
-            startActivity(intent_button)
-        }
-    }
 
     fun resetChkbox(context: Context){//정각시 리스트뷰의 체크박스(db) 초기화 기능구현
         val resetAlarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager

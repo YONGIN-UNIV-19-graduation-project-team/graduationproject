@@ -19,10 +19,23 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/frg0_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:text="챌린지"
+            android:textScaleX="1.1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
             android:id="@+id/frg1_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="71dp"
-            android:layout_height="62dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:text="루틴"
             android:textScaleX="1.1"
@@ -53,22 +66,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cal_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:clickable="true"
-            android:scaleType="fitCenter"
-
-            app:backgroundTint="@color/zero"
-            app:fabSize="normal"
-            app:rippleColor="@color/zero"
-            app:srcCompat="@drawable/challenge_button"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </FrameLayout>
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>
