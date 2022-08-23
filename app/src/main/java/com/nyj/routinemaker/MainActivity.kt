@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loadData(){
-        val pref = this.getPreferences(0)
+        val pref = this.getSharedPreferences("a",0)
         year = pref.getString("key_year","2022").toString()
         month = pref.getString("key_month","8").toString()
         day = pref.getString("key_day","28").toString()
