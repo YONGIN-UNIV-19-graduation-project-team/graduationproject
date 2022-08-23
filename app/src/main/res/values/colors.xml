@@ -17,4 +17,5 @@
     <color name="red_200">#F59696</color>
     <color name="red_300">#FFD2D2</color>
     <color name="zero">#00FF0000</color>
+    <color name="zero_100">#8CFFFFFF</color>
 </resources>
