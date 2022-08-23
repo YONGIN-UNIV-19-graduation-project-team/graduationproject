@@ -10,10 +10,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.hardware.camera2.*
 import android.media.ImageReader
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
+import android.os.*
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.SparseIntArray
@@ -107,6 +104,13 @@ class Camera : AppCompatActivity() {
 
 
         button_check.setOnClickListener() {
+            val bitmap  = capturePicture()
+            if (bitmap != null) {
+                Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
+                imageopencv(bitmap)
+                } else
+                    Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
+
 
 //            val getID = intent.getStringExtra("id")!!.toLong()
 //            val db = Room.databaseBuilder(
@@ -122,6 +126,22 @@ class Camera : AppCompatActivity() {
         initSensor()
         initView()
     }
+
+
+
+
+
+    //surfaceview capture
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun capturePicture()  : Bitmap {
+        val Cbitmap = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
+        PixelCopy.request(surfaceView, Cbitmap, { i ->
+            imageViewSf.setImageBitmap(Cbitmap) //"iv_Result" is the image view
+        }, Handler(Looper.getMainLooper()))
+        return Cbitmap
+    }
+
+
 
 
     private fun initSensor() {
@@ -208,7 +228,6 @@ class Camera : AppCompatActivity() {
     }
 
     private val deviceStateCallback = object : CameraDevice.StateCallback() {
-        //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @RequiresApi(Build.VERSION_CODES.S)
         override fun onOpened(camera: CameraDevice) {
             mCameraDevice = camera
@@ -401,7 +420,12 @@ class Camera : AppCompatActivity() {
 
 
         val result = Bitmap.createBitmap(dst.width(), dst.height(), Bitmap.Config.ARGB_8888)
-        processImage(result)
+        if (bitmap != null) {
+            Toast.makeText(applicationContext,"opencv success",Toast.LENGTH_SHORT).show()
+            processImage(bitmap)
+        } else
+            Toast.makeText(applicationContext,"opencv fail",Toast.LENGTH_SHORT).show()
+
 
     }
 
@@ -484,7 +508,7 @@ class Camera : AppCompatActivity() {
         var ocrResult : String? = null;
         tess.setImage(bitmap)
         ocrResult = tess.utF8Text
-        Toast.makeText(applicationContext,ocrResult,Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
 
     }
 
