@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="150dp"
@@ -11,27 +12,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/day_of_month"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XX"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="할 일"
+                android:textAlignment="textStart"
+                android:textColor="@color/red" />
 
-            android:id="@+id/day_of_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="X요일"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/day_of_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XX"
+                    android:textSize="18dp" />
+
+                <TextView
+
+                    android:id="@+id/day_of_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="X요일"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/plancount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:layout_weight="20"
             android:text="X"
             android:textAlignment="textEnd"
@@ -41,19 +63,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오늘의 할일"
-        android:textAlignment="textStart"
-        android:textColor="@color/red" />
-
-    <TextView
         android:id="@+id/todays_plan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
         android:text="오늘의일정"
-        android:textSize="14sp" />
+        android:textColor="@color/black"
+        android:textSize="18dp" />
 
 </LinearLayout>

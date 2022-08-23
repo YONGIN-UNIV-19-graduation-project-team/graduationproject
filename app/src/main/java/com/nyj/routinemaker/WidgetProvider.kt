@@ -3,10 +3,13 @@ package com.nyj.routinemaker
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.room.Room
+import kotlinx.android.synthetic.main.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDate
 import java.util.*
 
@@ -46,17 +49,16 @@ class WidgetProvider :AppWidgetProvider(){
 
         println("@@@@@@@@@@@@@@@"+Planlist)
         Planlist.forEach{Plan->
-            viewname.append(Plan.name).append("\n")
+            viewname.append(Plan.name).append("\n- ")
 
         }
         val plan_Count = Planlist.size.toString()
         db.close()
-        views.setTextViewText(R.id.todays_plan,"-"+ viewname.toString())
+        views.setTextViewText(R.id.todays_plan,"- "+ viewname.toString())
         views.setTextViewText(R.id.day_of_month,day)
         views.setTextViewText(R.id.day_of_week,doDayOfWeek())
         views.setTextViewText(R.id.plancount,plan_Count)
         return views
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
