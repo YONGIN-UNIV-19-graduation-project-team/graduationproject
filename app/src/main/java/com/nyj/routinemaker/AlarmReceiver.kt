@@ -84,7 +84,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         println("pendingintent 수신 완료")
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.mipmap.icon)
             .setContentTitle("제목 :"+getTitle)//제목
             .setContentText("RequestCode : "+getRequestCode)//내용
             .setContentIntent(contentPendingIntent)//푸쉬알람 클릭시 인텐트작업
