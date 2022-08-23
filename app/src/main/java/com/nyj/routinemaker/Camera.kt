@@ -78,6 +78,25 @@ class Camera : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //System.currentTimeMillis()
+        //val nowTime = "${System.currentTimeMillis()}"
+        //val getTime = intent.getStringExtra("time").toString().toInt()
+        //val calculate_time = nowTime.toInt()-getTime
+
+//        if(calculate_time>60000) {
+//            AlertDialog.Builder(this)
+//                .setMessage("시간초과!!!!!!!")
+//                .setPositiveButton("예", object : DialogInterface.OnClickListener {
+//                    override fun onClick(dialog: DialogInterface?, which: Int) {
+//                        val intent = Intent(applicationContext, MainActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//
+//                })
+//                .create()
+//                .show()
+//        }
+
 
         // 상태바 숨기기
         window.setFlags(

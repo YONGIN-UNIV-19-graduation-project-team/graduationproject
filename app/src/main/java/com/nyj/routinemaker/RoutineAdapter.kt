@@ -5,6 +5,7 @@ package com.nyj.routinemaker
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import androidx.core.content.ContextCompat
 import kotlin.collections.ArrayList
 
 
-class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>) : BaseAdapter()
+class RoutineAdapter(val context : Context, val RoutineList : ArrayList<Routine>) : BaseAdapter()
 {
 
     @SuppressLint("ResourceAsColor")
@@ -37,7 +38,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
         val dow7 = view.findViewById<TextView>(R.id.rt_7)
 
 
-        val routineList = RouineList[position]
+        val routineList = RoutineList[position]
 
         name.text = routineList.name
 
@@ -49,6 +50,12 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
             min.text = "0"+routineList.min
         }else min.text = routineList.min
 
+        if(routineList.routineischecked) {
+            name.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
+            //색도 변경(gray)
+            name.setTextColor(Color.GRAY)
+            ///
+        }else name.setPaintFlags(0)
 
 
 
@@ -71,7 +78,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
 
 
     override fun getItem(position: Int): Any {
-        return RouineList[position]
+        return RoutineList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -79,7 +86,7 @@ class RoutineAdapter(val context : Context, val RouineList : ArrayList<Routine>)
     }
 
     override fun getCount(): Int {
-        return RouineList.size
+        return RoutineList.size
     }
 
 

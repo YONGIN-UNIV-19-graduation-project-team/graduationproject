@@ -1,6 +1,5 @@
 package com.nyj.routinemaker
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +60,7 @@ class Fragment1 : Fragment() {
     }
 
     fun setOnClickListener() {
-        add_button.setOnClickListener(View.OnClickListener {
+        addrt_button.setOnClickListener(View.OnClickListener {
 
             val intent = Intent(activity, AddRoutine_Activity::class.java)
             startActivity(intent)

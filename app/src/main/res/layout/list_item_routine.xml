@@ -3,33 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="44dp"
+    tools:layout_editor_absoluteY="0dp">
 
     <TextView
         android:id="@+id/rt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
         android:text="name"
-        android:textColor="#898989"
-        android:textSize="28dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rt_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginBottom="16dp"
         android:text="hour"
-        android:textColor="#AEBAD2"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,12 +36,11 @@
         android:id="@+id/rt_hm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
         android:text=":"
-        android:textColor="#AEBAD2"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rt_hour" />
 
@@ -50,12 +48,11 @@
         android:id="@+id/rt_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
         android:text="min"
-        android:textColor="#AEBAD2"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rt_hm" />
 
@@ -63,99 +60,121 @@
         android:id="@+id/rt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
         android:text="월"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_min" />
-
-    <TextView
-        android:id="@+id/rt_7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:text="일"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_6" />
-
-    <TextView
-        android:id="@+id/rt_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:text="금"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_4" />
-
-    <TextView
-        android:id="@+id/rt_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:text="화"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_1" />
+        app:layout_constraintStart_toEndOf="@+id/rt_min"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rt_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
         android:text="수"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_2" />
+        app:layout_constraintStart_toEndOf="@+id/rt_2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rt_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="금"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rt_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="화"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rt_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="일"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rt_6"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rt_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
         android:text="목"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_3" />
+        app:layout_constraintStart_toEndOf="@+id/rt_3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rt_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
         android:text="토"
-        android:textColor="@color/softgray"
-        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rt_5" />
+        app:layout_constraintStart_toEndOf="@+id/rt_5"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/checkbox_rou"
+        android:button="@null"
         android:clickable="false"
         android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
