@@ -9,7 +9,7 @@
     <SurfaceView
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
-        android:layout_height="656dp" />
+        android:layout_height="655dp" />
 
     <ImageButton
         android:id="@+id/btn_convert"
