@@ -40,4 +40,11 @@
         android:layout_marginTop="700dp"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="323dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="660dp"
+        android:text="TextView" />
+
 </FrameLayout>
