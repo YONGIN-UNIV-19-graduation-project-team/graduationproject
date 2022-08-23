@@ -12,6 +12,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_dday.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,16 +23,20 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
+    var year = ""
+    var month = ""
+    var day = ""
+    var name = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var accessByPlan = intent.getIntExtra("access_by_fragment",0)
-        if(accessByPlan==0) setFrag(0)
-        else if(accessByPlan==1)setFrag(1)
-        else if(accessByPlan==2)setFrag(2)
+        var accessByFragment = intent.getIntExtra("access_by_fragment",0)
+        if(accessByFragment==0) setFrag(0)
+        else if(accessByFragment==1)setFrag(1)
+        else if(accessByFragment==2)setFrag(2)
         else setFrag(0)
         frg0_button.setOnClickListener{
             setFrag(0)
@@ -43,9 +48,36 @@ class MainActivity : AppCompatActivity() {
             setFrag(2)
         }
 
+        d_day.setOnClickListener{
+            val intent_go_to_d_day = Intent(this,Dday_Activity::class.java)
+            startActivity(intent_go_to_d_day)
+        }
+        dday_name.setOnClickListener{
+            val intent_go_to_d_day = Intent(this,Dday_Activity::class.java)
+            startActivity(intent_go_to_d_day)
+        }
+        loadData()
+        val settime :Calendar= Calendar.getInstance()
+        settime.set(year.toInt(),month.toInt()-1,day.toInt())
+        val setTime_milli = settime.timeInMillis
+        println("@@@@@@@"+setTime_milli.toString())
+        val nowtime_milli = System.currentTimeMillis()
+        println("@@@@@@@"+nowtime_milli.toString())
+        val dday = (setTime_milli-nowtime_milli)
+        println(dday)
+        println((dday/86400000).toString())
+
+
+        dday_name.text = name
+        d_day.text = "D-"+dday/86400000
+
+
+
+
 
         resetChkbox(this)
         setAlarm(this)
+
     }
 
 
@@ -155,7 +187,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun loadData(){
+        val pref = this.getPreferences(0)
+        year = pref.getString("key_year","2022").toString()
+        month = pref.getString("key_month","8").toString()
+        day = pref.getString("key_day","28").toString()
+        name = pref.getString("key_name","디데이를 설정하세요").toString()
 
+    }
 }
 
 
