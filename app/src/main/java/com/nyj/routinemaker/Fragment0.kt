@@ -84,8 +84,14 @@ class Fragment0 : Fragment() {
             }
 
         }
+        var percent=0.0
         count_checked = db.routine_DAO().howManyChecked()
-        val percent = (count_checked.toDouble())/(count_all.toDouble())
+        if(count_all==0||count_checked==0){
+            percent = 0.00
+        }
+        else {
+            percent = (count_checked.toDouble())/(count_all.toDouble())
+        }
 
         isExist = db.challenge_DAO().isExist(year,month,day)
         val challenge = Challenge(0L,year,month,day,percent)
@@ -93,7 +99,9 @@ class Fragment0 : Fragment() {
         if(isExist!=0){
             val challenge = Challenge(id,year,month,day,percent)
             db.challenge_DAO().update(challenge)
-        }else db.challenge_DAO().insertAll(challenge)
+        }else {
+            db.challenge_DAO().insertAll(challenge)
+        }
 
         challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(arrayListOf<Challenge>())
         println(challengeList)
