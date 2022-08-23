@@ -8,25 +8,38 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="379dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginStart="20dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/frg0_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:text="챌린지"
+            android:textScaleX="1.1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
             android:id="@+id/frg1_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="71dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:text="루틴"
             android:textScaleX="1.1"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,12 +47,12 @@
         <Button
             android:id="@+id/frg2_button"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:text="할 일"
             android:textScaleX="1.1"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,23 +63,9 @@
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp">
-
-
-        <ImageButton
-            android:id="@+id/cal_button"
-            android:layout_width="80dp"
-            android:layout_height="81dp"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="300dp"
-            android:background="#00FF0000"
-            app:srcCompat="@drawable/calender"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </FrameLayout>
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

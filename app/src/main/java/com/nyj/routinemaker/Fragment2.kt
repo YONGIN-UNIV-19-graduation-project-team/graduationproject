@@ -1,6 +1,5 @@
 package com.nyj.routinemaker
 
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment2.*
 import kotlinx.android.synthetic.main.fragment2.listView
@@ -122,13 +121,10 @@ class Fragment2 : Fragment() {
 
         }
 
-        button.setOnClickListener {
+        addplan_button.setOnClickListener {
             val intent = Intent(activity, AddPlan_Activity::class.java)
             intent.apply {
-                intent.putExtra(
-                    "year",
-                    clicked_year.toString()
-                )//toString으로 형변환 해야 null값이 아닌채로 데이터 전송.0730
+                intent.putExtra("year", clicked_year.toString())//toString으로 형변환 해야 null값이 아닌채로 데이터 전송.0730
                 intent.putExtra("month", clicked_month.toString())
                 intent.putExtra("day", clicked_dayofMonth.toString())//dev브랜치테스트
                 startActivity(intent)
@@ -139,4 +135,5 @@ class Fragment2 : Fragment() {
 
 
     }
+
 }

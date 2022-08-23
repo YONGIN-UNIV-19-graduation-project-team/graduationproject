@@ -2,18 +2,23 @@ package com.nyj.routinemaker
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
-import android.os.Build.VERSION_CODES.M
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Rect
+import android.hardware.input.InputManager
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
-import java.io.FileWriter
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 //..
 class AddPlan_Activity : AppCompatActivity() {
     val formatDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
@@ -62,7 +67,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
 
         //날짜 선택 란 //정상
-        btn_pick_date.setOnClickListener(View.OnClickListener {
+        textview_get_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
 
@@ -85,7 +90,7 @@ class AddPlan_Activity : AppCompatActivity() {
         })
 
         //시간 선택 란 //정상
-        btn_pick_time.setOnClickListener(View.OnClickListener {
+        textview_get_time.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
             val datePicker = TimePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth, TimePickerDialog.OnTimeSetListener { timePicker, i, i2->
                 val selectDate = Calendar.getInstance()
@@ -108,8 +113,8 @@ class AddPlan_Activity : AppCompatActivity() {
                         else textview_get_time.text = "$i : $i2"
                 }
 
-                plan_Hour=selectDate.get(Calendar.HOUR).toString()
-                plan_Min=selectDate.get(Calendar.MINUTE).toString()
+                plan_Hour=i.toString()
+                plan_Min=i2.toString()
 
             },getDate.get(Calendar.HOUR),getDate.get(Calendar.MINUTE),true)
             datePicker.show()
@@ -117,7 +122,7 @@ class AddPlan_Activity : AppCompatActivity() {
 
 
         //저장 버튼 구현.
-        button3.setOnClickListener{
+        addplan_button.setOnClickListener{
 
             plan_Name=planName.text.toString()//제목가져오기
             nameisnotnull=false
@@ -126,13 +131,40 @@ class AddPlan_Activity : AppCompatActivity() {
             val add_date = plan_Year+plan_Month+plan_Day
             val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
             if(timeisselected&&nameisnotnull) {
-                db?.plan_DAO()?.insertAll(plan)
+                db.plan_DAO().insertAll(plan)
                 db.close()
                 val intent = Intent(this,MainActivity::class.java)
-                intent.putExtra("access_plan",true)
+                intent.putExtra("access_by_fragment",2)
                 startActivity(intent)
             }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
 
         }
+        //이전 버튼 구현
+        cancel_button.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("access_by_fragment",2)
+            db.close()
+            startActivity(intent)
+        }
+
+
+    }
+
+    // 화면 클릭하여 키보드 숨기기 및 포커스 제거
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action === MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 }

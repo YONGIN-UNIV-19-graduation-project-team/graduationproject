@@ -41,16 +41,20 @@ class WidgetProvider :AppWidgetProvider(){
         month=LocalDate.now().monthValue.toString()
         day=LocalDate.now().dayOfMonth.toString()
         date=year+month+day
-        Planlist = db.plan_DAO().searchday(day).toTypedArray().toCollection(arrayListOf<Plan>())
+        Planlist = db.plan_DAO().searchday(date).toTypedArray().toCollection(arrayListOf<Plan>())
+        println(date+"date출력")
 
+        println("@@@@@@@@@@@@@@@"+Planlist)
         Planlist.forEach{Plan->
-            viewname.append(Plan.name).append(" ")
+            viewname.append(Plan.name).append("\n")
 
         }
+        val plan_Count = Planlist.size.toString()
         db.close()
         views.setTextViewText(R.id.todays_plan,viewname.toString())
         views.setTextViewText(R.id.day_of_month,day)
         views.setTextViewText(R.id.day_of_week,doDayOfWeek()+"요일")
+        views.setTextViewText(R.id.plancount,plan_Count+"개")
         return views
 
     }
