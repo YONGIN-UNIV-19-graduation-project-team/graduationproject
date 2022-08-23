@@ -60,13 +60,15 @@
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="259dp"
+            android:layout_height="300dp"
             android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/addplan_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/button_pattern"
             android:text="+ 할 일 추가"
             android:textColor="@color/white"

@@ -51,10 +51,10 @@ class WidgetProvider :AppWidgetProvider(){
         }
         val plan_Count = Planlist.size.toString()
         db.close()
-        views.setTextViewText(R.id.todays_plan,viewname.toString())
+        views.setTextViewText(R.id.todays_plan,"-"+ viewname.toString())
         views.setTextViewText(R.id.day_of_month,day)
-        views.setTextViewText(R.id.day_of_week,doDayOfWeek()+"요일")
-        views.setTextViewText(R.id.plancount,plan_Count+"개")
+        views.setTextViewText(R.id.day_of_week,doDayOfWeek())
+        views.setTextViewText(R.id.plancount,plan_Count)
         return views
 
     }

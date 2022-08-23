@@ -9,12 +9,14 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="625dp" />
+        android:layout_height="660dp" />
 
     <Button
         android:id="@+id/addrt_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/button_pattern"
         android:text="+ 루틴 추가"
         android:textColor="@color/white"
