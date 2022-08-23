@@ -480,12 +480,13 @@ class Camera : AppCompatActivity() {
     }
 
     //Mat->bitmap
-    private fun convertMatToBitMap(input: Mat): Bitmap? {
+    private fun convertMatToBitMap(mat: Mat): Bitmap? {
         var bmp: Bitmap? = null
-        val rgb = Mat()
+        val mat2 :Mat = mat
+        Imgproc.cvtColor(mat2, mat2, Imgproc.COLOR_RGB2GRAY)
         try {
-            bmp = Bitmap.createBitmap(rgb.width(), rgb.height(), Bitmap.Config.ARGB_8888)
-            Utils.matToBitmap(rgb, bmp)
+            bmp = Bitmap.createBitmap(mat2.width(), mat2.height(), Bitmap.Config.ARGB_8888)
+            Utils.matToBitmap(mat2, bmp)
         } catch (e: CvException) {
             e.printStackTrace()
         }
@@ -551,14 +552,13 @@ class Camera : AppCompatActivity() {
 
     fun processImage(bitmap: Bitmap){
         //test.setImageBitmap(bitmap)
-        println(bitmap)
         Toast.makeText(applicationContext,"잠시 기다려 주세요",Toast.LENGTH_SHORT).show()
         var ocrResult : String? = null;
         tess.setImage(bitmap)
 
         ocrResult = tess.utF8Text
         textView8.text=ocrResult
-        //Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
 
     }
 
