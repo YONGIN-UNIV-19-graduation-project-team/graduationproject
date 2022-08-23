@@ -17,7 +17,7 @@
             android:layout_width="111dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="화요일"
+            android:text="X요일"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -43,7 +43,7 @@
             android:layout_width="154dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="16"
+            android:text="XX"
             android:textColor="@color/black"
             android:textSize="38dp" />
 
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="20"
-            android:text="0개"
+            android:text="X개"
             android:textSize="35dp" />
     </LinearLayout>
 
