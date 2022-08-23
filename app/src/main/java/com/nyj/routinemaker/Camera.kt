@@ -131,7 +131,8 @@ class Camera : AppCompatActivity() {
 
             if (bitmap != null) {
                 Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
-                processImage(bitmap)
+                imageopencv(bitmap)
+                test.setImageBitmap(bitmap)
 
                 } else
                     Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
@@ -161,7 +162,7 @@ class Camera : AppCompatActivity() {
     fun capturePicture()  : Bitmap {
         val Cbitmap = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
         PixelCopy.request(surfaceView, Cbitmap, { i ->
-            imageViewSf.setImageBitmap(Cbitmap) //"iv_Result" is the image view
+            imageViewSf.setImageBitmap(Cbitmap)
         }, Handler(Looper.getMainLooper()))
         return Cbitmap
     }
@@ -443,11 +444,13 @@ class Camera : AppCompatActivity() {
         val dst = Mat()
         Imgproc.warpPerspective(mat, dst, perspectiveTransform, Size(dw, dh))
 
+    //  Mat 비트맵으로
+        val result = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
+        convertMatToBitMap(dst)
 
-        val result = Bitmap.createBitmap(dst.width(), dst.height(), Bitmap.Config.ARGB_8888)
+        //test.setImageBitmap(result)
         if (result != null) {
             Toast.makeText(applicationContext,"opencv success",Toast.LENGTH_SHORT).show()
-            test.setImageBitmap(result)
             processImage(result)
         } else
             Toast.makeText(applicationContext,"opencv fail",Toast.LENGTH_SHORT).show()
@@ -473,6 +476,19 @@ class Camera : AppCompatActivity() {
         val heightB =  kotlin.math.sqrt((tr.x - br.x) * (tr.x - br.x) + (tr.y - br.y) * (tr.y - br.y))
         val maxHeight = kotlin.math.max(heightA, heightB)
         return Size(maxWidth, maxHeight)
+    }
+
+    //Mat->bitmap
+    private fun convertMatToBitMap(input: Mat): Bitmap? {
+        var bmp: Bitmap? = null
+        val rgb = Mat()
+        try {
+            bmp = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
+            Utils.matToBitmap(rgb, bmp)
+        } catch (e: CvException) {
+            e.printStackTrace()
+        }
+        return bmp
     }
 
 
@@ -530,6 +546,7 @@ class Camera : AppCompatActivity() {
 
 
     fun processImage(bitmap: Bitmap){
+        //test.setImageBitmap(bitmap)
         Toast.makeText(applicationContext,"잠시 기다려 주세요",Toast.LENGTH_SHORT).show()
         var ocrResult : String? = null;
         tess.setImage(bitmap)
@@ -537,7 +554,6 @@ class Camera : AppCompatActivity() {
         Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
 
     }
-
 
 
 
