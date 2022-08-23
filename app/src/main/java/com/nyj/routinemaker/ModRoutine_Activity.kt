@@ -3,6 +3,7 @@ package com.nyj.routinemaker
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -75,7 +76,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
 
 
-
+        //지워도 되는 코드
         val checkBox01 = findViewById<CheckBox>(R.id.checkBox1)
         val checkBox02 = findViewById<CheckBox>(R.id.checkBox2)
         val checkBox03 = findViewById<CheckBox>(R.id.checkBox3)
@@ -83,14 +84,37 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
         val checkBox05 = findViewById<CheckBox>(R.id.checkBox5)
         val checkBox06 = findViewById<CheckBox>(R.id.checkBox6)
         val checkBox07 = findViewById<CheckBox>(R.id.checkBox7)
+        //대신 01->1로 바꿔 놓아야함
 
-        if(get_routine.mon)checkBox01.setChecked(true)
-        if(get_routine.tue)checkBox02.setChecked(true)
-        if(get_routine.wed)checkBox03.setChecked(true)
-        if(get_routine.thu)checkBox04.setChecked(true)
-        if(get_routine.fri)checkBox05.setChecked(true)
-        if(get_routine.sat)checkBox06.setChecked(true)
-        if(get_routine.sun)checkBox07.setChecked(true)
+
+        if(get_routine.mon){
+            checkBox01.setChecked(true)
+            checkBox01.setTextColor(Color.RED)
+        }
+        if(get_routine.tue){
+            checkBox02.setChecked(true)
+            checkBox02.setTextColor(Color.RED)
+        }
+        if(get_routine.wed){
+            checkBox03.setChecked(true)
+            checkBox03.setTextColor(Color.RED)
+        }
+        if(get_routine.thu){
+            checkBox04.setChecked(true)
+            checkBox4.setTextColor(Color.RED)
+        }
+        if(get_routine.fri){
+            checkBox05.setChecked(true)
+            checkBox5.setTextColor(Color.RED)
+        }
+        if(get_routine.sat){
+            checkBox06.setChecked(true)
+            checkBox6.setTextColor(Color.RED)
+        }
+        if(get_routine.sun){
+            checkBox07.setChecked(true)
+            checkBox7.setTextColor(Color.RED)
+        }
 
 
 
@@ -162,6 +186,50 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             intent.putExtra("access_by_fragment",1)
             db.close()
             startActivity(intent)
+        }
+
+        //요일 체크박스 선택및 해제시 텍스트 컬러 변경
+        checkBox1.setOnClickListener {
+            if(checkBox1.currentTextColor == Color.RED)
+                checkBox1.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox1.setTextColor(Color.RED)
+        }
+        checkBox2.setOnClickListener {
+            if(checkBox2.currentTextColor == Color.RED)
+                checkBox2.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox2.setTextColor(Color.RED)
+        }
+        checkBox3.setOnClickListener {
+            if(checkBox3.currentTextColor == Color.RED)
+                checkBox3.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox3.setTextColor(Color.RED)
+        }
+        checkBox4.setOnClickListener {
+            if(checkBox4.currentTextColor == Color.RED)
+                checkBox4.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox4.setTextColor(Color.RED)
+        }
+        checkBox5.setOnClickListener {
+            if(checkBox5.currentTextColor == Color.RED)
+                checkBox5.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox5.setTextColor(Color.RED)
+        }
+        checkBox6.setOnClickListener {
+            if(checkBox6.currentTextColor == Color.RED)
+                checkBox6.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox6.setTextColor(Color.RED)
+        }
+        checkBox7.setOnClickListener {
+            if(checkBox7.currentTextColor == Color.RED)
+                checkBox7.setTextColor(resources.getColor(R.color.gray,resources.newTheme()))
+            else
+                checkBox7.setTextColor(Color.RED)
         }
     }
 

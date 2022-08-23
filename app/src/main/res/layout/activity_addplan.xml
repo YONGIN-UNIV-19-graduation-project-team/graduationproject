@@ -47,7 +47,7 @@
 
     </LinearLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/textview_get_time"
         android:layout_width="366dp"
         android:layout_height="51dp"
@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/textview_get_date"
         android:layout_width="366dp"
         android:layout_height="51dp"
@@ -133,6 +133,7 @@
         android:layout_marginBottom="28dp"
         android:background="@drawable/button_pattern"
         android:text="추가하기"
+        android:textSize="20sp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
