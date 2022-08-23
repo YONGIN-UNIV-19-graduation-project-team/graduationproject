@@ -33,4 +33,11 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="700dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </FrameLayout>
