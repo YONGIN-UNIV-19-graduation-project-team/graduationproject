@@ -120,9 +120,10 @@ class Camera : AppCompatActivity() {
         var lang: String = "kor"
 
         dataPath = "$filesDir/tesseract/" //언어데이터의 경로 미리 지정
-        checkFile(File(dataPath), "kor")//사용할 언어파일의 이름 지정
+
+        checkFile(File(dataPath+"tessdata/"), "kor")//사용할 언어파일의 이름 지정
         tess = TessBaseAPI() //api준비
-        //tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
+        tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
 
 
 
@@ -497,13 +498,13 @@ class Camera : AppCompatActivity() {
     fun copyFile(lang : String){
         try{
             //언어 데이터 파일 위치
-            var filePath : String = dataPath+lang+".traineddata"
+            var filePath : String = dataPath+"/tessdata/"+lang+".traineddata"
 
             //AssestManager
             var assetManager : AssetManager = getAssets();
 
             //byte 스트림을 읽기 쓰기용으로 열기
-            var inputStream : InputStream = assetManager.open(lang+".traineddata")
+            var inputStream : InputStream = assetManager.open("tessdata/"+lang+".traineddata")
             var outStream : OutputStream = FileOutputStream(filePath)
 
 
@@ -525,6 +526,7 @@ class Camera : AppCompatActivity() {
         }catch (e : IOException){
             Log.v("error",e.toString())
         }
+        println("copyFile 수행 완료")
     }
 
     fun checkFile(dir : File, lang : String){
@@ -535,12 +537,13 @@ class Camera : AppCompatActivity() {
         }
 
         if(dir.exists()){
-            var datafilePath : String = dataPath+lang+".traineddata"
+            var datafilePath : String = dataPath+"/tessdata/"+lang+".traineddata"
             var dataFile : File = File(datafilePath)
             if(!dataFile.exists()){
                 copyFile(lang)
             }
         }
+        println("checkfile 수행 완료. dataPath : "+dataPath)
 
     }
 
