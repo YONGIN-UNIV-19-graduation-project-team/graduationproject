@@ -2,9 +2,11 @@ package com.nyj.routinemaker
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageFormat
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -117,18 +119,20 @@ class Camera : AppCompatActivity() {
 
         var lang: String = "kor"
 
-        dataPath = filesDir.toString() + "/tesseract/" //언어데이터의 경로 미리 지정
-        checkFile(File(dataPath + "tessdata/"), "kor")//사용할 언어파일의 이름 지정
+        dataPath = "$filesDir/tesseract/" //언어데이터의 경로 미리 지정
+        checkFile(File(dataPath), "kor")//사용할 언어파일의 이름 지정
         tess = TessBaseAPI() //api준비
-        tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
+        //tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
 
 
 
         button_check.setOnClickListener() {
             val bitmap  = capturePicture()
+
             if (bitmap != null) {
                 Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
-                imageopencv(bitmap)
+                processImage(bitmap)
+
                 } else
                     Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
 
@@ -441,9 +445,10 @@ class Camera : AppCompatActivity() {
 
 
         val result = Bitmap.createBitmap(dst.width(), dst.height(), Bitmap.Config.ARGB_8888)
-        if (bitmap != null) {
+        if (result != null) {
             Toast.makeText(applicationContext,"opencv success",Toast.LENGTH_SHORT).show()
-            processImage(bitmap)
+            test.setImageBitmap(result)
+            processImage(result)
         } else
             Toast.makeText(applicationContext,"opencv fail",Toast.LENGTH_SHORT).show()
 
@@ -476,13 +481,13 @@ class Camera : AppCompatActivity() {
     fun copyFile(lang : String){
         try{
             //언어 데이터 파일 위치
-            var filePath : String = dataPath+"/tessdata/"+lang+".traineddata"
+            var filePath : String = dataPath+lang+".traineddata"
 
             //AssestManager
             var assetManager : AssetManager = getAssets();
 
             //byte 스트림을 읽기 쓰기용으로 열기
-            var inputStream : InputStream = assetManager.open("tessdata/"+lang+".traineddata")
+            var inputStream : InputStream = assetManager.open(lang+".traineddata")
             var outStream : OutputStream = FileOutputStream(filePath)
 
 
@@ -514,7 +519,7 @@ class Camera : AppCompatActivity() {
         }
 
         if(dir.exists()){
-            var datafilePath : String = dataPath+"/tessdata/"+lang+".traineddata"
+            var datafilePath : String = dataPath+lang+".traineddata"
             var dataFile : File = File(datafilePath)
             if(!dataFile.exists()){
                 copyFile(lang)
