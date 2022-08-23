@@ -93,40 +93,40 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                 checkBox1.setTextColor(Color.RED)
         }
         checkBox2.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-                checkBox1.setTextColor(Color.GRAY)
+            if(checkBox2.currentTextColor == Color.RED)
+                checkBox2.setTextColor(Color.GRAY)
             else
-                checkBox1.setTextColor(Color.RED)
+                checkBox2.setTextColor(Color.RED)
         }
         checkBox3.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-                checkBox1.setTextColor(Color.GRAY)
+            if(checkBox3.currentTextColor == Color.RED)
+                checkBox3.setTextColor(Color.GRAY)
             else
-                checkBox1.setTextColor(Color.RED)
+                checkBox3.setTextColor(Color.RED)
         }
         checkBox4.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-            checkBox1.setTextColor(Color.GRAY)
+            if(checkBox4.currentTextColor == Color.RED)
+            checkBox4.setTextColor(Color.GRAY)
         else
-            checkBox1.setTextColor(Color.RED)
+            checkBox4.setTextColor(Color.RED)
         }
         checkBox5.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-                checkBox1.setTextColor(Color.GRAY)
+            if(checkBox5.currentTextColor == Color.RED)
+                checkBox5.setTextColor(Color.GRAY)
             else
-                checkBox1.setTextColor(Color.RED)
+                checkBox5.setTextColor(Color.RED)
         }
         checkBox6.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-                checkBox1.setTextColor(Color.GRAY)
+            if(checkBox6.currentTextColor == Color.RED)
+                checkBox6.setTextColor(Color.GRAY)
             else
-                checkBox1.setTextColor(Color.RED)
+                checkBox6.setTextColor(Color.RED)
         }
         checkBox7.setOnClickListener {
-            if(checkBox1.currentTextColor == Color.RED)
-                checkBox1.setTextColor(Color.GRAY)
+            if(checkBox7.currentTextColor == Color.RED)
+                checkBox7.setTextColor(Color.GRAY)
             else
-                checkBox1.setTextColor(Color.RED)
+                checkBox7.setTextColor(Color.RED)
         }
 
     }

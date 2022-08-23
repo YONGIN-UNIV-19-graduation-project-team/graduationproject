@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\82107\Desktop\icon.png" />
-                                                <entry key="scalingPercent" value="97" />
+                                                <entry key="imagePath" value="C:\Users\82107\Desktop\logo_icon.png" />
+                                                <entry key="scalingPercent" value="106" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -114,7 +114,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="a3bded" />
+                                      <entry key="backgroundColor" value="ff2f2f" />
                                       <entry key="outputName" value="icon" />
                                     </map>
                                   </option>
