@@ -57,13 +57,15 @@ class Dday_Activity : AppCompatActivity() {
         add_dday_button.setOnClickListener{
             name = d_day_name.text.toString()
             val intent = Intent(this,MainActivity::class.java)
-            val pref = this.getPreferences(0)
+            val pref = this.getSharedPreferences("a",0)
             val editor = pref.edit()
+
+            editor.clear()
             editor.putString("key_year",plan_Year)
-                .putString("key_month",plan_Month)
-                .putString("key_day",plan_Day)
-                .putString("key_name",name)
-                .apply()
+            editor.putString("key_month",plan_Month)
+            editor.putString("key_day",plan_Day)
+            editor.putString("key_name",name)
+            editor.apply()
             startActivity(intent)
         }
 
