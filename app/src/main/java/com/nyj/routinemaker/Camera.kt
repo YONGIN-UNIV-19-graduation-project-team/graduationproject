@@ -14,7 +14,9 @@ import android.os.*
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.SparseIntArray
-import android.view.*
+import android.view.PixelCopy
+import android.view.SurfaceHolder
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -78,6 +80,7 @@ class Camera : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera)
         //System.currentTimeMillis()
         //val nowTime = "${System.currentTimeMillis()}"
         //val getTime = intent.getStringExtra("time").toString().toInt()
@@ -111,15 +114,14 @@ class Camera : AppCompatActivity() {
         )
 
         /////////tesseract/////////
-        dataPath = filesDir.toString() + "/tesseract/" //언어데이터의 경로 미리 지정
-
-        checkFile(File(dataPath + "tessdata/"), "kor") //사용할 언어파일의 이름 지정
 
         var lang: String = "kor"
-        tess = TessBaseAPI() //api준비
-        //tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
 
-        setContentView(R.layout.activity_camera)
+        dataPath = filesDir.toString() + "/tesseract/" //언어데이터의 경로 미리 지정
+        checkFile(File(dataPath + "tessdata/"), "kor")//사용할 언어파일의 이름 지정
+        tess = TessBaseAPI() //api준비
+        tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
+
 
 
         button_check.setOnClickListener() {
@@ -150,7 +152,6 @@ class Camera : AppCompatActivity() {
 
 
 
-    //8.23
     //surfaceview capture
     @RequiresApi(Build.VERSION_CODES.N)
     fun capturePicture()  : Bitmap {
