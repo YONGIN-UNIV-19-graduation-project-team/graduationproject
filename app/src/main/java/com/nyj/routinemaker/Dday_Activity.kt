@@ -16,16 +16,24 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Dday_Activity : AppCompatActivity() {
-    val formatDate = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+    val formatDate = SimpleDateFormat("yyyy년 M월 dd일", Locale.KOREA)
     var plan_Year=""
     var plan_Month=""
     var plan_Day=""
-    var name = ""
+
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dday)
+        val pref = this.getSharedPreferences("a",0)
+        var name = pref.getString("key_name","null").toString()
+        d_day_name.setText(name)
+        var year = pref.getString("key_year","null").toString()
+        var month = pref.getString("key_month","null").toString()
+        var day = pref.getString("key_day","null").toString()
 
+
+        if(year!="null"&&month!="null"&&day!="null") {textview_get_date.text = year+"년 "+month+"월 "+day+"일"}
 
         textview_get_date.setOnClickListener(View.OnClickListener {
             val getDate = Calendar.getInstance()
@@ -57,7 +65,6 @@ class Dday_Activity : AppCompatActivity() {
         add_dday_button.setOnClickListener{
             name = d_day_name.text.toString()
             val intent = Intent(this,MainActivity::class.java)
-            val pref = this.getSharedPreferences("a",0)
             val editor = pref.edit()
 
             editor.clear()
@@ -69,6 +76,9 @@ class Dday_Activity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        can_button.setOnClickListener{
+            val intent_can = Intent(this,MainActivity::class.java)
+            startActivity(intent_can)
+        }
     }
 }

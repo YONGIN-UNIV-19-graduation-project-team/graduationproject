@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_dday.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.ceil
 
 
 class MainActivity : AppCompatActivity() {
@@ -63,13 +64,14 @@ class MainActivity : AppCompatActivity() {
         println("@@@@@@@"+setTime_milli.toString())
         val nowtime_milli = System.currentTimeMillis()
         println("@@@@@@@"+nowtime_milli.toString())
-        val dday = (setTime_milli-nowtime_milli)
+        val dday = (setTime_milli.toDouble()-nowtime_milli.toDouble())
         println(dday)
         println((dday/86400000).toString())
+        var d_day_result = ceil(dday/86400000).toInt()
 
 
         dday_name.text = name
-        d_day.text = "D-"+dday/86400000
+        d_day.text = "D-"+d_day_result
 
 
 
