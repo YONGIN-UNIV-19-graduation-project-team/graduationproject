@@ -65,12 +65,12 @@
         android:layout_height="51dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="116dp"
-        android:background="@null"
         android:ems="10"
         android:hint="D-day 제목을 입력해주세요"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textSize="15dp"
+        android:backgroundTint = "#FF000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
