@@ -19,9 +19,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30"
-            android:gravity="center"
+            android:gravity="center|start"
             android:text="이달의 진행도"
-            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -199,12 +198,12 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="33"
         android:orientation="horizontal">
 
         <Space
@@ -236,7 +235,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="3"
         android:orientation="horizontal"
         android:weightSum="100">
 
@@ -280,7 +279,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="3"
         android:orientation="horizontal"
         android:weightSum="100">
 
