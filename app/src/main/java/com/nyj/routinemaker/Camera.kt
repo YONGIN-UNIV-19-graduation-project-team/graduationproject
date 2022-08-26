@@ -2,7 +2,6 @@ package com.nyj.routinemaker
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.graphics.Bitmap
@@ -11,6 +10,7 @@ import android.graphics.ImageFormat
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.hardware.camera2.*
+import android.media.Image
 import android.media.ImageReader
 import android.os.*
 import android.util.DisplayMetrics
@@ -33,6 +33,8 @@ import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
 import splitties.toast.toast
 import java.io.*
+import java.nio.ByteBuffer
+
 
 
 class Camera : AppCompatActivity() {
@@ -121,55 +123,52 @@ class Camera : AppCompatActivity() {
 
         dataPath = "$filesDir/tesseract/" //언어데이터의 경로 미리 지정
 
-        checkFile(File(dataPath+"tessdata/"), "kor")//사용할 언어파일의 이름 지정
+        checkFile(File(dataPath + "tessdata/"), "kor")//사용할 언어파일의 이름 지정
         tess = TessBaseAPI() //api준비
         println("@@@@@@@@@@@@datapath : " + dataPath)
-        tess.init(dataPath,lang) //해당 사용할 언어데이터로 초기화
-
+        tess.init(dataPath, lang) //해당 사용할 언어데이터로 초기화
 
 
         button_check.setOnClickListener() {
-            val bitmap  = capturePicture()
 
-            if (bitmap != null) {
-                Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
-                imageopencv(bitmap)
+            processImage(BitmapFactory.decodeResource(resources, R.drawable.test3))
 
+//            val bitmap  = capturePicture()
+//
+//            if (bitmap != null) {
+//                Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
+//                processImage(bitmap)
+//
+//                } else
+//                    Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
+//
 
-                } else
-                    Toast.makeText(applicationContext,"capture fail",Toast.LENGTH_SHORT).show()
-
-
-//            val getID = intent.getStringExtra("id")!!.toLong()
-//            val db = Room.databaseBuilder(
-//                this,AppDatabase::class.java,"routine_databases"
-//            ).allowMainThreadQueries().build()
-//            val Routine = db.routine_DAO().getRoutinebyId(getID)
-//            Routine.routineischecked=true
-//            db.routine_DAO().update(Routine)
-//            db.close()
-//            val intent = Intent(this,MainActivity::class.java)
-//            startActivity(intent)
+////            val getID = intent.getStringExtra("id")!!.toLong()
+////            val db = Room.databaseBuilder(
+////                this,AppDatabase::class.java,"routine_databases"
+////            ).allowMainThreadQueries().build()
+////            val Routine = db.routine_DAO().getRoutinebyId(getID)
+////            Routine.routineischecked=true
+////            db.routine_DAO().update(Routine)
+////            db.close()
+////            val intent = Intent(this,MainActivity::class.java)
+////            startActivity(intent)
         }
         initSensor()
         initView()
     }
 
 
-
-
-
     //surfaceview capture
     @RequiresApi(Build.VERSION_CODES.N)
-    fun capturePicture()  : Bitmap {
-        val Cbitmap = Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
+    fun capturePicture(): Bitmap {
+        val Cbitmap =
+            Bitmap.createBitmap(surfaceView.width, surfaceView.height, Bitmap.Config.ARGB_8888)
         PixelCopy.request(surfaceView, Cbitmap, { i ->
             imageViewSf.setImageBitmap(Cbitmap)
         }, Handler(Looper.getMainLooper()))
         return Cbitmap
     }
-
-
 
 
     private fun initSensor() {
@@ -179,7 +178,7 @@ class Camera : AppCompatActivity() {
     }
 
     private fun initView() {
-        with(DisplayMetrics()){
+        with(DisplayMetrics()) {
             windowManager.defaultDisplay.getMetrics(this)
             mHeight = heightPixels
             mWidth = widthPixels
@@ -207,7 +206,7 @@ class Camera : AppCompatActivity() {
     }
 
     private fun switchCamera() {
-        when(mCameraId){
+        when (mCameraId) {
             CAMERA_BACK -> {
                 mCameraId = CAMERA_FRONT
                 mCameraDevice.close()
@@ -226,7 +225,6 @@ class Camera : AppCompatActivity() {
         val handlerThread = HandlerThread("CAMERA2")
         handlerThread.start()
         mHandler = Handler(handlerThread.looper)
-
         openCamera()
     }
 
@@ -250,6 +248,9 @@ class Camera : AppCompatActivity() {
             ) return
 
             mCameraManager.openCamera(mCameraId, deviceStateCallback, mHandler)
+
+
+
         } catch (e: CameraAccessException) {
             toast("카메라를 열지 못했습니다.")
         }
@@ -281,7 +282,9 @@ class Camera : AppCompatActivity() {
         mPreviewBuilder.addTarget(mSurfaceViewHolder.surface)
 
         mCameraDevice.createCaptureSession(
-            listOf(mSurfaceViewHolder.surface, mImageReader.surface), mSessionPreviewStateCallback, mHandler
+            listOf(mSurfaceViewHolder.surface, mImageReader.surface),
+            mSessionPreviewStateCallback,
+            mHandler
         )
     }
 
@@ -300,7 +303,11 @@ class Camera : AppCompatActivity() {
                     CaptureRequest.CONTROL_AE_MODE,
                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH
                 )
-                mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mHandler)
+                mSession.setRepeatingRequest(mPreviewBuilder.build(),null, mHandler)
+
+                //mImageReader.setOnImageAvailableListener(onImageAvailableListener , mHandler)
+
+
             } catch (e: CameraAccessException) {
                 e.printStackTrace()
             }
@@ -313,6 +320,59 @@ class Camera : AppCompatActivity() {
     }
 
 
+    private val mSessionCaptureCallback = object : CameraCaptureSession.CaptureCallback() {
+        override fun onCaptureProgressed(
+            session: CameraCaptureSession,
+            request: CaptureRequest,
+            partialResult: CaptureResult
+        ) {
+
+
+        }
+
+        override fun onCaptureCompleted(
+            session: CameraCaptureSession,
+            request: CaptureRequest,
+            result: TotalCaptureResult
+        ) {
+        }
+    }
+
+
+
+    val onImageAvailableListener = object : ImageReader.OnImageAvailableListener {
+        override fun onImageAvailable(reader: ImageReader?) {
+
+            val image : Image
+
+            try{image = mImageReader.acquireLatestImage()
+                if(image != null){
+                    val planes = image.planes
+                    val buffer: ByteBuffer = planes[0].buffer
+                    val pixelStride = planes[0].pixelStride
+                    val rowStride = planes[0].rowStride
+                    val rowPadding = rowStride - pixelStride * mWidth
+
+                    val bitmap = Bitmap.createBitmap(mWidth + rowPadding / pixelStride, mHeight, Bitmap.Config.ARGB_8888)
+                    imageopencv(bitmap)
+                    test.setImageBitmap(bitmap)
+
+
+                }
+            }catch (e : Exception){
+                e.printStackTrace()
+            }
+        }
+
+
+
+    }
+
+
+
+
+
+
     override fun onResume() {
         super.onResume()
 
@@ -322,6 +382,7 @@ class Camera : AppCompatActivity() {
         mSensorManager.registerListener(
             deviceOrientation.eventListener, mMagnetometer, SensorManager.SENSOR_DELAY_UI
         )
+
     }
 
     override fun onPause() {
@@ -439,15 +500,15 @@ class Camera : AppCompatActivity() {
             Point(dw, dh),
             Point(dw, 0.0)
         )
-    // 투시변환 매트릭스 구하기
+        // 투시변환 매트릭스 구하기
         val perspectiveTransform = Imgproc.getPerspectiveTransform(srcQuad, dstQuad)
 
-    // 투시변환 된 결과 영상 얻기
+        // 투시변환 된 결과 영상 얻기
         val dst = Mat()
         Imgproc.warpPerspective(mat, dst, perspectiveTransform, Size(dw, dh))
 
-    //  Mat 비트맵으로
-       val result :Bitmap? = convertMatToBitMap(dst)
+        //  Mat 비트맵으로
+        val result :Bitmap? = convertMatToBitMap(dst)
 
         //test.setImageBitmap(result)
         if (result != null) {
@@ -469,15 +530,18 @@ class Camera : AppCompatActivity() {
         bl:Point,
     ): Size {
         // Calculate width
-        val widthA = kotlin.math.sqrt((tl.x - tr.x) * (tl.x - tr.x) + (tl.y - tr.y) * (tl.y -tr.y))
+        val widthA = kotlin.math.sqrt((tl.x - tr.x) * (tl.x - tr.x) + (tl.y - tr.y) * (tl.y - tr.y))
         val widthB = kotlin.math.sqrt((bl.x - br.x) * (bl.x - br.x) + (bl.y - br.y) * (bl.y - br.y))
         val maxWidth = kotlin.math.max(widthA, widthB)
         // Calculate height
-        val heightA =  kotlin.math.sqrt((tl.x - bl.x) * (tl.x - bl.x) + (tl.y - bl.y) * (tl.y - bl.y))
-        val heightB =  kotlin.math.sqrt((tr.x - br.x) * (tr.x - br.x) + (tr.y - br.y) * (tr.y - br.y))
+        val heightA =
+            kotlin.math.sqrt((tl.x - bl.x) * (tl.x - bl.x) + (tl.y - bl.y) * (tl.y - bl.y))
+        val heightB =
+            kotlin.math.sqrt((tr.x - br.x) * (tr.x - br.x) + (tr.y - br.y) * (tr.y - br.y))
         val maxHeight = kotlin.math.max(heightA, heightB)
         return Size(maxWidth, maxHeight)
     }
+
 
     //Mat->bitmap
     private fun convertMatToBitMap(mat: Mat): Bitmap? {
@@ -490,7 +554,7 @@ class Camera : AppCompatActivity() {
         } catch (e: CvException) {
             e.printStackTrace()
         }
-        test.setImageBitmap(bmp)
+        //test.setImageBitmap(bmp)
         return bmp
     }
 
@@ -565,4 +629,8 @@ class Camera : AppCompatActivity() {
 
 
 }
+
+
+
+
 
