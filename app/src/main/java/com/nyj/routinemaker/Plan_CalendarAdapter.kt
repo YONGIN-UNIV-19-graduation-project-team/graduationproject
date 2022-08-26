@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -19,10 +20,17 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
                             private val onItemListener: OnItemListener):
     RecyclerView.Adapter<Plan_CalendarAdapter.ItemViewHolder>() {
 
+    var PlanList = arrayListOf<Plan>(
+        Plan(
+            0L, "더미", "2022", "11",
+            "12", "0", "0", ""
+        )
+    )
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     val dayText2: TextView = itemView.findViewById(R.id.dayText2)
+
 }
 
     lateinit var pref_plan: SharedPreferences
@@ -36,6 +44,12 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
 
         pref_plan = parent.context.getSharedPreferences("plan", 0)
 
+        val db = Room.databaseBuilder(
+            parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
+        PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
+
+        db.close()
         return ItemViewHolder(view)
     }
 
@@ -60,6 +74,19 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
                 holder.dayText2.setTextColor(Color.BLACK)
             }
         }
+
+        ////////////////람다식으로 해당날짜 비교....
+        PlanList.forEach { planlist->
+            if(day_position?.year==planlist.year.toInt()&&day_position?.monthValue==planlist.month.toInt()&&day_position?.dayOfMonth==planlist.day.toInt()){
+                //색 구현
+
+
+            }
+        }
+
+
+
+
 
 
         //날짜 클릭 이벤트
