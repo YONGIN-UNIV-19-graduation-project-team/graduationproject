@@ -7,11 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_addplan.*
 import kotlinx.android.synthetic.main.activity_dday.*
 import kotlinx.android.synthetic.main.activity_dday.textview_get_date
-import kotlinx.android.synthetic.main.activity_main.*
-import splitties.resources.int
 import java.text.SimpleDateFormat
 import java.util.*
 
