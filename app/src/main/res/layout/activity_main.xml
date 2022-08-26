@@ -87,9 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="50"
-                    android:gravity="bottom"
+                    android:gravity="bottom|end"
                     android:text="디데이를 설정하세요"
-                    android:textAlignment="textEnd"
                     android:textColor="@color/red" />
 
                 <TextView
