@@ -30,7 +30,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     val dayText2: TextView = itemView.findViewById(R.id.dayText2)
-
+    val dot:ImageView = itemView.findViewById(R.id.dot)
 }
 
     lateinit var pref_plan: SharedPreferences
@@ -68,7 +68,6 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
         } else {
             //해당 일자를 넣는다
             holder.dayText2.setText(day_position?.dayOfMonth.toString())
-            println(day_position.dayOfMonth)
             //현재 날짜 색상 칠하기
             if ((day_position == CalendarUtil.selectDate) && (now_month == day_position?.monthValue.toString())) {
                 holder.dayText2.setTextColor(Color.BLACK)
@@ -78,7 +77,8 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
         ////////////////람다식으로 해당날짜 비교....
         PlanList.forEach { planlist->
             if(day_position?.year==planlist.year.toInt()&&day_position?.monthValue==planlist.month.toInt()&&day_position?.dayOfMonth==planlist.day.toInt()){
-                //색 구현
+                //도트 구현
+                holder.dot.setVisibility(View.VISIBLE)
 
 
             }
