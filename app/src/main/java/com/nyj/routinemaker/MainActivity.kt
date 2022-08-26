@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
-    var year = ""
-    var month = ""
-    var day = ""
-    var name = ""
+    var year = "2022"
+    var month = "8"
+    var day = "10"
+    var name = "error"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +59,10 @@ class MainActivity : AppCompatActivity() {
         }
         loadData()
         val settime :Calendar= Calendar.getInstance()
-        settime.set(year.toInt(),month.toInt()-1,day.toInt())
+        val int_year = year?.toInt()
+        val int_month = (month?.toInt())-1
+        val int_day = day?.toInt()
+        settime.set(int_year,int_month,int_day)
         val setTime_milli = settime.timeInMillis
         println("@@@@@@@"+setTime_milli.toString())
         val nowtime_milli = System.currentTimeMillis()
