@@ -59,10 +59,13 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
         //날짜 변수에 담기
+        holder.dayText2.setTextColor(Color.GRAY)
 
         var day_position = dayList[holder.adapterPosition]
 
         var now_month = LocalDate.now().monthValue.toString()
+
+
         if (day_position == null) {
             holder.dayText2.text = ""
         } else {
@@ -92,6 +95,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
         //날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
 
+            holder.dayText2.setTextColor(Color.RED)
             onItemListener.onItemClick(day_position)
             //인터페이스를 통해 날짜를 넘겨준다.
             var iYear = day_position?.year
@@ -111,7 +115,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
 
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
-
+            //holder.itemView.setBackgroundResource(R.drawable.challenge_background4)
 
         }
 
