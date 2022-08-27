@@ -2,7 +2,6 @@ package com.nyj.routinemaker
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.AssetManager
 import android.graphics.Bitmap
@@ -33,6 +32,7 @@ import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
 import splitties.toast.toast
 import java.io.*
+
 
 
 class Camera : AppCompatActivity() {
@@ -129,11 +129,16 @@ class Camera : AppCompatActivity() {
 
 
         button_check.setOnClickListener() {
+
+            //processImage(BitmapFactory.decodeResource(resources,R.drawable.gkdl))
+
+
+
             val bitmap  = capturePicture()
 
             if (bitmap != null) {
                 Toast.makeText(applicationContext,"capture success",Toast.LENGTH_SHORT).show()
-                imageopencv(bitmap)
+                processImage(bitmap)
 
 
                 } else
@@ -206,6 +211,8 @@ class Camera : AppCompatActivity() {
         btn_convert.setOnClickListener { switchCamera() }
     }
 
+
+    //카메라 전환
     private fun switchCamera() {
         when(mCameraId){
             CAMERA_BACK -> {
@@ -371,6 +378,7 @@ class Camera : AppCompatActivity() {
             binaryImg, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE
         )
 
+
         // 가장 면적이 큰 윤곽선 찾기
         var biggestContour: MatOfPoint? = null
         var biggestContourArea: Double = 0.0
@@ -446,8 +454,8 @@ class Camera : AppCompatActivity() {
         val dst = Mat()
         Imgproc.warpPerspective(mat, dst, perspectiveTransform, Size(dw, dh))
 
-    //  Mat 비트맵으로
-       val result :Bitmap? = convertMatToBitMap(dst)
+     // Mat 비트맵으로
+       val result = convertMatToBitMap(dst) as Bitmap
 
         //test.setImageBitmap(result)
         if (result != null) {
@@ -461,7 +469,6 @@ class Camera : AppCompatActivity() {
 
 
     // 사각형 꼭짓점 정보로 사각형 최대 사이즈 구하기
-    // 평면상 두 점 사이의 거리는 직각삼각형의 빗변길이 구하기와 동일
     private fun calculateMaxWidthHeight(
         tl:Point,
         tr:Point,
@@ -556,7 +563,9 @@ class Camera : AppCompatActivity() {
         var ocrResult : String? = null;
         tess.setImage(bitmap)
 
-        ocrResult = tess.utF8Text
+        ocrResult = tess.utF8Text.toString()
+        println(ocrResult)
+
         textView8.text=ocrResult
         Toast.makeText(applicationContext,"결과 : " + ocrResult,Toast.LENGTH_SHORT).show()
 
