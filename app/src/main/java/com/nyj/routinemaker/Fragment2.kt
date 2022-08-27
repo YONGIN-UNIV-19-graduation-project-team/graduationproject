@@ -133,6 +133,7 @@ class Fragment2 : Fragment(),OnItemListener {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onItemClick(dayText:LocalDate?){
+
         clicked_year = dayText?.year.toString()
         clicked_month = dayText?.monthValue.toString()
         clicked_dayofMonth = dayText?.dayOfMonth.toString()
