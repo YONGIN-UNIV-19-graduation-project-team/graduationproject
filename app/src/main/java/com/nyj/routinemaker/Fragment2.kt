@@ -2,6 +2,7 @@ package com.nyj.routinemaker
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
+var click_ = false
 class Fragment2 : Fragment(),OnItemListener {
     private lateinit var binding: Fragment2Binding
     var PlanList = arrayListOf<Plan>(
@@ -115,7 +117,7 @@ class Fragment2 : Fragment(),OnItemListener {
 
 
         addplan_button.setOnClickListener {
-            loadData()
+            //loadData()
             val intent = Intent(activity, AddPlan_Activity::class.java)
             intent.apply {
                 intent.putExtra("year", clicked_year.toString())//toString으로 형변환 해야 null값이 아닌채로 데이터 전송.0730
@@ -171,10 +173,22 @@ class Fragment2 : Fragment(),OnItemListener {
 
             }
         db.close()
+//        println(click_)
+//        if(click_){
+//            setMonthview()
+//            val editor_plan = pref_plan.edit()
+//            click_=false
+//            editor_plan.putBoolean("click?",click_)
+//            editor_plan.apply()
+//        }
+//        loadData()
+
+
+
 
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setMonthview() {
+    fun setMonthview() {
         //년월 텍스트뷰 셋팅
         monthYearText_pl.text = monthYearFromDate(CalendarUtil.selectDate)
 
@@ -243,10 +257,13 @@ class Fragment2 : Fragment(),OnItemListener {
         }
         return dayList
     }
+
+
     private fun loadData(){
-        clicked_year = pref_plan.getString("key_year",clicked_year).toString()
-        clicked_month = pref_plan.getString("key_month",clicked_month).toString()
-        clicked_dayofMonth = pref_plan.getString("key_day",clicked_dayofMonth).toString()
+//        clicked_year = pref_plan.getString("key_year",clicked_year).toString()
+//        clicked_month = pref_plan.getString("key_month",clicked_month).toString()
+//        clicked_dayofMonth = pref_plan.getString("key_day",clicked_dayofMonth).toString()
+//        click_ = pref_plan.getBoolean("click?",false)
 
     }
 }
