@@ -169,19 +169,12 @@ class Fragment2 : Fragment(),OnItemListener {
 
                 val intent = Intent(activity, ModPlan_Activity::class.java)
                 intent.apply {
-                    intent.putExtra(
-                        "planid",
-                        selectItem.id
-                    )
-
-
+                    intent.putExtra("planid", selectItem.id)
                     startActivity(intent)
-
                 }
-
             }
+        //db닫기
         db.close()
-
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun setMonthview() {
