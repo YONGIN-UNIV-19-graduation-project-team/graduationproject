@@ -23,7 +23,6 @@ class AlarmReceiver : BroadcastReceiver() {
     var getTitle=""
     var getTime=""
     var getRequestCode=""
-    var setResetTime = ""
     lateinit var notificationManager: NotificationManager
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onReceive(context: Context, intent: Intent) {
@@ -93,7 +92,6 @@ class AlarmReceiver : BroadcastReceiver() {
             .setDefaults(NotificationCompat.DEFAULT_ALL)//소리나 진동 설정 or 키워드로 둘다 설정 가능
             .build()
         notificationManager?.notify(getRequestCode.toInt(),builder)
-        //notificationManager?.cancel(getRequestCode.toInt())
     }
 
     private fun doDayOfWeek(): String? {//오늘의 요일 구하기

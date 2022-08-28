@@ -49,8 +49,6 @@ class AddPlan_Activity : AppCompatActivity() {
         var month = (intent.getStringExtra("month")).toString()
         var day = intent.getStringExtra("day").toString()
 
-        // ex)8월 달력 클릭시 7월로 데이터가 이전되어서 형변환후 1추가시킨후 다시형변환했음
-
         plan_Year=year
         plan_Month=month
         plan_Day=day

@@ -173,9 +173,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("requestCode",requestCode.toString())
             intent.putExtra("weekList",weekList)
 
-            //val repeatInterval = AlarmManager.INTERVAL_DAY//반복시간설정
 
-            //println("캘린더ㅡ를 이용한 밀리초"+convertTime)
             if(System.currentTimeMillis()>convertTime){
                 convertTime+=interval
             }
@@ -187,7 +185,6 @@ class MainActivity : AppCompatActivity() {
             )
             println("pendingintent 전송 완료")
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,convertTime,pendingIntent)
-            //alarmManager.setRepeating(AlarmManager.RTC,convertTime,repeatInterval,pendingIntent)
         }
     }
 
