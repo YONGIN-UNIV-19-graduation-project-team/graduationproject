@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -12,23 +13,29 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_dday.*
 import kotlinx.android.synthetic.main.activity_dday.textview_get_date
+import splitties.toast.toast
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class Dday_Activity : AppCompatActivity() {
     //출력하기위한 포맷
     val formatDate = SimpleDateFormat("yyyy년 M월 dd일", Locale.KOREA)
-    //년,월,일 변수 초기화
-    var plan_Year=""
-    var plan_Month=""
-    var plan_Day=""
+
+    lateinit var plan_Year : String
+    lateinit var plan_Month : String
+    lateinit var plan_Day : String
+
+    var dateisselected=false
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dday)
+
 
         //getSharedPreferences란 웹개발의 session같은 존재.
         val pref = this.getSharedPreferences("a",0)
@@ -47,6 +54,7 @@ class Dday_Activity : AppCompatActivity() {
 
         //날짜를 설정하라는 텍스트뷰를 클릭했을 때 생성되는 DatePicker 다이얼로그
         textview_get_date.setOnClickListener(View.OnClickListener {
+            dateisselected=true
             val getDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
@@ -75,22 +83,27 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 설정하는 버튼
         add_dday_button.setOnClickListener{
-            //디데이의 이름을 가져와 변수에 저장.
-            name = d_day_name.text.toString()
-            val intent = Intent(this,MainActivity::class.java)
+            //날짜를 선택했다면
+            if(dateisselected) {
+                //디데이의 이름을 가져와 변수에 저장.
+                name = d_day_name.text.toString()
+                val intent = Intent(this, MainActivity::class.java)
 
-            //getSharedPreference에 년,월,일, 이름 값 저장
-            val editor = pref.edit()
+                //getSharedPreference에 년,월,일, 이름 값 저장
+                val editor = pref.edit()
 
-            //getSharedPreference의 값을 전부 초기화
-            editor.clear()
-            //후 저장
-            editor.putString("key_year",plan_Year)
-            editor.putString("key_month",plan_Month)
-            editor.putString("key_day",plan_Day)
-            editor.putString("key_name",name)
-            editor.apply()
-            startActivity(intent)
+                //getSharedPreference의 값을 전부 초기화
+                editor.clear()
+                //후 저장
+                editor.putString("key_year", plan_Year)
+                editor.putString("key_month", plan_Month)
+                editor.putString("key_day", plan_Day)
+                editor.putString("key_name", name)
+                editor.apply()
+                startActivity(intent)
+            }//날짜를 선택하지 않았으면 토스트메시지처리
+            else Toast.makeText(this, "날짜를 선택하세요!", Toast.LENGTH_SHORT ).show()
+            dateisselected=false
         }
 
         //취소 버튼

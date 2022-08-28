@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         Routine(0L,"더미","3","10",
             true,true,true,true,true,true,true,false)
     )
+
     var year = "2022"
     var month = "8"
     var day = "10"
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity() {
         }
         loadData()
         val settime :Calendar= Calendar.getInstance()
-        val int_year = year?.toInt()
-        val int_month = (month?.toInt())-1
-        val int_day = day?.toInt()
+        val int_year = year.toInt()
+        val int_month = (month.toInt())-1
+        val int_day = day.toInt()
         settime.set(int_year,int_month,int_day)
         val setTime_milli = settime.timeInMillis
         println("@@@@@@@"+setTime_milli.toString())
