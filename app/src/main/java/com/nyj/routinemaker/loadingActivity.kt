@@ -21,15 +21,12 @@ class loadingActivity : AppCompatActivity() {
         setPermission()
 
     }
-
+    //카메라 권한허용 설정
     fun setPermission() {
         val permission = object : PermissionListener {
             override fun onPermissionGranted() {
                 ///Toast.makeText(this@MainActivity, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
                 Handler().postDelayed({
-                    // This method will be executed once the timer is over
-                    // Start your app main activity
-
                     startActivity(Intent(applicationContext, MainActivity::class.java))
 
                     // close this activity

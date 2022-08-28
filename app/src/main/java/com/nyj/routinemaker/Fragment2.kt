@@ -23,22 +23,25 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
-var click_ = false
 class Fragment2 : Fragment(),OnItemListener {
+    //데이터바인딩, 뷰바인딩 사용하여 어댑터와 실시간 바인딩 가능
     private lateinit var binding: Fragment2Binding
+
+    //전체 할일 더미 객체리스트 생성
     var PlanList = arrayListOf<Plan>(
         Plan(
             0L, "더미", "2022", "11",
             "12", "0", "0", ""
         )
     )
+
+    //날짜, 클릭한 년,월,일, 개수 변수 초기화
     var date_ = ""
     var clicked_year = "2022"
     var clicked_month = "8"
     var clicked_dayofMonth = "20"
     var count = 0
 
-    lateinit var pref_plan:SharedPreferences
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -46,20 +49,29 @@ class Fragment2 : Fragment(),OnItemListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //xml과 연결
-//        val view = inflater.inflate(R.layout.fragment2, container, false)
+        //뷰바인딩
         binding = Fragment2Binding.inflate(inflater, container, false)
+
+        //오늘의 년,월,일을 변수에 할당. (기본값을 오늘로)
         clicked_year= LocalDate.now().year.toString()
         clicked_month= LocalDate.now().monthValue.toString()
         clicked_dayofMonth= LocalDate.now().dayOfMonth.toString()
+
+        //쿼리문을 쉽게 사용하기 위해 년,월,일 String을 합쳤음
         date_ = clicked_year+clicked_month+clicked_dayofMonth
-        println(date_)
+
         //db연결
         val db = Room.databaseBuilder(
             requireActivity().applicationContext, AppDatabase::class.java, "routine_databases"
         ).allowMainThreadQueries().build()
+
+        //해당하는 날짜의 플랜리스트를 db에서 가져왔다
         PlanList = db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
+
+        //해당하는 날짜의 할 일의 총 개수
         count = db.plan_DAO().countPlan(date_)
+
+        //db닫기
         db.close()
 
 
@@ -69,36 +81,33 @@ class Fragment2 : Fragment(),OnItemListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pref_plan = requireActivity().applicationContext.getSharedPreferences("plan",0)
+        //pref_plan = requireActivity().applicationContext.getSharedPreferences("plan",0)
 
 
-
+        //해당하는 날짜의 할일 개수 띄우기
         listcount.text = count.toString()+"개"
 
-
+        //어댑터설정(할일 ListView)
         val Adapter = PlanAdapter(requireContext(), PlanList)
         listView.adapter = Adapter
 
+        //ListView 클릭리스너 설정. 클릭시 인텐트로 id값 전달하고 할일수정으로 넘어감
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectItem = parent.getItemAtPosition(position) as Plan
 
                 val intent = Intent(activity, ModPlan_Activity::class.java)
                 intent.apply {
-                    intent.putExtra(
-                        "planid",
-                        selectItem.id
-                    )
-
-
+                    intent.putExtra("planid", selectItem.id)
                     startActivity(intent)
-
                 }
 
             }
-        /////////////////////////////커스텀달력구현부///////////////////////
+
+        //커스텀 달력을 뷰에 띄운다
         setMonthview()
 
+        //이전달 버튼 이벤트
         pre_btn_pl.setOnClickListener {
             CalendarUtil.selectDate = CalendarUtil.selectDate.minusMonths(1)
             setMonthview()
@@ -110,14 +119,9 @@ class Fragment2 : Fragment(),OnItemListener {
             setMonthview()
         }
 
-
-
-
-        ///////////////////////////////////////////////////////////////
-
-
+        //할일 추가 버튼 리스너
         addplan_button.setOnClickListener {
-            //loadData()
+
             val intent = Intent(activity, AddPlan_Activity::class.java)
             intent.apply {
                 intent.putExtra("year", clicked_year.toString())//toString으로 형변환 해야 null값이 아닌채로 데이터 전송.0730
@@ -125,67 +129,52 @@ class Fragment2 : Fragment(),OnItemListener {
                 intent.putExtra("day", clicked_dayofMonth.toString())//dev브랜치테스트
                 startActivity(intent)
             }
-
-
         }
-
-
-
     }
 
+    //어댑터의 리사이클러뷰 클릭리스너 재정의. 인터페이스를 사용해서 재정의해주었다.
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onItemClick(dayText:LocalDate?){
 
+        //클릭한 년,월,일값을 변수에 저장한다.
         clicked_year = dayText?.year.toString()
         clicked_month = dayText?.monthValue.toString()
         clicked_dayofMonth = dayText?.dayOfMonth.toString()
 
+        //db연결
         val db = Room.databaseBuilder(
             requireActivity().applicationContext, AppDatabase::class.java, "routine_databases"
         ).allowMainThreadQueries().build()
 
-        //
+        //쿼리문을 쉽게쓰려고 년,월,일 String 합침
         date_ = clicked_year+clicked_month+clicked_dayofMonth
-        PlanList =
-            db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
-        println(PlanList)
+
+        //클릭한 날짜의 할일들을 플랜리스트 객체리스트에 저장
+        PlanList = db.plan_DAO().getPlanbyDate(date_).toTypedArray().toCollection(ArrayList<Plan>())
+
+        //클릭한 날짜의 할일들 개수저장
         count = db.plan_DAO().countPlan(date_)
+
+        //개수띄우기
         listcount.text = count.toString()+"개"
 
+        //할일 리스트뷰 구현부
         val Adapter = PlanAdapter(requireContext(), PlanList)
         listView.adapter = Adapter
 
+        //할일 리스트뷰 클릭리스너. (다시 구현하는 이유는 리스트뷰의 초기값(오늘)/클릭후 변화된 값 차이임)
         listView.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectItem = parent.getItemAtPosition(position) as Plan
 
                 val intent = Intent(activity, ModPlan_Activity::class.java)
                 intent.apply {
-                    intent.putExtra(
-                        "planid",
-                        selectItem.id
-                    )
-
-
+                    intent.putExtra("planid", selectItem.id)
                     startActivity(intent)
-
                 }
-
             }
+        //db닫기
         db.close()
-//        println(click_)
-//        if(click_){
-//            setMonthview()
-//            val editor_plan = pref_plan.edit()
-//            click_=false
-//            editor_plan.putBoolean("click?",click_)
-//            editor_plan.apply()
-//        }
-//        loadData()
-
-
-
-
     }
     @RequiresApi(Build.VERSION_CODES.O)
     fun setMonthview() {
@@ -258,12 +247,4 @@ class Fragment2 : Fragment(),OnItemListener {
         return dayList
     }
 
-
-    private fun loadData(){
-//        clicked_year = pref_plan.getString("key_year",clicked_year).toString()
-//        clicked_month = pref_plan.getString("key_month",clicked_month).toString()
-//        clicked_dayofMonth = pref_plan.getString("key_day",clicked_dayofMonth).toString()
-//        click_ = pref_plan.getBoolean("click?",false)
-
-    }
 }
