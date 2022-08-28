@@ -16,10 +16,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import java.time.LocalDate
 
+
 class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
                             private val onItemListener: OnItemListener):
     RecyclerView.Adapter<Plan_CalendarAdapter.ItemViewHolder>() {
 
+    var pos = 0//선택한 포지션 빨간색으로 바꾸기위한 변수.
+
+    //빈 Plan 객체리스트 초기화
     var PlanList = arrayListOf<Plan>(
         Plan(
             0L, "더미", "2022", "11",
@@ -33,7 +37,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
     val dot:ImageView = itemView.findViewById(R.id.dot)
 }
 
-    lateinit var pref_plan: SharedPreferences
+    //lateinit var pref_plan: SharedPreferences
 
 
     //화면 설정
@@ -42,7 +46,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             .inflate(R.layout.calendar_item_2, parent, false)
 
 
-        pref_plan = parent.context.getSharedPreferences("plan", 0)
+        //pref_plan = parent.context.getSharedPreferences("plan", 0)
 
         val db = Room.databaseBuilder(
             parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
@@ -55,17 +59,15 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
 
     //데이터 설정
 
+    @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
         //날짜 변수에 담기
-        holder.dayText2.setTextColor(Color.GRAY)
-
         var day_position = dayList[holder.adapterPosition]
-
         var now_month = LocalDate.now().monthValue.toString()
 
-
+        //캘린더의 날짜들 뷰에 띄운다
         if (day_position == null) {
             holder.dayText2.text = ""
         } else {
@@ -77,7 +79,13 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             }
         }
 
-        ////////////////람다식으로 해당날짜 비교....
+
+        //선택한 포지션을 빨간색으로 변경
+        if(pos!=0&&position==pos){
+            holder.dayText2.setTextColor(Color.RED)
+        }
+
+        ////////////////람다식으로 해당날짜 비교하여 할일이 존재하는 날짜에 도트 visible로 보이게 함
         PlanList.forEach { planlist->
             if(day_position?.year==planlist.year.toInt()&&day_position?.monthValue==planlist.month.toInt()&&day_position?.dayOfMonth==planlist.day.toInt()){
                 //도트 구현
@@ -94,24 +102,52 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
 
         //날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
+            pos = holder.adapterPosition//선택한 포지션을 pos변수에 넣음
+            this.notifyDataSetChanged()//뷰 재설정
 
-            holder.dayText2.setTextColor(Color.RED)
+
+//            println(click)
+//            if(click) {
+//                this.notifyDataSetChanged()
+//                click=false
+//                holder.dayText2.setTextColor(Color.RED)
+//            }else{
+//                holder.dayText2.setTextColor(Color.RED)
+//                click=true
+//            }
+//            println(click)
+
+
+
+
+
+
+
+            ////////클릭한 텍스트 빨간색으로 변경////////
+
+
+
+            //click=true
+
+            //인터페이스를 사용하기 위한 코드.
             onItemListener.onItemClick(day_position)
             //인터페이스를 통해 날짜를 넘겨준다.
             var iYear = day_position?.year
             var iMonth = day_position?.monthValue
             var iDay = day_position?.dayOfMonth
-
+            //toast를 위한 String 포맷
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
-            val editor_plan = pref_plan.edit()
-
-
-            editor_plan.clear()
-            editor_plan.putString("key_year", iYear.toString())
-            editor_plan.putString("key_month", iMonth.toString())
-            editor_plan.putString("key_day", iDay.toString())
-            editor_plan.apply()
+//            val editor_plan = pref_plan.edit()
+//
+//
+//
+//            editor_plan.clear()
+//            editor_plan.putString("key_year", iYear.toString())
+//            editor_plan.putString("key_month", iMonth.toString())
+//            editor_plan.putString("key_day", iDay.toString())
+//            //editor_plan.putBoolean("click?",click)
+//            editor_plan.apply()
 
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
@@ -128,4 +164,5 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
     override fun getItemCount(): Int {
         return dayList.size
     }
+
 }
