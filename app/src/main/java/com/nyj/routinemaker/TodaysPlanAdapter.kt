@@ -16,6 +16,7 @@ class TodaysPlanAdapter (val context: Context,val PlanList:ArrayList<Plan>):Base
         val planList = PlanList[position]
         name.text = planList.name
 
+        //오전 오후 나타내고 싶어서 짠 코드
         if(planList.hour.toInt()<12) {
             time.text = "오전 ${planList.hour}시 ${planList.min}분"
         }
