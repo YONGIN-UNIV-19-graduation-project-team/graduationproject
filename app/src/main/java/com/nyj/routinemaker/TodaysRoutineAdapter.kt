@@ -17,16 +17,19 @@ class TodaysRoutineAdapter (val context: Context,val RoutineList:ArrayList<Routi
         val name = view.findViewById<TextView>(R.id.todays_routine_name)
         val time = view.findViewById<TextView>(R.id.todays_routine_time)
 
+        //어댑터 연결
         val routineList = RoutineList[position]
 
+        //오전 오후 나타내고 싶어서 짠 코드
         if(routineList.hour.toInt()<12) {
             time.text = "오전 ${routineList.hour}시 ${routineList.min}분"
         }
         else time.text = "오후 ${(routineList.hour.toInt()-12)}시 ${routineList.min}분"
 
 
-
+        //텍스트 띄우기
         name.text = routineList.name
+
         //루틴이 수행된거면 중간줄
         if(routineList.routineischecked) {
             name.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG)
