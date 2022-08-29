@@ -21,7 +21,8 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
                             private val onItemListener: OnItemListener):
     RecyclerView.Adapter<Plan_CalendarAdapter.ItemViewHolder>() {
 
-    var pos = 0//선택한 포지션 빨간색으로 바꾸기위한 변수.
+    //선택한 포지션 빨간색으로 바꾸기위한 변수.
+    var pos = 0
 
     //빈 Plan 객체리스트 초기화
     var PlanList = arrayListOf<Plan>(
@@ -32,12 +33,10 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
     )
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        //레이아웃에서 id가져오기
     val dayText2: TextView = itemView.findViewById(R.id.dayText2)
     val dot:ImageView = itemView.findViewById(R.id.dot)
 }
-
-    //lateinit var pref_plan: SharedPreferences
 
 
     //화면 설정
@@ -45,19 +44,18 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.calendar_item_2, parent, false)
 
-
-        //pref_plan = parent.context.getSharedPreferences("plan", 0)
-
+        //db연동
         val db = Room.databaseBuilder(
             parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
+
+        //할일 전부 가져와서 객체리스트에 저장
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
 
+        //db종료
         db.close()
         return ItemViewHolder(view)
     }
-
-    //데이터 설정
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -85,7 +83,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             holder.dayText2.setTextColor(Color.RED)
         }
 
-        ////////////////람다식으로 해당날짜 비교하여 할일이 존재하는 날짜에 도트 visible로 보이게 함
+        //람다식으로 해당날짜 비교하여 할일이 존재하는 날짜에 도트 visible로 보이게 함
         PlanList.forEach { planlist->
             if(day_position?.year==planlist.year.toInt()&&day_position?.monthValue==planlist.month.toInt()&&day_position?.dayOfMonth==planlist.day.toInt()){
                 //도트 구현
@@ -105,60 +103,19 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             pos = holder.adapterPosition//선택한 포지션을 pos변수에 넣음
             this.notifyDataSetChanged()//뷰 재설정
 
-
-//            println(click)
-//            if(click) {
-//                this.notifyDataSetChanged()
-//                click=false
-//                holder.dayText2.setTextColor(Color.RED)
-//            }else{
-//                holder.dayText2.setTextColor(Color.RED)
-//                click=true
-//            }
-//            println(click)
-
-
-
-
-
-
-
-            ////////클릭한 텍스트 빨간색으로 변경////////
-
-
-
-            //click=true
-
             //인터페이스를 사용하기 위한 코드.
             onItemListener.onItemClick(day_position)
+
             //인터페이스를 통해 날짜를 넘겨준다.
             var iYear = day_position?.year
             var iMonth = day_position?.monthValue
             var iDay = day_position?.dayOfMonth
-            //toast를 위한 String 포맷
+            //toast를 위한 String 포맷. 나중에 제거
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
-//            val editor_plan = pref_plan.edit()
-//
-//
-//
-//            editor_plan.clear()
-//            editor_plan.putString("key_year", iYear.toString())
-//            editor_plan.putString("key_month", iMonth.toString())
-//            editor_plan.putString("key_day", iDay.toString())
-//            //editor_plan.putBoolean("click?",click)
-//            editor_plan.apply()
-
-
+            //나중에 제거
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
-            //holder.itemView.setBackgroundResource(R.drawable.challenge_background4)
-
         }
-
-
-
-
-
 
     }
     override fun getItemCount(): Int {
