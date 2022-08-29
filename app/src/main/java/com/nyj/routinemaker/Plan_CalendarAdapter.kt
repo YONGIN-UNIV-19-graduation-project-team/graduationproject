@@ -93,11 +93,6 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             }
         }
 
-
-
-
-
-
         //날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
             pos = holder.adapterPosition//선택한 포지션을 pos변수에 넣음
