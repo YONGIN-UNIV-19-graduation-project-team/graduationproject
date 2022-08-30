@@ -1,7 +1,9 @@
 package com.nyj.routinemaker
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -73,6 +75,10 @@ class WidgetProvider :AppWidgetProvider(){
         views.setTextViewText(R.id.day_of_week,doDayOfWeek())
         views.setTextViewText(R.id.plancount,plan_Count)
 
+        //위젯의 오늘의 할일 클릭 시 메인액티비티 실행
+        views.setOnClickPendingIntent(R.id.todays_plan,buildStartIntent(context))
+
+
         return views
     }
 
@@ -88,6 +94,14 @@ class WidgetProvider :AppWidgetProvider(){
             val views:RemoteViews = addviews(context)
             appWidgetManager?.updateAppWidget(appWidgetId,views)
         }
+    }
+
+    private fun buildStartIntent(context: Context?):PendingIntent{
+        var intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.setComponent(ComponentName(context!!.applicationContext,MainActivity::class.java))
+        val pendingIntent = PendingIntent.getActivity(context,999,intent,0)
+        return pendingIntent
     }
 
     //오늘의 요일 구하기
