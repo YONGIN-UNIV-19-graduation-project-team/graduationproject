@@ -69,7 +69,7 @@ class Fragment1 : Fragment() {
     fun setOnClickListener() {
         addrt_button.setOnClickListener(View.OnClickListener {
 
-            val intent = Intent(activity, AddRoutine_Activity::class.java)
+            val intent = Intent(activity, Test::class.java)
             startActivity(intent)
         })
     }
