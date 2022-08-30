@@ -37,6 +37,8 @@ import java.io.*
 
 class Camera : AppCompatActivity() {
 
+    
+
     //ocr
     lateinit var tess: TessBaseAPI //Tesseract API 객체 생성
     var dataPath: String = "" //데이터 경로 변수 선언
