@@ -1,144 +1,113 @@
 package com.nyj.routinemaker
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
+
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.SurfaceHolder
-import android.view.SurfaceView
-import android.view.View
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.google.android.gms.vision.CameraSource
-import com.google.android.gms.vision.Detector
-import com.google.android.gms.vision.Detector.Detections
-import com.google.android.gms.vision.text.TextBlock
-import com.google.android.gms.vision.text.TextRecognizer
-import org.opencv.dnn.TextDetectionModel_DB
-import java.io.IOException
+import androidx.room.Room
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizer
+import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
+import kotlinx.android.synthetic.main.activity_test.*
 
 
 class Test : AppCompatActivity() {
-    var surfaceView: SurfaceView? = null
-    var textView: TextView? = null
-    var cameraSource: CameraSource? = null
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            Test.Companion.MY_PERMISSIONS_REQUEST_CMERA -> {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.CAMERA
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        return
-                    }
-                    try {
-                        cameraSource!!.start(surfaceView!!.holder)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
-        }
-    }
-
+    var resultText="아무 텍스트나 입력"
+    var routineSuccess=false
+    @SuppressLint("UnsafeOptInUsageError", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        surfaceView = findViewById<View>(R.id.TESTsurfaceView) as SurfaceView
-        textView = findViewById<View>(R.id.TESTTextView) as TextView
-        //Recognizer 를 생성하고, Detector.Processor 를 구현한 Proce
-        val textRecognizer = TextRecognizer.Builder(applicationContext)
-            .build()
-        //
-        if (!textRecognizer.isOperational) {
-            Log.d("main", "nonoo")
-        } else {
-            //카메라 이미지를 얻기 위한 CameraSoutce 객체 형성  이미지를 연속적으로 스트리밍한
-            cameraSource = CameraSource.Builder(applicationContext, textRecognizer)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(500, 1500)
-                .setRequestedFps(2.0f) //초당 2 프레임
-                .setAutoFocusEnabled(true)
-                .build()
-            surfaceView!!.holder.addCallback(object : SurfaceHolder.Callback {
-                override fun surfaceCreated(holder: SurfaceHolder) {
-                    try {
-                        //permissionCamera();
-//                        if(ActivityCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-//
-//                            ActivityCompat.requestPermissions(MainActivity.this,new String []{Manifest.permission.CAMERA},MY_PERMISSIONS_REQUEST_CMERA);
-//                            return;
-//                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            if (ActivityCompat.checkSelfPermission(
-                                    applicationContext,
-                                    Manifest.permission.CAMERA
-                                ) != PackageManager.PERMISSION_GRANTED
-                            ) {
-                                //사용자가 허가를 할때까지 기다리게 하는 그런 설명이 필요할때
-                                ActivityCompat.requestPermissions(
-                                    this@Test,
-                                    arrayOf(Manifest.permission.CAMERA),
-                                    MY_PERMISSIONS_REQUEST_CMERA
-                                )
-                                return
+
+        /////db연동....
+        val getID = intent.getStringExtra("id")!!.toLong()
+        val db = Room.databaseBuilder(
+                this,AppDatabase::class.java,"routine_databases"
+            ).allowMainThreadQueries().build()
+        val Routine = db.routine_DAO().getRoutinebyId(getID)
+
+
+
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        val textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
+        val executor = ContextCompat.getMainExecutor(this)
+        if(!routineSuccess) {
+            cameraProviderFuture.addListener({
+                val provider = cameraProviderFuture.get()
+
+                val previewUseCase = Preview.Builder().build().apply {
+                    setSurfaceProvider(TESTpreView.surfaceProvider)
+                }
+
+                val analysisUseCase = ImageAnalysis.Builder().build().apply {
+                    setAnalyzer(executor) { image: ImageProxy ->
+                        textRecognizer.process(
+                            InputImage.fromMediaImage(
+                                image.image!!,
+                                image.imageInfo.rotationDegrees
+                            )
+
+                        ).addOnSuccessListener { visionText ->
+                            // 인식이 끝났을 때에 할 일
+                            for (block in visionText.textBlocks) {
+                                resultText = block.text
+                                TESTTextView.text = resultText
+
+                                if (Routine.name == resultText.toString()) {
+                                    routineSuccess = true
+                                    Routine.routineischecked = true
+                                    db.routine_DAO().update(Routine)
+                                    db.close()
+                                }
+                            }
+
+
+                            //인식완료?
+                        }.addOnCompleteListener {
+                            image.close()
+                            if (Routine.name == resultText.toString()) {
+                                Toast.makeText(applicationContext,"루틴 성공!",Toast.LENGTH_SHORT ).show()
+
+                                //반복 provider 종료
+                                if(routineSuccess)provider.unbindAll()
+                                val intent = Intent(applicationContext,MainActivity::class.java)
+                                startActivity(intent)
+
                             }
                         }
-                        cameraSource!!.start(surfaceView!!.holder)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
+
                     }
+
                 }
 
-                override fun surfaceChanged(
-                    holder: SurfaceHolder,
-                    format: Int,
-                    width: Int,
-                    height: Int
-                ) {
-                }
 
-                override fun surfaceDestroyed(holder: SurfaceHolder) {
-                    cameraSource!!.stop()
-                }
-            })
-            textRecognizer.setProcessor(object : Detector.Processor<TextBlock> {
-                override fun release() {}
-                override fun receiveDetections(detections: Detections<TextBlock>) {
-                    val items = detections.detectedItems
-                    val lang = arrayOf("ko-Kore")
+                provider.bindToLifecycle(
+                    this,
+                    CameraSelector.DEFAULT_BACK_CAMERA,
+                    previewUseCase,
+                    analysisUseCase,
 
-                    if (items.size() != 0) {
-                        textView!!.post {
-                            val stringBuilder = StringBuilder()
-                            for (i in 0 until items.size()) {
-                                val item = items.valueAt(i)
-                                stringBuilder.append(item.value)
-                                stringBuilder.append('\n')
-                            }
-                            textView!!.text = stringBuilder.toString()
-                        }
-                    }
-                }
-            })
+
+                )
+
+
+            }, executor)
         }
+
+
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraSource!!.release()
-    }
-    companion object {
-        private const val MY_PERMISSIONS_REQUEST_CMERA = 1001
-    }
 }

@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
 
-    <SurfaceView
-        android:id="@+id/TESTsurfaceView"
+    <androidx.camera.view.PreviewView
+        android:id="@+id/TESTpreView"
 
         android:layout_width="match_parent"
         android:layout_height="300dp"
