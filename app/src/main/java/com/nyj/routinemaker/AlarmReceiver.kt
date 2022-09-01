@@ -88,7 +88,7 @@ class AlarmReceiver : BroadcastReceiver() {
     private fun deliverNotification(context: Context){
         System.currentTimeMillis()
         val sendTime = "${System.currentTimeMillis()}" //현재 시간(알림 클릭한 시간)을 인텐트로 카메라엑티비티에 전달.
-        val contextIntent = Intent(context,Camera::class.java) //알림 클릭 시 이동하는 인텐트. 알림 클릭 시 카메라 액티비티로 이동한다.
+        val contextIntent = Intent(context,Test::class.java) //알림 클릭 시 이동하는 인텐트. 알림 클릭 시 카메라 액티비티로 이동한다.
         contextIntent.putExtra("id",getRequestCode)
         contextIntent.putExtra("time",sendTime)
         val contentPendingIntent = PendingIntent.getActivity(context, getRequestCode.toInt(),//request Code
