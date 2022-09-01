@@ -12,9 +12,10 @@
     <color name="softgray">#DEDEDE</color>
     <color name="blue">#A3BDED</color>
     <color name="white2">#FAFAFA</color>
-    <color name="red">#FF0000</color>
+    <color name="red">#FF2F2F</color>
     <color name="red_100">#FF5050</color>
     <color name="red_200">#F59696</color>
     <color name="red_300">#FFD2D2</color>
     <color name="zero">#00FF0000</color>
+    <color name="zero_100">#8CFFFFFF</color>
 </resources>
