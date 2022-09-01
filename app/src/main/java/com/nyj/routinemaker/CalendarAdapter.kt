@@ -16,6 +16,8 @@ import java.time.LocalDate
 
 class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
+
+    //챌린지 객체 생성
     var challengeList = arrayListOf<Challenge>(
         Challenge(0L,"2022","5","5",
             0.0)
@@ -25,6 +27,7 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
 
         val dayText: TextView = itemView.findViewById(R.id.dayText)
     }
+
     //화면 설정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -33,7 +36,9 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
         val db = Room.databaseBuilder(
             parent.context.applicationContext,AppDatabase::class.java,"routine_databases"
         ).allowMainThreadQueries().build()
+        //db에 연결하여 모든 챌린지를 challengeList 객체리스트에 저장한다.
         challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(ArrayList<Challenge>())
+
         db.close()
         return ItemViewHolder(view)
     }
@@ -47,10 +52,16 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
         //날짜 변수에 담기
 
         var day_position = dayList[holder.adapterPosition]
+        //커스텀 캘린더를 생성하기 위한 년,월,일 값을 포지션의 메소드로 가져온다.
         var year = day_position?.year
         var month = day_position?.monthValue
         var day = day_position?.dayOfMonth
+
+        //이번달
         var now_month = LocalDate.now().monthValue.toString()
+
+        //db를 통해 가져온 모든 챌린지가 담긴 challengeList를 람다식을 사용하여 모든 날짜를 뷰에 띄우고
+        //challenge객체의 해당 날짜의 챌린지 percent에 대한 색깔을 지정해준다.
         challengeList.forEach { challenge ->
             if (day_position == null) {
                 holder.dayText.text = ""
