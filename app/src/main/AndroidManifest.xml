@@ -21,10 +21,6 @@
         <activity
             android:name=".Dday_Activity"
             android:exported="false" />
-        <activity
-            android:name=".Camera"
-            android:exported="false" />
-
         <receiver
             android:name=".ResetCheckboxReceiver"
             android:enabled="true"
