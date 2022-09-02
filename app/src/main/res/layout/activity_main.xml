@@ -40,6 +40,7 @@
                 android:layout_weight="22"
                 android:text="챌린지"
                 android:textSize="20dp"
+                android:autoSizeTextType="uniform"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +53,7 @@
                 android:layout_weight="17"
                 android:text="루틴"
                 android:textSize="20dp"
+                android:autoSizeTextType="uniform"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +66,7 @@
                 android:layout_weight="18"
                 android:text="할 일"
                 android:textSize="20dp"
+                android:autoSizeTextType="uniform"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,6 +92,7 @@
                     android:layout_weight="50"
                     android:gravity="bottom|end"
                     android:textSize="15dp"
+                    android:autoSizeTextType="uniform"
                     android:text="디데이를 설정하세요"
                     android:textColor="@color/red" />
 
@@ -100,7 +104,8 @@
                     android:text="D-X"
                     android:textAlignment="textEnd"
                     android:textColor="@color/red"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:autoSizeTextType="uniform"/>
             </LinearLayout>
 
         </LinearLayout>
