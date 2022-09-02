@@ -159,7 +159,7 @@
             android:id="@+id/recyclerview_pl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="72"
+            android:layout_weight="70"
             android:textAlignment="center">
 
         </androidx.recyclerview.widget.RecyclerView>
