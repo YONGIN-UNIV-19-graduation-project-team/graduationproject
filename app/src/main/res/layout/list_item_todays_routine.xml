@@ -14,7 +14,7 @@
         android:layout_marginBottom="9dp"
         android:text="확인 시간 NN:NN"
         android:textColor="@color/black"
-        android:textSize="17dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:layout_marginBottom="15dp"
         android:text="제목입니다"
         android:textColor="@color/black"
-        android:textSize="19dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
