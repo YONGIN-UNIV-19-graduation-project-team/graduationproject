@@ -54,10 +54,7 @@ class Test : AppCompatActivity() {
             handler.sendMessage(msg)
 
             if(second<1){
-                var editor = pref.edit()
-                editor.clear()
-                editor.putLong("routineId",getID)
-                editor.apply()
+
                 routineSuccess=true
                 //application이동
             }
@@ -110,6 +107,11 @@ class Test : AppCompatActivity() {
                             //인식완료?
                         }.addOnCompleteListener {
                             image.close()
+                            var editor = pref.edit()
+                            editor.clear()
+                            editor.putLong("routineId",getID)
+                            editor.apply()
+
                             if (Routine.name == resultText.toString()) {
                                 Toast.makeText(applicationContext,"루틴 성공!",Toast.LENGTH_SHORT ).show()
                                 var editor2 = pref.edit()
