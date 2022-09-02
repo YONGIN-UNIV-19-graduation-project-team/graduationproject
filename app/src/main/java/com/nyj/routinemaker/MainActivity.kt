@@ -3,13 +3,16 @@ package com.nyj.routinemaker
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_dday.*
@@ -37,6 +40,46 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+        val prefbyrec = this.getSharedPreferences("rec",0)
+
+        var getID_String = prefbyrec.getLong("routineId",999).toString()
+
+        val db = Room.databaseBuilder(
+            this,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
+        var getID_Long = getID_String.toLong()
+        var rtn = db.routine_DAO().getRoutinebyId(getID_Long)
+        db.close()
+
+        if(getID_String!="999"){
+            //다이얼로그 띄우기
+            AlertDialog.Builder(this)
+                .setMessage("최근 실패한 ["+rtn.name+"]루틴을 다시 수행하시겠습니까?")
+                .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val intent = Intent(applicationContext,Test::class.java)
+                        intent.putExtra("id",getID_String)
+                        startActivity(intent)
+                    }
+                })
+                .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        var editor2 = prefbyrec.edit()
+                        editor2.clear()
+                        editor2.putLong("routineId",999)
+                        editor2.apply()
+                        Toast.makeText(applicationContext,"취소하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .create()
+                .show()
+
+
+        }
+
 
         //무슨 프래그먼트에서 접근했는지 설정. 기본값은 챌린지 프래그먼트
         var accessByFragment = intent.getIntExtra("access_by_fragment",0)
