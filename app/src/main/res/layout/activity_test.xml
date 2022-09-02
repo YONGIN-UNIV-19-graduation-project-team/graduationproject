@@ -50,34 +50,59 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:gravity="center|top"
             android:text="Time"
             android:textColor="@color/red"
-            android:textSize="45dp"
+            android:textSize="35dp"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="2" />
 
         <TextView
             android:id="@+id/TESTTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_alignParentBottom="true"
-            android:layout_weight="12"
+            android:layout_weight="10"
             android:gravity="center|top"
             android:text="No Text"
             android:textColor="@color/black"
             android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:gravity="center|top"
+            android:text="루틴명"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
+
+        <Button
+            android:id="@+id/button"
+            android:background="@drawable/button_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:text="나중에 할래요"
+            android:textSize="20dp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
