@@ -67,8 +67,18 @@ class Test : AppCompatActivity() {
                 this,AppDatabase::class.java,"routine_databases"
             ).allowMainThreadQueries().build()
         val Routine = db.routine_DAO().getRoutinebyId(getID)
+        routineName.text = "["+Routine.name.toString()+"] 글자를 인식하세요!"
 
 
+        button.setOnClickListener(){
+            var editor_exit = pref.edit()
+            editor_exit.clear()
+            editor_exit.putLong("routineId",getID)
+            editor_exit.apply()
+            val intent = Intent(applicationContext,MainActivity::class.java)
+            startActivity(intent)
+
+        }
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         val textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())

@@ -133,16 +133,16 @@ class Fragment0 : Fragment() {
 
         //전체 챌린지 객체리스트를 db로 받아온다
         challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(arrayListOf<Challenge>())
-
-        //프로그레스바 퍼센트 계산(람다식)
-        challengeList.forEach { challenge ->
-            progressPercent+=(challenge.percent*3.4)
-        }
-
-        //프로그레스바 퍼센트 설정
-        progress_percent.text = progressPercent.toInt().toString()+"%"
-        //프로그레스바 상태
-        progressBar.progress = progressPercent.toInt()
+//
+//        //프로그레스바 퍼센트 계산(람다식)
+//        challengeList.forEach { challenge ->
+//            progressPercent+=(challenge.percent*3.4)
+//        }
+//
+//        //프로그레스바 퍼센트 설정
+//        progress_percent.text = progressPercent.toInt().toString()+"%"
+//        //프로그레스바 상태
+//        progressBar.progress = progressPercent.toInt()
 
         //현재 날짜
         CalendarUtil.selectDate = LocalDate.now()
@@ -227,6 +227,31 @@ class Fragment0 : Fragment() {
         //어댑터 적용
         recyclerview.adapter = adapter
 
+        //프로그레스바 계산
+        //db연결
+        val db = Room.databaseBuilder(
+            requireActivity().applicationContext,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
+
+        //이번달의 챌린지리스트를가져온다. 수정해야함
+        challengeList = db.challenge_DAO().getChallengeFromYearAndMonth(CalendarUtil.selectDate.year.toString(),CalendarUtil.selectDate.monthValue.toString()).toTypedArray().toCollection(arrayListOf<Challenge>())
+        println("@@@@@@@@@@@@@@@@"+challengeList)
+        //프로그레스바 퍼센트 계산(람다식)
+        progressPercent=0.0
+        challengeList.forEach { challenge ->
+            progressPercent+=(challenge.percent*3.4)
+        }
+
+        //프로그레스바 텍스트 띄우기
+        if(progressPercent.toInt()<=100){
+            progress_percent.text = progressPercent.toInt().toString()+"%"
+        }else progress_percent.text = "100%"
+
+
+        //프로그레스바 상태
+        progressBar.progress = progressPercent.toInt()
+
+        db.close()
     }
     //날짜 타입 설정(월,년)
     @RequiresApi(Build.VERSION_CODES.O)

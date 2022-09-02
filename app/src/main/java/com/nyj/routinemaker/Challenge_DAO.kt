@@ -24,4 +24,7 @@ interface Challenge_DAO {
 
     @Query("SELECT id FROM tb_challenge where year = :parameter7 AND month = :parameter8 AND day = :parameter9")
     fun getId(parameter7:String,parameter8:String,parameter9:String):Long
+
+    @Query("SELECT *From tb_challenge where year = :parameter10 AND month = :parameter11")
+    fun getChallengeFromYearAndMonth(parameter10: String,parameter11: String):List<Challenge>
 }
