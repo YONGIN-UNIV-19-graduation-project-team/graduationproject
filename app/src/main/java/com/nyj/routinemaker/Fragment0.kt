@@ -79,7 +79,7 @@ class Fragment0 : Fragment() {
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
 
-        //모든 루틴리스트를 람다식을 사용하여 오늘 수행해야 할 총 루틴 개수를 count_all 변수에 저장한다
+        //모든 루틴리스트를 람다식을 사용하여 오늘 수행해야 할 총 루틴 개수를 count_all 변수에 저장한다!
         RoutineList.forEach{routine ->
 
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
