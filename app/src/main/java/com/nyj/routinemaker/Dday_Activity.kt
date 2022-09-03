@@ -4,22 +4,20 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Rect
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_dday.*
-import kotlinx.android.synthetic.main.activity_dday.textview_get_date
-import splitties.toast.toast
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
+
 
 class Dday_Activity : AppCompatActivity() {
     //출력하기위한 포맷
@@ -39,7 +37,7 @@ class Dday_Activity : AppCompatActivity() {
 
         //getSharedPreferences란 웹개발의 session같은 존재.
         val pref = this.getSharedPreferences("a",0)
-        var name = pref.getString("key_name","디데이 제목을 설정하세요.").toString()
+        var name = pref.getString("key_name","").toString()
 
         //이전에 dday를 설정한 적이 있다면 그 이름을 가져오고 텍스트에 띄운다
         d_day_name.setText(name)
@@ -50,7 +48,9 @@ class Dday_Activity : AppCompatActivity() {
         var day = pref.getString("key_day","null").toString()
 
         //년,월,일 설정했을때 텍스트에 띄우기
-        if(year!="null"&&month!="null"&&day!="null") {textview_get_date.text = year+"년 "+month+"월 "+day+"일"}
+        if(year!="null"&&month!="null"&&day!="null") {
+            textview_get_date.text = year+"년 "+month+"월 "+day+"일"
+        }
 
         //날짜를 설정하라는 텍스트뷰를 클릭했을 때 생성되는 DatePicker 다이얼로그
         textview_get_date.setOnClickListener(View.OnClickListener {
@@ -83,8 +83,18 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 설정하는 버튼
         add_dday_button.setOnClickListener{
+            //이름만 변경하는경우
+            if(textview_get_date != null && dateisselected==false){
+                name = d_day_name.text.toString()
+                val editor = pref.edit()
+                editor.putString("key_name", name)
+                editor.apply()
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
             //날짜를 선택했다면
-            if(dateisselected) {
+            else if(dateisselected) {
                 //디데이의 이름을 가져와 변수에 저장.
                 name = d_day_name.text.toString()
                 val intent = Intent(this, MainActivity::class.java)
