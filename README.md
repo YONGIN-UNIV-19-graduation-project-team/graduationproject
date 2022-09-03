@@ -1,7 +1,7 @@
-# graduationproject <RoutineMaker>
+# RoutineMaker
 
 ## **용인대학교 컴퓨터과학과 19학번 졸업작품 프로젝트**
-## 주제 : **Google ML kit**을 이용한 루틴 관리 안드로이드 어플리케이션
+## 주제 : **Google ML kit**을 활용한 루틴 관리 안드로이드 어플리케이션
 ### 팀원 : 주종훈, 나연주, 곽시현
 
 ----------
