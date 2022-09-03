@@ -83,37 +83,42 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 설정하는 버튼
         add_dday_button.setOnClickListener{
-            //이름만 변경하는경우
-            if(textview_get_date != null && dateisselected==false){
-                name = d_day_name.text.toString()
-                val editor = pref.edit()
-                editor.putString("key_name", name)
-                editor.apply()
+            //디데이 이름 입력 필수
+            if(d_day_name.text.toString() != ""){
+                //이름만 변경하는경우
+                if(textview_get_date != null && dateisselected==false){
+                    name = d_day_name.text.toString()
+                    val editor = pref.edit()
+                    editor.putString("key_name", name)
+                    editor.apply()
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            //날짜를 선택했다면
-            else if(dateisselected) {
-                //디데이의 이름을 가져와 변수에 저장.
-                name = d_day_name.text.toString()
-                val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
 
-                //getSharedPreference에 년,월,일, 이름 값 저장
-                val editor = pref.edit()
+                }
+                //날짜를 선택했다면
+                else if(dateisselected) {
+                    //디데이의 이름을 가져와 변수에 저장.
+                    name = d_day_name.text.toString()
+                    val intent = Intent(this, MainActivity::class.java)
 
-                //getSharedPreference의 값을 전부 초기화
-                editor.clear()
-                //후 저장
-                editor.putString("key_year", plan_Year)
-                editor.putString("key_month", plan_Month)
-                editor.putString("key_day", plan_Day)
-                editor.putString("key_name", name)
-                editor.apply()
-                startActivity(intent)
-            }//날짜를 선택하지 않았으면 토스트메시지처리
-            else Toast.makeText(this, "날짜를 선택하세요!", Toast.LENGTH_SHORT ).show()
-            dateisselected=false
+                    //getSharedPreference에 년,월,일, 이름 값 저장
+                    val editor = pref.edit()
+
+                    //getSharedPreference의 값을 전부 초기화
+                    editor.clear()
+                    //후 저장
+                    editor.putString("key_year", plan_Year)
+                    editor.putString("key_month", plan_Month)
+                    editor.putString("key_day", plan_Day)
+                    editor.putString("key_name", name)
+                    editor.apply()
+                    startActivity(intent)
+                }//날짜를 선택하지 않았으면 토스트메시지처리
+                else Toast.makeText(this, "날짜를 선택하세요!", Toast.LENGTH_SHORT ).show()
+                dateisselected=false
+            } else Toast.makeText(this, "이름을 입력하세요!", Toast.LENGTH_SHORT ).show()
+
         }
 
         //취소 버튼
