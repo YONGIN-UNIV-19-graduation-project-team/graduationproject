@@ -83,7 +83,7 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 설정하는 버튼
         add_dday_button.setOnClickListener{
-            //디데이 이름 입력 필수
+            //디데이 이름 입력하도록
             if(d_day_name.text.toString() != ""){
                 //이름만 변경하는경우
                 if(textview_get_date != null && dateisselected==false){
