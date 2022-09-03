@@ -44,7 +44,7 @@
 +보다 쉽게 내부저장소 데이터베이스를 사용하기 위해 Room DB를 사용하였습니다.
 +Room 지속성 라이브러리는 SQLite를 완벽히 활용하면서 원활한 데이터베이스 액세스가 가능하도록 SQLite에 추상화 계층을 제공합니다.
 
-### Google Machine-Learning Kit (ML_Kit)
+### Google Machine-Learning Kit (https://developers.google.com/ml-kit)
 +Google ML-Kit를 사용하여 높은 인식률의 글자인식을 수행하도록 구현하였습니다.
 
 ### CameraX(Android jetpack)
