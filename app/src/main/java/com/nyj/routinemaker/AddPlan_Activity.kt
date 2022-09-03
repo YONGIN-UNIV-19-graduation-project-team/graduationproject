@@ -138,6 +138,7 @@ class AddPlan_Activity : AppCompatActivity() {
             //쉬운 쿼리문을 사용하고 싶어서 date String을 합쳤다
             val add_date = plan_Year+plan_Month+plan_Day
 
+            //시간 선택 안했을 땐 9시로 기본설정
             if(timeisselected==false){
                 val i=9
                 val i2 =0
