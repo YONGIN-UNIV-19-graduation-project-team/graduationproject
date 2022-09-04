@@ -73,7 +73,7 @@
             android:layout_weight="10"
             android:text="일"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
             android:layout_weight="10"
             android:text="토"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="#FF9999"
             android:textSize="15dp"
             android:textStyle="bold" />
 
