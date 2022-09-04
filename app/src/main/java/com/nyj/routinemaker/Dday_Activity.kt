@@ -128,6 +128,9 @@ class Dday_Activity : AppCompatActivity() {
             val intent_can = Intent(this,MainActivity::class.java)
             startActivity(intent_can)
         }
+
+        //디데이 초기화 버튼
+
     }
 
     // 화면 클릭하여 키보드 숨기기 및 포커스 제거
