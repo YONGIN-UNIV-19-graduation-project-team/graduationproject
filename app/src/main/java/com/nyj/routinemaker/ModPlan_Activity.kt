@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
 import kotlinx.android.synthetic.main.activity_addplan.planName
@@ -45,6 +46,7 @@ class ModPlan_Activity : AppCompatActivity() {
     var nameisnotnull=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_modplan)
 
         //db연결
