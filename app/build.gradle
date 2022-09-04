@@ -81,6 +81,8 @@ dependencies {
     //mlkit-korean
     implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta5'
 
+    //camera permission
+    implementation 'io.github.ParkSangGwon:tedpermission:2.3.0'
 
     //camera
     // The following line is optional, as the core library is included indirectly by camera-camera2
