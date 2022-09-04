@@ -214,7 +214,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="90"
                 android:autoSizeTextType="uniform"
-                android:text="  XX"
+                android:text="XX"
                 android:textColor="@color/red"
                 android:textSize="15dp"
                 android:textStyle="bold" />
