@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
 import java.text.SimpleDateFormat
@@ -38,6 +39,7 @@ class AddPlan_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //db연결
         val db = Room.databaseBuilder(
