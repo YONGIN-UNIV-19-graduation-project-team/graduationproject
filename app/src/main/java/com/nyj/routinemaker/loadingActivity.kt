@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+
 //import com.gun0912.tedpermission.PermissionListener
 //import com.gun0912.tedpermission.TedPermission
 
@@ -16,6 +18,7 @@ class loadingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_loading)
         Handler().postDelayed({
             startActivity(Intent(applicationContext, MainActivity::class.java))

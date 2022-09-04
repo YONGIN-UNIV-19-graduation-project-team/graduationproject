@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addroutine.*
 import kotlinx.android.synthetic.main.activity_modroutine.*
@@ -45,6 +46,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_modroutine)
 
         //db연결

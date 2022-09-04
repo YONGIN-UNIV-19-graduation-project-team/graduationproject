@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Message
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
@@ -43,6 +44,7 @@ class Test : AppCompatActivity() {
     @SuppressLint("UnsafeOptInUsageError", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_test)
 
         val pref = this.getSharedPreferences("rec",0)

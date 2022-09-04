@@ -154,7 +154,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="8"
                 android:ems="10"
-                android:hint="눌러서 시간을 설정하세요"
+                android:hint="오전 9:00 [눌러서 수정]"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="parent"

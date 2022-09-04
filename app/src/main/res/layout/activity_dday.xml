@@ -46,10 +46,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Space
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="30" />
+            android:layout_weight="30"
+            android:text="삭제"
+            android:textColor="@color/red"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

@@ -73,7 +73,7 @@
             android:layout_weight="10"
             android:text="일"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
             android:layout_weight="10"
             android:text="토"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="#FF9999"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -147,7 +147,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="31.5"
         android:orientation="horizontal">
 
         <Space
@@ -179,7 +179,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="3.5"
         android:orientation="horizontal"
         android:weightSum="100">
 
@@ -187,9 +187,10 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="22"
+            android:layout_weight="30"
             android:text="To do list"
             android:textColor="@color/black"
+            android:autoSizeTextType="uniform"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/calendarView"
@@ -198,7 +199,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="78"
+            android:layout_weight="70"
             android:orientation="vertical"
             android:weightSum="100">
 
@@ -212,7 +213,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="90"
-                android:text=" XX"
+                android:autoSizeTextType="uniform"
+                android:text="XX"
                 android:textColor="@color/red"
                 android:textSize="15dp"
                 android:textStyle="bold" />
