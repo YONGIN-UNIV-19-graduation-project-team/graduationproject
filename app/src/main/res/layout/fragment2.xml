@@ -187,7 +187,7 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="22"
+            android:layout_weight="30"
             android:text="To do list"
             android:textColor="@color/black"
             android:autoSizeTextType="uniform"
@@ -199,7 +199,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="78"
+            android:layout_weight="70"
             android:orientation="vertical"
             android:weightSum="100">
 
@@ -215,6 +215,7 @@
                 android:layout_weight="90"
                 android:text=" XX"
                 android:textColor="@color/red"
+                android:autoSizeTextType="uniform"
                 android:textSize="15dp"
                 android:textStyle="bold" />
         </LinearLayout>
