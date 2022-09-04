@@ -147,7 +147,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="31.5"
         android:orientation="horizontal">
 
         <Space
@@ -179,7 +179,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="3.5"
         android:orientation="horizontal"
         android:weightSum="100">
 
@@ -213,9 +213,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="90"
-                android:text=" XX"
-                android:textColor="@color/red"
                 android:autoSizeTextType="uniform"
+                android:text="  XX"
+                android:textColor="@color/red"
                 android:textSize="15dp"
                 android:textStyle="bold" />
         </LinearLayout>
