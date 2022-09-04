@@ -190,6 +190,7 @@
             android:layout_weight="22"
             android:text="To do list"
             android:textColor="@color/black"
+            android:autoSizeTextType="uniform"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/calendarView"
