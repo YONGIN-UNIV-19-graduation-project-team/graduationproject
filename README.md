@@ -54,6 +54,9 @@
 +Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다.
 
 
+------
+# 루틴 인증 영상
 
+<img src="https://user-images.githubusercontent.com/85150438/188340107-a5a9700f-b0c6-467d-96c4-7591318d17af.gif">
 
 
