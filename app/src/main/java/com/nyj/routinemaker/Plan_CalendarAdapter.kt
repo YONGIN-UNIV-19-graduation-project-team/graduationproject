@@ -109,7 +109,7 @@ class Plan_CalendarAdapter(private val dayList: ArrayList<LocalDate?>,
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
             //나중에 제거
-            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
         }
 
     }
