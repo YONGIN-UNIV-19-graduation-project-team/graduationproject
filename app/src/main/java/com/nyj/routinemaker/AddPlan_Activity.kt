@@ -63,7 +63,7 @@ class AddPlan_Activity : AppCompatActivity() {
         if(year != null && year.length > 0 && !year.contains("null") &&
             month != null && month.length > 0 && !month.contains("null") &&
             day != null && day.length > 0 && !day.contains("null")){
-            textview_get_date.setText(year+"년"+month+"월"+day+"일")
+            textview_get_date.setText(year+"년 "+month+"월 "+day+"일")
         }
         else {
             textview_get_date.setText("error")

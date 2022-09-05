@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     var month = "8"
     var day = "10"
     var name = "error"
-
+    var ddayIsUsed=false
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,8 +139,16 @@ class MainActivity : AppCompatActivity() {
         var d_day_result = ceil(dday/86400000).toInt()
 
         //텍스트 띄우기
-        dday_name.text = name
-        d_day.text = "D-"+d_day_result
+        if(ddayIsUsed){
+            dday_name.text = name
+            d_day.text = "D-"+d_day_result
+        }
+        else{
+            //dday_name.text="D-day를 설정하세요"
+            dday_name.text = "D-day"
+            d_day.text = "D-X"
+            d_day.setTextColor(Color.WHITE)
+        }
 
         //자정이 되면 루틴들의 체크박스(수행했는지안했는지 확인하는 체크박스) 초기화하는 pendingintent 전송
         resetChkbox(this)
@@ -274,7 +282,7 @@ class MainActivity : AppCompatActivity() {
         month = pref.getString("key_month","8").toString()
         day = pref.getString("key_day","28").toString()
         name = pref.getString("key_name","디데이를 설정하세요").toString()
-
+        ddayIsUsed = pref.getBoolean("key_used",false)
     }
 }
 

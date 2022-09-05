@@ -114,6 +114,7 @@ class Dday_Activity : AppCompatActivity() {
                     editor.putString("key_month", plan_Month)
                     editor.putString("key_day", plan_Day)
                     editor.putString("key_name", name)
+                    editor.putBoolean("key_used",true)
                     editor.apply()
                     startActivity(intent)
                 }//날짜를 선택하지 않았으면 토스트메시지처리
@@ -127,6 +128,16 @@ class Dday_Activity : AppCompatActivity() {
         can_button.setOnClickListener{
             val intent_can = Intent(this,MainActivity::class.java)
             startActivity(intent_can)
+        }
+
+        //디데이 초기화 버튼
+        del_button.setOnClickListener{
+            val editor = pref.edit()
+            editor.clear()
+            editor.putBoolean("key_used",false)
+            editor.apply()
+            val intent_del = Intent(this,MainActivity::class.java)
+            startActivity(intent_del)
         }
     }
 
