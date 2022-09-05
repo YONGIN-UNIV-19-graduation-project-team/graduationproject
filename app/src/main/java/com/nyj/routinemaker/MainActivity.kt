@@ -144,9 +144,10 @@ class MainActivity : AppCompatActivity() {
             d_day.text = "D-"+d_day_result
         }
         else{
-            dday_name.text="D-day를 설정하세요"
+            //dday_name.text="D-day를 설정하세요"
+            dday_name.text = "D-day"
             d_day.text = "D-X"
-            //d_day.setTextColor(Color.WHITE)
+            d_day.setTextColor(Color.WHITE)
         }
 
         //자정이 되면 루틴들의 체크박스(수행했는지안했는지 확인하는 체크박스) 초기화하는 pendingintent 전송
