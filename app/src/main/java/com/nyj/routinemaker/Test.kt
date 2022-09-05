@@ -105,7 +105,10 @@ class Test : AppCompatActivity() {
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
                                 resultText = block.text
-                                TESTTextView.text = resultText
+                                //공백제거
+                                var replace_resultText = resultText.replace(" ","")
+                                //텍스트뷰에 띄우기
+                                TESTTextView.text = replace_resultText
 
                                 if (Routine.name == resultText.toString()) {
                                     routineSuccess = true
