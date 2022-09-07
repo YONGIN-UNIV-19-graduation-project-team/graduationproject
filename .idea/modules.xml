@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RoutineMaker.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/RoutineMaker.sdk.unitTest.iml" />
     </modules>
   </component>
 </project>

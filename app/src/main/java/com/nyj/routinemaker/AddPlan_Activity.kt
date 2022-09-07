@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_addplan.*
 import java.text.SimpleDateFormat
@@ -38,6 +39,7 @@ class AddPlan_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addplan)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //db연결
         val db = Room.databaseBuilder(
@@ -56,11 +58,12 @@ class AddPlan_Activity : AppCompatActivity() {
         plan_Month=month
         plan_Day=day
 
+
         //intent 값 수신 시 예외처리 부분
         if(year != null && year.length > 0 && !year.contains("null") &&
             month != null && month.length > 0 && !month.contains("null") &&
             day != null && day.length > 0 && !day.contains("null")){
-            textview_get_date.setText(year+"년"+month+"월"+day+"일")
+            textview_get_date.setText(year+"년 "+month+"월 "+day+"일")
         }
         else {
             textview_get_date.setText("error")
@@ -137,6 +140,32 @@ class AddPlan_Activity : AppCompatActivity() {
             //쉬운 쿼리문을 사용하고 싶어서 date String을 합쳤다
             val add_date = plan_Year+plan_Month+plan_Day
 
+            //시간 선택 안했을 땐 9시로 기본설정
+            if(timeisselected==false){
+                val i=9
+                val i2 =0
+
+                //00시 00분으로 나타내고 싶어서 짠 코드
+                if(i<10&&i2<10) {
+                    textview_get_time.text = "0$i : 0$i2"
+                }
+                else {
+                    if (i2<10) {
+                        textview_get_time.text = "$i : 0$i2"
+                    }
+                    else
+                        if(i<10) {
+                            textview_get_time.text = "0$i : $i2"
+                        }
+                        else textview_get_time.text = "$i : $i2"
+                }
+                //String으로 형변환 후 변수에 저장
+                plan_Hour=i.toString()
+                plan_Min=i2.toString()
+                timeisselected=true
+            }
+
+
             //지금까지 입력했던 변수들로 plan객체 생성
             val plan = Plan(0L,plan_Name,plan_Year,plan_Month,plan_Day,plan_Hour,plan_Min,add_date)
 
@@ -150,7 +179,7 @@ class AddPlan_Activity : AppCompatActivity() {
                 val intent = Intent(this,MainActivity::class.java)
                 intent.putExtra("access_by_fragment",2)
                 startActivity(intent)
-            }else Toast.makeText(this, "이름이나 시간이 정해지지 않았습니다.", Toast.LENGTH_SHORT).show()
+            }else Toast.makeText(this, "이름을 정해주세요.", Toast.LENGTH_SHORT).show()
 
         }
         //이전 버튼 구현

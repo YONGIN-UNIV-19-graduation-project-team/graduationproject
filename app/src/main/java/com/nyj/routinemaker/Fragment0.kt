@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -64,6 +65,7 @@ class Fragment0 : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         //현재 년,월,일 변수생성 후 저장
         val year= LocalDate.now().year.toString()
@@ -79,7 +81,7 @@ class Fragment0 : Fragment() {
         RoutineList = db.routine_DAO().getAll().toTypedArray().toCollection(ArrayList<Routine>())
         PlanList = db.plan_DAO().getAll().toTypedArray().toCollection(ArrayList<Plan>())
 
-        //모든 루틴리스트를 람다식을 사용하여 오늘 수행해야 할 총 루틴 개수를 count_all 변수에 저장한다
+        //모든 루틴리스트를 람다식을 사용하여 오늘 수행해야 할 총 루틴 개수를 count_all 변수에 저장한다!
         RoutineList.forEach{routine ->
 
             var weekList = arrayListOf<Boolean>(routine.mon,routine.tue,routine.wed,routine.thu,routine.fri,routine.sat,routine.sun)
@@ -133,16 +135,16 @@ class Fragment0 : Fragment() {
 
         //전체 챌린지 객체리스트를 db로 받아온다
         challengeList = db.challenge_DAO().getAll().toTypedArray().toCollection(arrayListOf<Challenge>())
-
-        //프로그레스바 퍼센트 계산(람다식)
-        challengeList.forEach { challenge ->
-            progressPercent+=(challenge.percent*3.4)
-        }
-
-        //프로그레스바 퍼센트 설정
-        progress_percent.text = progressPercent.toInt().toString()+"%"
-        //프로그레스바 상태
-        progressBar.progress = progressPercent.toInt()
+//
+//        //프로그레스바 퍼센트 계산(람다식)
+//        challengeList.forEach { challenge ->
+//            progressPercent+=(challenge.percent*3.4)
+//        }
+//
+//        //프로그레스바 퍼센트 설정
+//        progress_percent.text = progressPercent.toInt().toString()+"%"
+//        //프로그레스바 상태
+//        progressBar.progress = progressPercent.toInt()
 
         //현재 날짜
         CalendarUtil.selectDate = LocalDate.now()
@@ -227,6 +229,31 @@ class Fragment0 : Fragment() {
         //어댑터 적용
         recyclerview.adapter = adapter
 
+        //프로그레스바 계산
+        //db연결
+        val db = Room.databaseBuilder(
+            requireActivity().applicationContext,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
+
+        //이번달의 챌린지리스트를가져온다. 수정해야함
+        challengeList = db.challenge_DAO().getChallengeFromYearAndMonth(CalendarUtil.selectDate.year.toString(),CalendarUtil.selectDate.monthValue.toString()).toTypedArray().toCollection(arrayListOf<Challenge>())
+        println("@@@@@@@@@@@@@@@@"+challengeList)
+        //프로그레스바 퍼센트 계산(람다식)
+        progressPercent=0.0
+        challengeList.forEach { challenge ->
+            progressPercent+=(challenge.percent*3.4)
+        }
+
+        //프로그레스바 텍스트 띄우기
+        if(progressPercent.toInt()<=100){
+            progress_percent.text = progressPercent.toInt().toString()+"%"
+        }else progress_percent.text = "100%"
+
+
+        //프로그레스바 상태
+        progressBar.progress = progressPercent.toInt()
+
+        db.close()
     }
     //날짜 타입 설정(월,년)
     @RequiresApi(Build.VERSION_CODES.O)

@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import kotlinx.android.synthetic.main.calendar_item.view.*
 import java.time.LocalDate
 
 class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
@@ -70,13 +71,13 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
                 holder.dayText.text = day_position.dayOfMonth.toString()
                 if(challenge.year==year.toString()&&challenge.month==month.toString()&&challenge.day==day.toString()) {
                     if(challenge.percent==1.0){
-                        holder.itemView.setBackgroundResource(R.drawable.challenge_background1)
+                        holder.itemView.dayText.setBackgroundResource(R.drawable.challenge_background1)
                     }else if(challenge.percent>=0.75) {//0.75~0.999
-                        holder.itemView.setBackgroundResource(R.drawable.challenge_background2)
+                        holder.itemView.dayText.setBackgroundResource(R.drawable.challenge_background2)
                     }else if(challenge.percent>=0.5) {//0.5~0.7499
-                        holder.itemView.setBackgroundResource(R.drawable.challenge_background3)
+                        holder.itemView.dayText.setBackgroundResource(R.drawable.challenge_background3)
                     }else if(challenge.percent>=0.25) {//0.25~0.4999
-                        holder.itemView.setBackgroundResource(R.drawable.challenge_background4)
+                        holder.itemView.dayText.setBackgroundResource(R.drawable.challenge_background4)
                     }
 
 
@@ -101,7 +102,7 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
 
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
-            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
         }
    }
 

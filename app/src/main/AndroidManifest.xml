@@ -21,10 +21,6 @@
         <activity
             android:name=".Test"
             android:exported="false" />
-        <activity
-            android:name=".Dday_Activity"
-            android:exported="false" />
-
         <receiver
             android:name=".ResetCheckboxReceiver"
             android:enabled="true"
@@ -58,6 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Dday_Activity"
+            android:exported="true" />
 
         <receiver
             android:name=".WidgetProvider"
