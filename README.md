@@ -54,6 +54,10 @@
 +Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다
 
 ------
+## Class Diagram
+<img width="647" alt="KakaoTalk_Image_2022-09-08-17-35-08" src="https://user-images.githubusercontent.com/85150438/189075865-c099ab76-2b4f-496c-a5ba-c15b42459959.png">
+
+------
 ## 소스코드 마인드맵
 
 <img width = "80%" src ="https://github.com/YONGIN-UNIV-19-graduation-project-team/graduationproject/files/9523414/Mind.Map.pdf"/>
