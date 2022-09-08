@@ -56,7 +56,7 @@
 ------
 ## 소스코드 마인드맵
 
-<img width = "80%" src ="https://github.com/YONGIN-UNIV-19-graduation-project-team/graduationproject/files/9523414/Mind.Map.pdf">
+<img width = "80%" src ="https://github.com/YONGIN-UNIV-19-graduation-project-team/graduationproject/files/9523414/Mind.Map.pdf"/>
 ------
 # 루틴 인증 영상
 
