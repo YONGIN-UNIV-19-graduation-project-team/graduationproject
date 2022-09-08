@@ -51,9 +51,12 @@
 +ML-kit를 사용하기 위해 카메라 동작을 일관되게 유지하고, 방향, 회전을 고려하는 라이브러리인 CameraX를 사용하였습니다.
 
 ### Git Branch
-+Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다.
++Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다
 
+------
+## 소스코드 마인드맵
 
+<img src ="https://github.com/YONGIN-UNIV-19-graduation-project-team/graduationproject/files/9523414/Mind.Map.pdf">
 ------
 # 루틴 인증 영상
 
