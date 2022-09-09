@@ -61,7 +61,9 @@
 ## 소스코드 마인드맵
 
 <img src="https://user-images.githubusercontent.com/85150438/189335423-cf5b89a0-dc11-4c8e-93c3-97daf93576cb.png"/>
+
 ------
+
 # 루틴 인증 영상
 
 <img src="https://user-images.githubusercontent.com/85150438/188340107-a5a9700f-b0c6-467d-96c4-7591318d17af.gif"/>
