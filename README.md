@@ -27,31 +27,31 @@
 ----------
 ## **사용한 에디터**
 
-+Android Studio
++ Android Studio
 
 ## **사용한 기술 스택**
 
 ### Gradle
-+안드로이드 스튜디오의 공식 빌드 시스템인 Gradle로 빌드 자동화
++ 안드로이드 스튜디오의 공식 빌드 시스템인 Gradle로 빌드 자동화
 
 ### Kotlin, Java
-+안드로이드 개발에 주요 사용되는 Kotlin과 Java 프로그래밍 언어를 사용하였습니다.
++ 안드로이드 개발에 주요 사용되는 Kotlin과 Java 프로그래밍 언어를 사용하였습니다.
 
 ### Xml
-+안드로이드 어플리케이션의 레이아웃 파일을 xml로 구현하였습니다.
++ 안드로이드 어플리케이션의 레이아웃 파일을 xml로 구현하였습니다.
 
 ### SQLite, Room DB
-+보다 쉽게 내부저장소 데이터베이스를 사용하기 위해 Room DB를 사용하였습니다.
-+Room 지속성 라이브러리는 SQLite를 완벽히 활용하면서 원활한 데이터베이스 액세스가 가능하도록 SQLite에 추상화 계층을 제공합니다.
++ 보다 쉽게 내부저장소 데이터베이스를 사용하기 위해 Room DB를 사용하였습니다.
++ Room 지속성 라이브러리는 SQLite를 완벽히 활용하면서 원활한 데이터베이스 액세스가 가능하도록 SQLite에 추상화 계층을 제공합니다.
 
 ### Google Machine-Learning Kit (https://developers.google.com/ml-kit)
-+Google ML-Kit를 사용하여 높은 인식률의 글자인식을 수행하도록 구현하였습니다.
++ Google ML-Kit를 사용하여 높은 인식률의 글자인식을 수행하도록 구현하였습니다.
 
 ### CameraX(Android jetpack)
-+ML-kit를 사용하기 위해 카메라 동작을 일관되게 유지하고, 방향, 회전을 고려하는 라이브러리인 CameraX를 사용하였습니다.
++ ML-kit를 사용하기 위해 카메라 동작을 일관되게 유지하고, 방향, 회전을 고려하는 라이브러리인 CameraX를 사용하였습니다.
 
 ### Git Branch
-+Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다
++ Git Branch를 사용하여 독립적인 저장소에서 각자의 역할을 수행할 수 있는 협업 경험을 쌓았습니다
 
 ------
 ## Class Diagram
