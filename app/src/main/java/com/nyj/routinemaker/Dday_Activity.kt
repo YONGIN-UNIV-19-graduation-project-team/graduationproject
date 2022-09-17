@@ -52,6 +52,10 @@ class Dday_Activity : AppCompatActivity() {
         //년,월,일 설정했을때 텍스트에 띄우기
         if(year!="null"&&month!="null"&&day!="null") {
             textview_get_date.text = year+"년 "+month+"월 "+day+"일"
+            plan_Year = year
+            plan_Month = month
+            plan_Day = day
+            dateisselected=true
         }
 
         //날짜를 설정하라는 텍스트뷰를 클릭했을 때 생성되는 DatePicker 다이얼로그
@@ -88,21 +92,13 @@ class Dday_Activity : AppCompatActivity() {
             //디데이 이름 입력하도록
             if(d_day_name.text.toString() != ""){
                 //이름만 변경하는경우
-                if(textview_get_date != null && dateisselected==false){
-                    name = d_day_name.text.toString()
-                    val editor = pref.edit()
-                    editor.putString("key_name", name)
-                    editor.apply()
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-
-                }
                 //날짜를 선택했다면
-                else if(dateisselected) {
+                if(dateisselected) {
                     //디데이의 이름을 가져와 변수에 저장.
                     name = d_day_name.text.toString()
                     val intent = Intent(this, MainActivity::class.java)
+
 
                     //getSharedPreference에 년,월,일, 이름 값 저장
                     val editor = pref.edit()
@@ -117,6 +113,7 @@ class Dday_Activity : AppCompatActivity() {
                     editor.putBoolean("key_used",true)
                     editor.apply()
                     startActivity(intent)
+
                 }//날짜를 선택하지 않았으면 토스트메시지처리
                 else Toast.makeText(this, "날짜를 선택하세요!", Toast.LENGTH_SHORT ).show()
                 dateisselected=false
