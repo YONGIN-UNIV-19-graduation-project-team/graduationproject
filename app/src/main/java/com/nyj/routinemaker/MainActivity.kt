@@ -237,6 +237,7 @@ class MainActivity : AppCompatActivity() {
 
         //db닫기
         db.close()
+
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
             //루틴의 요일리스트 선언

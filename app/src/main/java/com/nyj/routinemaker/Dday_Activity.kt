@@ -1,13 +1,16 @@
 package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -97,6 +100,40 @@ class Dday_Activity : AppCompatActivity() {
 
                 //날짜를 선택했다면
                 if(dateisselected) {
+                    ///////////알람구현부///////////
+                    val intentDday = Intent(this, DdayReceiver::class.java)
+
+                    val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+
+                    //트리거타임 설정
+                    val triggerTime : Calendar = Calendar.getInstance()
+                    triggerTime.timeInMillis = System.currentTimeMillis()
+                    triggerTime.set(Calendar.YEAR,plan_Year.toInt())
+                    triggerTime.set(Calendar.MONTH,plan_Month.toInt()-1)
+                    triggerTime.set(Calendar.DAY_OF_MONTH,plan_Day.toInt()-3)
+                    triggerTime.set(Calendar.HOUR_OF_DAY,0)
+                    triggerTime.set(Calendar.MINUTE,0)
+                    triggerTime.set(Calendar.SECOND,0)
+                    var convertTime = triggerTime.timeInMillis
+//                    var interval:Long = 1000*60*60*24//하루를 밀리초로 변환
+//                    convertTime-=interval
+                    println("하루 뺀 시간 : "+convertTime)
+                    val format = SimpleDateFormat("MM/dd kk:mm:ss")
+                    val setResetTime = format.format(Date(triggerTime.getTimeInMillis()+AlarmManager.INTERVAL_DAY))
+                    Log.d("resetAlarm","ResetHour: "+setResetTime+"이 디데이 알람 울리는 시간")
+
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        this,
+                        1331,//디데이 전용 RC
+                        intentDday,
+                        PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                    )
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,convertTime,pendingIntent)
+
+
+
+                    ////////////////////////////
+
                     //디데이의 이름을 가져와 변수에 저장.
                     name = d_day_name.text.toString()
                     val intent = Intent(this, MainActivity::class.java)
