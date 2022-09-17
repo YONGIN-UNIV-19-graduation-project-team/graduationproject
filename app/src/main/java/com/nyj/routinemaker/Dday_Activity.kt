@@ -3,6 +3,7 @@ package com.nyj.routinemaker
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Rect
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.android.synthetic.main.activity_dday.*
@@ -129,12 +131,27 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 초기화 버튼
         del_button.setOnClickListener{
-            val editor = pref.edit()
-            editor.clear()
-            editor.putBoolean("key_used",false)
-            editor.apply()
-            val intent_del = Intent(this,MainActivity::class.java)
-            startActivity(intent_del)
+            AlertDialog.Builder(this)
+                .setMessage("정말로 디데이를 초기화하시겠습니까?")
+                .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val editor = pref.edit()
+                        editor.clear()
+                        editor.putBoolean("key_used",false)
+                        editor.apply()
+                        val intent_del = Intent(applicationContext,MainActivity::class.java)
+                        startActivity(intent_del)
+                    }
+                })
+                .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Toast.makeText(applicationContext,"초기화를 취소하였습니다.",Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .create()
+                .show()
+
+
         }
     }
 
