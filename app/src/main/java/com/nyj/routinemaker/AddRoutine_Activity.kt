@@ -36,6 +36,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
     //예외처리를 위한 변수 초기화
     var timeisselected=false
     var nameisnotnull=false
+    var namenotcontainblank= false
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,8 +67,9 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             val hour = changed_hour.toString()
             val min = changed_minute.toString()
 
-            //예외처리를 위한 변수. 루틴명이 공백이면 true로 지정
+            //예외처리를 위한 변수. 루틴명이 공백이거나 띄어쓰기를 포함하면 true로 지정
             if(name!="")nameisnotnull=true
+            if(!(name.contains(" "))) namenotcontainblank=true
 
             //체크박스의 상태를 변수에 각각 저장한다
             if(checkBox1.isChecked)mon=true
@@ -87,7 +89,7 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
             }
             else{
                 //시간을 선택하지 않았거나 이름이 공백일 때의 예외처리
-                if(timeisselected&&nameisnotnull){
+                if(timeisselected&&nameisnotnull&&namenotcontainblank){
                     //정상적인 루틴추가 구현 부분
                     val db = Room.databaseBuilder(
                         this.applicationContext,AppDatabase::class.java,"routine_databases"
@@ -98,8 +100,16 @@ class AddRoutine_Activity : AppCompatActivity() , TimePicker.OnTimeChangedListen
                     intent.putExtra("access_by_fragment",1)
                     startActivity(intent)
                 }
-                else{
-                    Toast.makeText(this, "루틴 이름이 공백이거나 시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
+                else if((timeisselected==false)&&nameisnotnull&&namenotcontainblank){
+                    Toast.makeText(this, "시간을 선택하지 않았습니다!", Toast.LENGTH_SHORT).show()
+
+                }
+                else if(timeisselected&&(nameisnotnull==false)&&namenotcontainblank){
+                    Toast.makeText(this, "루틴 이름이 공백입니다!", Toast.LENGTH_SHORT).show()
+
+                }
+                else if(timeisselected&&nameisnotnull&&(namenotcontainblank==false)){
+                    Toast.makeText(this, "루틴 이름에 띄어쓰기가 포함됩니다!", Toast.LENGTH_SHORT).show()
 
                 }
             }
