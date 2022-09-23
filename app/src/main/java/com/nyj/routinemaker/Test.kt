@@ -29,7 +29,6 @@ class Test : AppCompatActivity() {
     var getID:Long = 999
     var second : Int = 60
 
-
     val handler: Handler = object : Handler() {
         @SuppressLint("HandlerLeak")
         override fun handleMessage(msg: Message) {
@@ -91,11 +90,13 @@ class Test : AppCompatActivity() {
                 val provider = cameraProviderFuture.get()
 
                 val previewUseCase = Preview.Builder().build().apply {
+
                     setSurfaceProvider(TESTpreView.surfaceProvider)
                 }
 
                 val analysisUseCase = ImageAnalysis.Builder().build().apply {
                     setAnalyzer(executor) { image: ImageProxy ->
+
                         textRecognizer.process(
                             InputImage.fromMediaImage(
                                 image.image!!,
@@ -105,10 +106,22 @@ class Test : AppCompatActivity() {
                         ).addOnSuccessListener { visionText ->
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
-                                var BoundingBox = block.boundingBox
-                                var canvas = Canvas()
-                                rectOverlay.drawOverlay(BoundingBox,canvas)
-                                resultText = block.text
+                                for (line in block.lines){
+                                    for (element in line.elements){
+                                        val elementText = element.text
+                                        resultText = elementText
+                                        var elementBox = element.boundingBox
+
+                                        var canvas = Canvas()
+                                        if (elementBox != null) {
+                                            rectOverlay.drawBoundingBox(elementBox)
+                                            rectOverlay.draw(canvas)
+                                            println("캔버스 그리기 완료.")
+                                        }
+                                    }
+
+                                }
+
                                 //공백제거
                                 var replace_resultText = resultText.replace(" ","")
                                 //텍스트뷰에 띄우기
@@ -152,17 +165,11 @@ class Test : AppCompatActivity() {
 
                         }
 
+
                     }
 
+
                 }
-//                if(second==0){
-//                    //반복 provider 종료
-//                    if(routineSuccess)provider.unbindAll()
-//                    //종료 후 intent로 application 이동
-//                    Toast.makeText(applicationContext,"제한시간 경과로 실패!",Toast.LENGTH_SHORT ).show()
-//                    val intent = Intent(applicationContext,MainActivity::class.java)
-//                    startActivity(intent)
-//                }
 
                 //카메라 provider의 무한 루프
                 provider.bindToLifecycle(
@@ -175,10 +182,8 @@ class Test : AppCompatActivity() {
                 )
 
 
-
             }, executor)
         }
-
 
 
     }
