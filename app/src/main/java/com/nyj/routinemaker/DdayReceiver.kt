@@ -45,7 +45,7 @@ class DdayReceiver : BroadcastReceiver() {
 
         //println("pendingintent 수신 완료")
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.icon)
+            .setSmallIcon(R.mipmap.icon4)
             .setContentTitle("디데이 알림")//제목
             .setContentText("디데이가 하루 남았습니다!")//내용
             .setContentIntent(contentPendingIntent)//푸쉬알람 클릭시 인텐트작업
