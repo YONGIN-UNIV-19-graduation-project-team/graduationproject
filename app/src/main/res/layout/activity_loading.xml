@@ -13,5 +13,5 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/loding_logo" />
+        app:srcCompat="@drawable/logo_loding" />
 </androidx.constraintlayout.widget.ConstraintLayout>

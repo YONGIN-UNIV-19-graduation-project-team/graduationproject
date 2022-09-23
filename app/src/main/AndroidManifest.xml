@@ -13,9 +13,9 @@
     <application
         android:allowBackup="true"
         android:exported="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/icon4"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon_round"
+        android:roundIcon="@mipmap/icon4_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RoutineMaker">
         <receiver
