@@ -3,6 +3,7 @@ package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -104,6 +105,9 @@ class Test : AppCompatActivity() {
                         ).addOnSuccessListener { visionText ->
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
+                                var BoundingBox = block.boundingBox
+                                var canvas = Canvas()
+                                rectOverlay.drawOverlay(BoundingBox,canvas)
                                 resultText = block.text
                                 //공백제거
                                 var replace_resultText = resultText.replace(" ","")
