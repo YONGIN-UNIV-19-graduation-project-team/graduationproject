@@ -22,7 +22,7 @@
         android:layout_height="20dp"
         android:gravity="bottom|center"
         android:text="30"
-        android:textSize="17dp" />
+        android:textSize="17sp" />
 
 
 </LinearLayout>

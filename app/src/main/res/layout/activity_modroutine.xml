@@ -316,25 +316,25 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="7" />
+                android:layout_weight="6.5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="12.5"
+                android:layout_weight="14"
                 android:orientation="horizontal"
                 android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.5" />
+                    android:layout_weight="3" />
 
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="91"
+                        android:layout_weight="94"
                         android:background="#F6F4F4"
                         android:singleLine="false"
                         android:text="1. 루틴 이름을 포스트잇에 쓰세요!
@@ -342,7 +342,7 @@
                                   3. 울리는 알람을 탭하고 써둔 포스트잇을 스캔하세요!
                                   4. 루틴을 시작하세요!"
                         android:textColor="@color/gray_300"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -351,14 +351,14 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4.5" />
+                    android:layout_weight="3" />
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6" />
+                android:layout_weight="5" />
 
             <Button
                 android:id="@+id/mod_button"
