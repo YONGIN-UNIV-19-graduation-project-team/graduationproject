@@ -9,6 +9,8 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.Nullable
+import androidx.core.graphics.plus
+import androidx.core.graphics.times
 
 class RectOverlay(context: Context?, @Nullable attrs: AttributeSet?) :
     View(context, attrs) {
@@ -38,7 +40,10 @@ class RectOverlay(context: Context?, @Nullable attrs: AttributeSet?) :
         paint.style = Paint.Style.STROKE
     }
     fun drawBoundingBox(boundingBox: Rect){
-        this.boundingBox = boundingBox
+        this.boundingBox = boundingBox*3
+
+
         invalidate()
     }
+
 }

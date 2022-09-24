@@ -7,14 +7,14 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.DisplayMetrics
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.google.mlkit.vision.common.InputImage
@@ -22,6 +22,7 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlin.concurrent.timer
+
 
 class Test : AppCompatActivity() {
     var resultText="아무 텍스트나 입력"
@@ -92,6 +93,7 @@ class Test : AppCompatActivity() {
                 val previewUseCase = Preview.Builder().build().apply {
 
                     setSurfaceProvider(TESTpreView.surfaceProvider)
+                    TESTpreView.scaleType = PreviewView.ScaleType.FILL_CENTER
                 }
 
                 val analysisUseCase = ImageAnalysis.Builder().build().apply {
@@ -103,6 +105,7 @@ class Test : AppCompatActivity() {
                                 image.imageInfo.rotationDegrees
                             )
 
+
                         ).addOnSuccessListener { visionText ->
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
@@ -111,6 +114,25 @@ class Test : AppCompatActivity() {
                                         val elementText = element.text
                                         resultText = elementText
                                         var elementBox = element.boundingBox
+
+//                                        var dm  =DisplayMetrics()
+//                                        windowManager.defaultDisplay.getMetrics(dm)
+//                                        var x = dm.widthPixels
+//                                        var y = dm.heightPixels
+//                                        println("해상도 x : "+x+ "y :"+y)
+//
+//                                        println("before x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
+//
+//                                        val param = TESTpreView.getLayoutParams()
+//                                        param.width=x
+//                                        param.height = y
+//                                        TESTpreView.setLayoutParams(param)
+
+                                        println("x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
+
+
+
+
 
                                         var canvas = Canvas()
                                         if (elementBox != null) {
@@ -188,11 +210,12 @@ class Test : AppCompatActivity() {
 
     }
 
-
-//    fun timerSetting(){
+   //    fun timerSetting(){
 //        timer(period = 1000, initialDelay = 1000){
 //            second--
 //            timer.text = second.toString()
 //        }
 //    }
 }
+
+
