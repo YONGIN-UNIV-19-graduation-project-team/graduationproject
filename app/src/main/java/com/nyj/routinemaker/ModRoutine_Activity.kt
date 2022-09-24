@@ -43,6 +43,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
     //예외처리를 위한 변수 초기화
     var nameisnotnull=false
+    var namenotcontainblank= false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,6 +138,7 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
 
             //이름 예외처리
             if(name!="")nameisnotnull=true else nameisnotnull=false
+            if(!(name.contains(" "))) namenotcontainblank=true
 
             //체크박스 변수에 대입
             if(checkBox1.isChecked)mon=true
@@ -156,14 +158,19 @@ class ModRoutine_Activity : AppCompatActivity() ,TimePicker.OnTimeChangedListene
             }
             else{
                 //이름 예외처리 구현부, 수정부분 구현
-                if(nameisnotnull){
+                if(nameisnotnull&&namenotcontainblank){
                     db.routine_DAO().update(routine)
                     db.close()
                     intent.putExtra("access_by_fragment",1)
                     startActivity(intent)
                 }
-                else{
+                else if((nameisnotnull==false)&&namenotcontainblank){
                     Toast.makeText(this, "루틴 이름이 공백입니다!", Toast.LENGTH_SHORT).show()
+
+                }
+                else if(nameisnotnull&&(namenotcontainblank==false)){
+                    Toast.makeText(this, "루틴 이름에 띄어쓰기가 포함됩니다!", Toast.LENGTH_SHORT).show()
+
                 }
             }
         }

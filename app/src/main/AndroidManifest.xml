@@ -13,14 +13,20 @@
     <application
         android:allowBackup="true"
         android:exported="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/icon4"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon_round"
+        android:roundIcon="@mipmap/icon4_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RoutineMaker">
+        <receiver
+            android:name=".DdayReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".Test"
             android:exported="false" />
+
         <receiver
             android:name=".ResetCheckboxReceiver"
             android:enabled="true"
@@ -70,6 +76,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
         </receiver>
+
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />

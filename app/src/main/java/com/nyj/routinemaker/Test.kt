@@ -3,17 +3,18 @@ package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Canvas
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.DisplayMetrics
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.google.mlkit.vision.common.InputImage
@@ -22,12 +23,12 @@ import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlin.concurrent.timer
 
+
 class Test : AppCompatActivity() {
     var resultText="아무 텍스트나 입력"
     var routineSuccess=false
     var getID:Long = 999
     var second : Int = 60
-
 
     val handler: Handler = object : Handler() {
         @SuppressLint("HandlerLeak")
@@ -90,21 +91,59 @@ class Test : AppCompatActivity() {
                 val provider = cameraProviderFuture.get()
 
                 val previewUseCase = Preview.Builder().build().apply {
+
                     setSurfaceProvider(TESTpreView.surfaceProvider)
+                    TESTpreView.scaleType = PreviewView.ScaleType.FILL_CENTER
                 }
 
                 val analysisUseCase = ImageAnalysis.Builder().build().apply {
                     setAnalyzer(executor) { image: ImageProxy ->
+
                         textRecognizer.process(
                             InputImage.fromMediaImage(
                                 image.image!!,
                                 image.imageInfo.rotationDegrees
                             )
 
+
                         ).addOnSuccessListener { visionText ->
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
-                                resultText = block.text
+                                for (line in block.lines){
+                                    for (element in line.elements){
+                                        val elementText = element.text
+                                        resultText = elementText
+                                        var elementBox = element.boundingBox
+
+//                                        var dm  =DisplayMetrics()
+//                                        windowManager.defaultDisplay.getMetrics(dm)
+//                                        var x = dm.widthPixels
+//                                        var y = dm.heightPixels
+//                                        println("해상도 x : "+x+ "y :"+y)
+//
+//                                        println("before x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
+//
+//                                        val param = TESTpreView.getLayoutParams()
+//                                        param.width=x
+//                                        param.height = y
+//                                        TESTpreView.setLayoutParams(param)
+
+                                        println("x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
+
+
+
+
+
+                                        var canvas = Canvas()
+                                        if (elementBox != null) {
+                                            rectOverlay.drawBoundingBox(elementBox)
+                                            rectOverlay.draw(canvas)
+                                            println("캔버스 그리기 완료.")
+                                        }
+                                    }
+
+                                }
+
                                 //공백제거
                                 var replace_resultText = resultText.replace(" ","")
                                 //텍스트뷰에 띄우기
@@ -148,17 +187,11 @@ class Test : AppCompatActivity() {
 
                         }
 
+
                     }
 
+
                 }
-//                if(second==0){
-//                    //반복 provider 종료
-//                    if(routineSuccess)provider.unbindAll()
-//                    //종료 후 intent로 application 이동
-//                    Toast.makeText(applicationContext,"제한시간 경과로 실패!",Toast.LENGTH_SHORT ).show()
-//                    val intent = Intent(applicationContext,MainActivity::class.java)
-//                    startActivity(intent)
-//                }
 
                 //카메라 provider의 무한 루프
                 provider.bindToLifecycle(
@@ -171,19 +204,18 @@ class Test : AppCompatActivity() {
                 )
 
 
-
             }, executor)
         }
 
 
-
     }
 
-
-//    fun timerSetting(){
+   //    fun timerSetting(){
 //        timer(period = 1000, initialDelay = 1000){
 //            second--
 //            timer.text = second.toString()
 //        }
 //    }
 }
+
+

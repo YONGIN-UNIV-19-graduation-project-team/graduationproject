@@ -1,17 +1,22 @@
 package com.nyj.routinemaker
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.android.synthetic.main.activity_dday.*
@@ -52,6 +57,10 @@ class Dday_Activity : AppCompatActivity() {
         //년,월,일 설정했을때 텍스트에 띄우기
         if(year!="null"&&month!="null"&&day!="null") {
             textview_get_date.text = year+"년 "+month+"월 "+day+"일"
+            plan_Year = year
+            plan_Month = month
+            plan_Day = day
+            dateisselected=true
         }
 
         //날짜를 설정하라는 텍스트뷰를 클릭했을 때 생성되는 DatePicker 다이얼로그
@@ -88,21 +97,47 @@ class Dday_Activity : AppCompatActivity() {
             //디데이 이름 입력하도록
             if(d_day_name.text.toString() != ""){
                 //이름만 변경하는경우
-                if(textview_get_date != null && dateisselected==false){
-                    name = d_day_name.text.toString()
-                    val editor = pref.edit()
-                    editor.putString("key_name", name)
-                    editor.apply()
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-
-                }
                 //날짜를 선택했다면
-                else if(dateisselected) {
+                if(dateisselected) {
+                    ///////////알람구현부///////////
+                    val intentDday = Intent(this, DdayReceiver::class.java)
+
+                    val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
+
+                    //트리거타임 설정
+                    val triggerTime : Calendar = Calendar.getInstance()
+                    triggerTime.timeInMillis = System.currentTimeMillis()
+                    triggerTime.set(Calendar.YEAR,plan_Year.toInt())
+                    triggerTime.set(Calendar.MONTH,plan_Month.toInt()-1)
+                    triggerTime.set(Calendar.DAY_OF_MONTH,plan_Day.toInt()-3)
+                    triggerTime.set(Calendar.HOUR_OF_DAY,0)
+                    triggerTime.set(Calendar.MINUTE,0)
+                    triggerTime.set(Calendar.SECOND,0)
+                    var convertTime = triggerTime.timeInMillis
+//                    var interval:Long = 1000*60*60*24//하루를 밀리초로 변환
+//                    convertTime-=interval
+                    println("하루 뺀 시간 : "+convertTime)
+                    val format = SimpleDateFormat("MM/dd kk:mm:ss")
+                    val setResetTime = format.format(Date(triggerTime.getTimeInMillis()+AlarmManager.INTERVAL_DAY))
+                    Log.d("resetAlarm","ResetHour: "+setResetTime+"이 디데이 알람 울리는 시간")
+
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        this,
+                        1331,//디데이 전용 RC
+                        intentDday,
+                        PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                    )
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,convertTime,pendingIntent)
+
+
+
+                    ////////////////////////////
+
                     //디데이의 이름을 가져와 변수에 저장.
                     name = d_day_name.text.toString()
                     val intent = Intent(this, MainActivity::class.java)
+
 
                     //getSharedPreference에 년,월,일, 이름 값 저장
                     val editor = pref.edit()
@@ -117,6 +152,7 @@ class Dday_Activity : AppCompatActivity() {
                     editor.putBoolean("key_used",true)
                     editor.apply()
                     startActivity(intent)
+
                 }//날짜를 선택하지 않았으면 토스트메시지처리
                 else Toast.makeText(this, "날짜를 선택하세요!", Toast.LENGTH_SHORT ).show()
                 dateisselected=false
@@ -132,12 +168,27 @@ class Dday_Activity : AppCompatActivity() {
 
         //디데이 초기화 버튼
         del_button.setOnClickListener{
-            val editor = pref.edit()
-            editor.clear()
-            editor.putBoolean("key_used",false)
-            editor.apply()
-            val intent_del = Intent(this,MainActivity::class.java)
-            startActivity(intent_del)
+            AlertDialog.Builder(this)
+                .setMessage("정말로 디데이를 초기화하시겠습니까?")
+                .setPositiveButton("예",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        val editor = pref.edit()
+                        editor.clear()
+                        editor.putBoolean("key_used",false)
+                        editor.apply()
+                        val intent_del = Intent(applicationContext,MainActivity::class.java)
+                        startActivity(intent_del)
+                    }
+                })
+                .setNegativeButton("아니오",object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        Toast.makeText(applicationContext,"초기화를 취소하였습니다.",Toast.LENGTH_SHORT).show()
+                    }
+                })
+                .create()
+                .show()
+
+
         }
     }
 

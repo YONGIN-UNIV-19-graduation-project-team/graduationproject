@@ -10,20 +10,24 @@ import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.room.Room
-import kotlinx.android.synthetic.main.activity_dday.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.ceil
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
+    private val finishtimeed: Long = 1000
+    private var presstime: Long = 0
 
     //전체 루틴 더미 객체리스트 생성
     var RoutineList = arrayListOf<Routine>(
@@ -237,6 +241,7 @@ class MainActivity : AppCompatActivity() {
 
         //db닫기
         db.close()
+
         val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
         RoutineList.forEach { Routine ->
             //루틴의 요일리스트 선언
@@ -283,6 +288,35 @@ class MainActivity : AppCompatActivity() {
         day = pref.getString("key_day","28").toString()
         name = pref.getString("key_name","디데이를 설정하세요").toString()
         ddayIsUsed = pref.getBoolean("key_used",false)
+    }
+
+//    override fun onBackPressed() {
+//        val tempTime = System.currentTimeMillis()
+//        val intervalTime = tempTime - presstime
+//        if (intervalTime in 0..finishtimeed) {
+//            android.os.Process.killProcess(android.os.Process.myPid())
+//        } else {
+//            presstime = tempTime
+//            Toast.makeText(applicationContext, "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show()
+//        }
+//    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            val tempTime = System.currentTimeMillis()
+            val intervalTime = tempTime - presstime
+            if (intervalTime in 0..finishtimeed) {
+//                moveTaskToBack(true)
+//                finishAndRemoveTask()
+                ActivityCompat.finishAffinity(this)
+                System.exit(0)
+            } else {
+                presstime = tempTime
+                Toast.makeText(applicationContext, "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show()
+            }
+            return true
+        }
+        return false
     }
 }
 
