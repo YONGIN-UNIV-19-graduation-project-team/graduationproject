@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.DisplayMetrics
-import android.view.ViewGroup
+import android.util.Size
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -30,6 +30,9 @@ class Test : AppCompatActivity() {
     var getID:Long = 999
     var second : Int = 60
 
+
+
+
     val handler: Handler = object : Handler() {
         @SuppressLint("HandlerLeak")
         override fun handleMessage(msg: Message) {
@@ -49,6 +52,10 @@ class Test : AppCompatActivity() {
         setContentView(R.layout.activity_test)
 
         val pref = this.getSharedPreferences("rec",0)
+        var dm  = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(dm)
+        var x = dm.widthPixels
+        var y = dm.heightPixels
 
         //타이머는 메인쓰레드가 아니라서 view에 접근할 수 없다. 그러므로 handler객체를 사용해야 함
         timer(period = 1000, initialDelay = 1000){
@@ -67,8 +74,8 @@ class Test : AppCompatActivity() {
         /////db연동....
         getID = intent.getStringExtra("id")!!.toLong()
         val db = Room.databaseBuilder(
-                this,AppDatabase::class.java,"routine_databases"
-            ).allowMainThreadQueries().build()
+            this,AppDatabase::class.java,"routine_databases"
+        ).allowMainThreadQueries().build()
         val Routine = db.routine_DAO().getRoutinebyId(getID)
         routineName.text = "["+Routine.name.toString()+"] 글자를 인식하세요!"
 
@@ -86,6 +93,9 @@ class Test : AppCompatActivity() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         val textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
         val executor = ContextCompat.getMainExecutor(this)
+
+
+
         if(!routineSuccess) {
             cameraProviderFuture.addListener({
                 val provider = cameraProviderFuture.get()
@@ -96,17 +106,23 @@ class Test : AppCompatActivity() {
                     TESTpreView.scaleType = PreviewView.ScaleType.FILL_CENTER
                 }
 
-                val analysisUseCase = ImageAnalysis.Builder().build().apply {
+
+                val analysisUseCase  = ImageAnalysis.Builder()
+                    .setTargetResolution(Size(x, y))
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build().apply {
                     setAnalyzer(executor) { image: ImageProxy ->
+                        Size(TESTpreView.width, TESTpreView.height)
 
                         textRecognizer.process(
                             InputImage.fromMediaImage(
                                 image.image!!,
                                 image.imageInfo.rotationDegrees
+
                             )
 
-
                         ).addOnSuccessListener { visionText ->
+
                             // 인식이 끝났을 때에 할 일
                             for (block in visionText.textBlocks) {
                                 for (line in block.lines){
@@ -114,25 +130,6 @@ class Test : AppCompatActivity() {
                                         val elementText = element.text
                                         resultText = elementText
                                         var elementBox = element.boundingBox
-
-//                                        var dm  =DisplayMetrics()
-//                                        windowManager.defaultDisplay.getMetrics(dm)
-//                                        var x = dm.widthPixels
-//                                        var y = dm.heightPixels
-//                                        println("해상도 x : "+x+ "y :"+y)
-//
-//                                        println("before x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
-//
-//                                        val param = TESTpreView.getLayoutParams()
-//                                        param.width=x
-//                                        param.height = y
-//                                        TESTpreView.setLayoutParams(param)
-
-                                        println("x :" + TESTpreView.width + "| y :"+ TESTpreView.height)
-
-
-
-
 
                                         var canvas = Canvas()
                                         if (elementBox != null) {
@@ -201,7 +198,7 @@ class Test : AppCompatActivity() {
                     analysisUseCase,
 
 
-                )
+                    )
 
 
             }, executor)
@@ -210,12 +207,7 @@ class Test : AppCompatActivity() {
 
     }
 
-   //    fun timerSetting(){
-//        timer(period = 1000, initialDelay = 1000){
-//            second--
-//            timer.text = second.toString()
-//        }
-//    }
 }
+
 
 
