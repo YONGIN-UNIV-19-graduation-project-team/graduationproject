@@ -301,23 +301,23 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            val tempTime = System.currentTimeMillis()
-            val intervalTime = tempTime - presstime
-            if (intervalTime in 0..finishtimeed) {
-//                moveTaskToBack(true)
-//                finishAndRemoveTask()
-                ActivityCompat.finishAffinity(this)
-                System.exit(0)
-            } else {
-                presstime = tempTime
-                Toast.makeText(applicationContext, "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show()
-            }
-            return true
-        }
-        return false
-    }
+//    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+//        if(keyCode==KeyEvent.KEYCODE_BACK){
+//            val tempTime = System.currentTimeMillis()
+//            val intervalTime = tempTime - presstime
+//            if (intervalTime in 0..finishtimeed) {
+////                moveTaskToBack(true)
+////                finishAndRemoveTask()
+//                ActivityCompat.finishAffinity(this)
+//                System.exit(0)
+//            } else {
+//                presstime = tempTime
+//                Toast.makeText(applicationContext, "한번더 누르시면 앱이 종료됩니다", Toast.LENGTH_SHORT).show()
+//            }
+//            return true
+//        }
+//        return false
+//    }
 }
 
 
