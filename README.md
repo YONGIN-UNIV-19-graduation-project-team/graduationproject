@@ -69,6 +69,9 @@
 
 <img src="https://user-images.githubusercontent.com/85150438/188340107-a5a9700f-b0c6-467d-96c4-7591318d17af.gif"/>
 
+# 실 사용 영상
+[![Video Label](http://img.youtube.com/vi/6tWUdvRLWro/0.jpg)]
+(https://youtu.be/59USvjy2toI)
 ------
 
 ##
