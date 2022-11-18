@@ -71,7 +71,7 @@
 
 # 실 사용 영상
 [![Video Label](http://img.youtube.com/vi/6tWUdvRLWro/0.jpg)]
-(https://youtu.be/59USvjy2toI)
+(https://youtu.be/6tWUdvRLWro)
 ------
 
 ##
