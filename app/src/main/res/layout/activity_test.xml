@@ -34,17 +34,27 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="64" />
+            android:layout_weight="62" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:gravity="center"
-            android:text="제한시간 안에 글자를 스캔하세요!"
+            android:text="제한시간 안에"
+            android:gravity="center|top"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/routineName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:gravity="center|top"
+            android:text="루틴명"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -55,11 +65,11 @@
             android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:gravity="center|top"
             android:text="Time"
             android:textColor="@color/red"
-            android:textSize="35dp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
         <Space
@@ -78,30 +88,39 @@
             android:textColor="@color/black"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/routineName"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:gravity="center|top"
-            android:text="루틴명"
-            android:textColor="@color/black"
-            android:textSize="25dp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2" />
+            android:layout_weight="3" />
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="7"
-            android:background="@drawable/button_pattern"
-            android:text="나중에 할래요"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            android:weightSum="100"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="90"
+                android:background="@drawable/button_pattern"
+                android:text="나중에 할래요"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
